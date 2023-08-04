@@ -1,0 +1,5 @@
+# Prettierの対象外
+node_modules
+.next
+# test coverage
+coverage
