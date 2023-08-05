@@ -1,6 +1,7 @@
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import { useRouter } from 'next/navigation'
-import { auth } from '@/libs/firebase'
+import { auth, db } from '@/libs/firebase'
+import { setDoc, doc, Timestamp } from 'firebase/firestore'
 
 export const useAuth = () => {
   /*
@@ -23,12 +24,19 @@ export const useAuth = () => {
     try {
       const result = await signInWithPopup(auth, provider)
       const user = result.user
-      // TODO: ログイン後の処理
-      // DBに管理者情報を保存するなど
-      console.log(user)
+
+      // DBに管理者情報を保存する
+      const adminRef = doc(db, 'admins', `${user.uid}`)
+      await setDoc(adminRef, {
+        name: user.displayName,
+        email: user.email,
+        photoURL: user.photoURL,
+        createdAt: Timestamp.fromDate(new Date()),
+        updatedAt: Timestamp.fromDate(new Date()),
+      })
+
       router.push('/admins')
     } catch (error) {
-      // TODO: エラー処理
       console.error(error)
     }
   }
