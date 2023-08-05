@@ -2,8 +2,7 @@
 
 import { FC, PropsWithChildren, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { auth, db } from '@/libs/firebase'
-import { doc, getDoc, setDoc, Timestamp } from 'firebase/firestore'
+import { auth } from '@/libs/firebase'
 import { useAuth } from '@/app/admins/_hooks/useAuth'
 
 const Layout: FC<PropsWithChildren> = ({ children }) => {
