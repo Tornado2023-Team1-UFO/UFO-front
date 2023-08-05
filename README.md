@@ -6,6 +6,12 @@ package install
 npm run install
 ```
 
+環境変数設定
+
+```bash
+cp env.sample .env.local
+```
+
 開発環境立ち上げる
 
 ```bash
