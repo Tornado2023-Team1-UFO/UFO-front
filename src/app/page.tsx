@@ -2,11 +2,15 @@
 
 import Link from 'next/link'
 import 'ress'
+import { useAuth } from '@/app/_hooks/useAuth'
 
 export default function Home() {
+  const { Logout } = useAuth()
+
   return (
     <main>
-      <Link href='/admins/register'>管理者登録</Link>
+      <Link href='/register'>新規登録</Link>
+      <button onClick={() => Logout()}>Logout</button>
     </main>
   )
 }
