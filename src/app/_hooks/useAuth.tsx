@@ -10,7 +10,7 @@ export const useAuth = () => {
    * */
   const Logout = async () => {
     await auth.signOut()
-    router.push('/admins/register')
+    router.push('/register')
   }
 
   /*
@@ -26,16 +26,16 @@ export const useAuth = () => {
       const user = result.user
 
       // DBに管理者情報を保存する
-      await registerAdminUser(user)
+      await registerUser(user)
 
-      router.push('/admins')
+      router.push('/')
     } catch (error) {
       console.error(error)
     }
   }
 
-  const registerAdminUser = async (user: User) => {
-    const adminRef = doc(db, 'admins', `${user.uid}`)
+  const registerUser = async (user: User) => {
+    const adminRef = doc(db, 'users', `${user.uid}`)
     await setDoc(adminRef, {
       name: user.displayName,
       email: user.email,
@@ -45,5 +45,5 @@ export const useAuth = () => {
     })
   }
 
-  return { Logout, loginWithGoogle, registerAdminUser }
+  return { Logout, loginWithGoogle, registerUser }
 }

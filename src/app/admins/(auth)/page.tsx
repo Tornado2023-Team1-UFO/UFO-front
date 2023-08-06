@@ -1,6 +1,6 @@
 'use client'
 
-import { useAuth } from '../_hooks/useAuth'
+import { useAuth } from '@/app/_hooks/useAuth'
 
 const AdminTop = () => {
   const { Logout } = useAuth()
