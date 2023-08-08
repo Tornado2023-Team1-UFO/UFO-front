@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import 'ress'
 import { useAuth } from '@/app/_hooks/useAuth'
 
 export default function Home() {
