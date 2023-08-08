@@ -1,5 +1,5 @@
 'use client'
-import styles from './NavigationMenu.module.css'
+import styles from './navigationMenu.module.css'
 import { TbSquarePlus } from 'react-icons/tb'
 
 export const NavigationMenu = () => {
