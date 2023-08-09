@@ -14,7 +14,6 @@ const EventPage = () => {
 
   const fetchEvents = async () => {
     const results = await EventsRepository.getEventSlideItems()
-    console.log(results)
     setEvents(results)
   }
 
