@@ -2,6 +2,7 @@
 // imports from 'react'
 'use client'
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 // import components 
 import PageDetails from '@/components/PageDetails';
 import EventCard from '@/app/events/_components/EventCard';
@@ -57,6 +58,11 @@ function Events() {
     ]
     let searchCategories: string[] = ["All", "Music", "Sports", "Food", "Art", "Business", "Other"]; 
 
+    // handClick function when clicked on "もっと見る"
+    // if clicked on "もっと見る", then it will jump to the "tinder" style swiping page
+    const handleClick = () => {
+        alert("clicked");
+    }
     return ( 
         <>
             <PageDetails
@@ -91,9 +97,12 @@ function Events() {
                         </div>
                     </div>
                 </div>
-                <div className="event-container">
-                    <h1>人気上昇中のイベント</h1>
-                    <h2>もっと見る</h2>
+                <div className="eventcontainer">
+                    <div className={styles.categoryheadline}>
+                        <h1>人気上昇中のイベント</h1>
+                        <p onClick={handleClick}>もっと見る {">"}</p>
+                    </div>
+                    
                     <div className={styles.cardcontainer}>
                         {/* only show if there's data  */}
                         {eventData &&
@@ -104,7 +113,7 @@ function Events() {
                 </div>
                 {
                     searchCategories.map((category) => (
-                    <div>
+                    <div className="eventcontainer">
                         <h1>{category}</h1>
                         <h2>もっと見る</h2>
                         <div className={styles.cardcontainer}>

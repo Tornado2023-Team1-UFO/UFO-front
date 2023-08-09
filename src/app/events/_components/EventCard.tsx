@@ -17,14 +17,13 @@ export default function EventCard (event: any) {
                         <Image
                          src="http://placekitten.com/300/300" 
                          alt="Placeholder image" 
-                         width={300} 
-                         height={300}
-                         style={{
-                            width: '100%',
-                            height: '100%',
-                         }}
+                        //  width={300} 
+                        //  height={300}
+                        fill
+                        style={{
+                            objectPosition: 'center',
+                        }}
                         />
-
                     </figure>
                 </div>
                 <div className={styles.cardcontent}>
