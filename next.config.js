@@ -4,5 +4,9 @@ const nextConfig = {
         appDir: true,
     },
 }
+module.exports = {
+    images: {
+        domains: ['static.camp-fire.jp', 'placekitten.com'], // Add your domain(s) here
+    },
+};
 
-module.exports = nextConfig
