@@ -5,13 +5,19 @@ import { collection, getCountFromServer, getDocs, query, where } from 'firebase/
 export const EventsRepository = {
   async getEventSlideItems(): Promise<EventSlideItem[]> {
     const results: EventSlideItem[] = []
+    // 開催中のイベントを取得する　０：開催前　１：開催中
+    // TODO: orderByを追加する,できればpersonalize化したい
     const ref = query(collection(db, 'events'), where('status', '==', 1))
     const docSnap = await getDocs(ref)
 
     for (const doc of docSnap.docs) {
       const data = doc.data()
       const attendeesCounts = await this.getAttendeeCount(doc.id)
+      // 締切が過ぎるとイベントが表示されないようにする
       const deadLine = data.deadLine.toDate()
+      if (deadLine < new Date()) {
+        break
+      }
       const item = new EventSlideItem(
         doc.id,
         data.title,
