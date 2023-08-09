@@ -22,7 +22,9 @@
     "next": "13.4.12",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "ress": "^5.0.2"
+    "react-icons": "^4.10.1",
+    "ress": "^5.0.2",
+    "swiper": "^10.1.0"
   },
   "devDependencies": {
     "@types/react": "18.2.18",

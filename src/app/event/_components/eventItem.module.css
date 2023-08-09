@@ -1,0 +1,35 @@
+.full {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-size: contain;
+  background-repeat: none;
+  background-position: center;
+  background-color: #000;
+  opacity: 0.7;
+}
+
+.items {
+  position: absolute;
+  bottom: 100px;
+  right: 10px;
+  display: flex;
+  gap: 12px;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.text {
+  font-size: 8px;
+  line-height: 12px;
+  color: #fff;
+  text-align: center;
+}
