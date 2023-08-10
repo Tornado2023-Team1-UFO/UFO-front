@@ -1,14 +1,11 @@
 'use client'
 
 import { NavigationMenu } from './_components/NavigationMenu'
-import { Swiper, SwiperSlide } from 'swiper/react'
-
-import 'swiper/css'
+import { useSpringCarousel } from 'react-spring-carousel'
 import { useEffect, useState } from 'react'
 import { EventsRepository } from '@/repositories/EventsRepository'
 import { EventSlideItem } from './_models/EventSlideItem'
-import { EvetntItem } from './_components/EventItem'
-
+import { EventItems } from './_components/EventItems'
 const EventPage = () => {
   const [events, setEvents] = useState<EventSlideItem[]>([])
 
@@ -17,23 +14,15 @@ const EventPage = () => {
     setEvents(results)
   }
 
+  const deleteEvent = (eventId: string) => {
+    const newEvents = events.filter((event) => event.id !== eventId)
+    setEvents(newEvents)
+  }
+
   useEffect(() => {
     fetchEvents()
   }, [])
-  return (
-    <Swiper>
-      {events.map((event) => (
-        <SwiperSlide key={event.id}>
-          <EvetntItem
-            backgrountImageUrl={event.mainImageUrl}
-            attendCounts={event.attendCounts}
-            likeCounts={event.likeCounts}
-          />
-        </SwiperSlide>
-      ))}
-      <NavigationMenu />
-    </Swiper>
-  )
+  return <EventItems events={events} deleteEvent={deleteEvent} />
 }
 
 export default EventPage

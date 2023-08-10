@@ -1,12 +1,16 @@
 .full {
   position: relative;
-  width: 100%;
-  min-height: 100vh;
+  width: 80%;
+  margin: 0 auto;
+  height: 80vh;
   background-size: contain;
   background-repeat: none;
   background-position: center;
   background-color: #000;
   opacity: 0.7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .items {

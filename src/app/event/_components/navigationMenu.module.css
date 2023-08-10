@@ -5,14 +5,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 84px;
   width: 100%;
-  height: 40px;
-  background-color: black;
 }
 
-.button {
-  width: 60px;
+.circle {
+  width: 30px;
   height: 30px;
-  color: white;
-  cursor: pointer;
+  border-radius: 50%;
+  background-color: #9b9b9b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
