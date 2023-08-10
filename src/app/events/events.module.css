@@ -1,0 +1,97 @@
+.container { 
+    width: 100%; 
+}
+
+/* ------ start of searchbar ------  */
+.searchbar {
+    display: flex; 
+    flex-direction: column; 
+    margin: 0 auto;
+    background-color: aliceblue;
+}
+
+.searchbytext {
+    margin: 2rem;
+}
+
+.searchbytext input {
+    width: 80%; 
+    height: 30px; 
+    border-radius: 5px; 
+    border: 1px solid #ccc; 
+    margin: 0 auto; 
+}
+
+.searchbytext button {
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin: 0 auto;
+}
+
+.searchothers {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+.searchotherschild {
+    display: flex; 
+    flex-direction: row;
+    margin: 0; 
+}
+
+.searchotherschild p {
+    margin: 0; 
+    padding: 0; 
+    text-align: left;
+    width: 40%; 
+}
+/* ------ end of searchbar ------  */
+
+/* ------ start of cardcontainer ------  */
+.cardcontainer {
+    display: flex; 
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.card {
+    display: flex; 
+    flex-direction: column;
+    margin: 0 auto; 
+    width: auto; 
+    min-height: 10rem; 
+    background-color: lightgrey;
+    margin-bottom: 1rem;
+}
+
+.cardimage {
+    position: relative; 
+    height: auto; 
+    min-height: 100px; 
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardcontent {
+    margin: 0 auto; 
+}
+
+.content {
+    margin: 0; 
+    padding: 0; 
+}
+.categoryheadline {
+    display: flex;
+    justify-content: space-between;
+}
+.categoryheadline > *{
+    display: inline-block; 
+}
