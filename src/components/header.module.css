@@ -13,11 +13,12 @@
     background-color: white;
 }
 
-.header > div > p {
+.header div p {
     margin: 0;
     text-align: center;
     font-size: 0.75rem;
 }
+
 .logo {
     flex-basis: 50%;
 }
@@ -32,4 +33,9 @@
     margin: 0;
     margin-right: 1rem; 
     text-align: center;
+}
+
+.link {
+    text-decoration: none;
+    color: black;
 }

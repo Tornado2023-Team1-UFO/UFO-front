@@ -8,11 +8,15 @@ export default function Header() {
         <>
             <header className={styles.header}>
                 <div className={styles.logo}>
-                    <p>ロゴ</p>
+                    <p>
+                        <Link className={styles.link} href="/">ロゴ</Link>
+                    </p>
                 </div>
                 <div className={styles.login}>
                     <FiLogIn className={styles.icon} /> 
-                    <p> ログイン / 新規会員登録</p>
+                    <p> 
+                        <Link className={styles.link} href="/register">ログイン / 新規会員登録</Link>
+                    </p>
                 </div>
             </header>
         </>
