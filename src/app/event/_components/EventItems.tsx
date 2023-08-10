@@ -10,10 +10,8 @@ type Props = {
 }
 
 export const EventItems: FC<Props> = ({ events, deleteEvent }) => {
-  if (events.length === 0) return null
-
   const firstEvent = events[0]
-  const [currentEventId, setCurrentEventId] = useState(firstEvent.id)
+  const [currentEventId, setCurrentEventId] = useState(firstEvent?.id)
 
   const { carouselFragment, useListenToCustomEvent } = useSpringCarousel({
     withLoop: true,
