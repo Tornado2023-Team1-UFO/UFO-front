@@ -11,7 +11,7 @@ type Props = {
 
 export const EventItems: FC<Props> = ({ events, deleteEvent }) => {
   const firstEvent = events[0]
-  const [currentEventId, setCurrentEventId] = useState(firstEvent?.id)
+  const [currentEventId, setCurrentEventId] = useState(firstEvent.id)
 
   const { carouselFragment, useListenToCustomEvent } = useSpringCarousel({
     withLoop: true,
@@ -33,6 +33,7 @@ export const EventItems: FC<Props> = ({ events, deleteEvent }) => {
 
   // 配列からは削除する
   const swipeToBad = (id: string) => {
+    console.log(currentEventId)
     deleteEvent(currentEventId)
     setCurrentEventId(id)
   }
