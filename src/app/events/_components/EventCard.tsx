@@ -1,7 +1,8 @@
 'use client'
 import Link from "next/link"
 import Image from "next/image"
-import styles from "@/app/events/events.module.css"
+import styles from "./eventcard.module.css"
+
 // this component is responsible for EventCard that will be displayed 
 // in the event page
 export default function EventCard (event: any) {

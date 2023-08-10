@@ -56,7 +56,7 @@ function Events() {
     }
 
     ]
-    let searchCategories: string[] = ["All", "Music", "Sports", "Food", "Art", "Business", "Other"]; 
+    let searchCategories: string[] = ["All Category", "Music", "Sports", "Food", "Art", "Business", "Other"]; 
 
     // handClick function when clicked on "もっと見る"
     // if clicked on "もっと見る", then it will jump to the "tinder" style swiping page
@@ -80,7 +80,6 @@ function Events() {
                     </div>
                     <div className={styles.searchothers}>
                         <div className={styles.searchotherschild}>
-                            <p>カテゴリー </p>
                             <select name="category" onChange={() => alert("category changed")}>
                                 {searchCategories.map((item) => (
                                 <option value={item}>{item}</option>)) 
@@ -88,7 +87,6 @@ function Events() {
                             </select>
                         </div>
                         <div className={styles.searchotherschild}>
-                            <p>地域 </p>
                             <select name="location" onChange={() => alert("category changed")}>
                                 {searchCategories.map((item) => (
                                     <option value={item}>{item}</option>))
