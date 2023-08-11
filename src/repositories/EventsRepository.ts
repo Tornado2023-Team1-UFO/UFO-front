@@ -13,21 +13,24 @@ export const EventsRepository = {
     for (const doc of docSnap.docs) {
       const data = doc.data()
       const attendeesCounts = await this.getAttendeeCount(doc.id)
-      // 締切が過ぎるとイベントが表示されないようにする
       const deadLine = data.deadLine.toDate()
+      const startAt = data.startAt.toDate()
+      const endAt = data.endAt.toDate()
+      // 締切が過ぎるとイベントが表示されないようにする
       if (deadLine < new Date()) {
         break
       }
-      const item = new EventSlideItem(
-        doc.id,
-        data.title,
-        data.likeCounts,
-        data.address,
-        data.mainImageUrl,
-        data.categories,
-        attendeesCounts,
-        deadLine,
-      )
+      const item = new EventSlideItem({
+        id: doc.id,
+        title: data.title,
+        prefecture: data.prefecture,
+        startAt: startAt,
+        endAt: endAt,
+        imageUrls: data.imageUrls,
+        attendeeCounts: attendeesCounts,
+        recruitPeopleCounts: data.recruitPeopleCounts,
+        deadline: deadLine,
+      })
       results.push(item)
     }
     return results
