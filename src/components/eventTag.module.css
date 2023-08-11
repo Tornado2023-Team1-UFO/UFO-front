@@ -1,0 +1,25 @@
+.hash_tag {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: #9b9b9b;
+  border: #9b9b9b 1px solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.event_tag {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 10px;
+  margin: 16px;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #4a4a4a;
+}
