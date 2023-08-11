@@ -50,6 +50,7 @@ export const EvetntItem: FC<EventItemProps> = ({
           <div className={styles.circles}>
             {backgroundImages.map((backgroundImage, index) => (
               <span
+                key={index}
                 className={styles.circle}
                 style={{
                   backgroundColor: currentIndex === index ? '#FFC107' : '#fff',
