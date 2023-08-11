@@ -11,6 +11,10 @@ type ReturnType = {
    */
   events: EventSlideItem[]
   /*
+   * 現在の背景画像のインデックス
+   */
+  backGroundImageIndex: number
+  /*
    * いいね側にスワイプしたときの処理
    */
   swipeToLike: (id: string) => void
@@ -23,13 +27,13 @@ type ReturnType = {
   /*
    * Tapしたときの処理
    */
-  tapEventItem: (index: number) => void
+  tapEventItem: (backgroundImages: string[]) => void
 }
 
 export const useSwipeEvent = (): ReturnType => {
   const [events, setEvents] = useState<EventSlideItem[]>([])
   const [currentEventId, setCurrentEventId] = useState('')
-  const [backgroundImages, setBackgroundImages] = useState<string[]>([])
+  const [backGroundImageIndex, setBackGroundImageIndex] = useState(0)
 
   const deleteEvent = (eventId: string) => {
     const newEvents = events.filter((event) => event.id !== eventId)
@@ -48,7 +52,14 @@ export const useSwipeEvent = (): ReturnType => {
     setCurrentEventId(id)
   }
 
-  const tapEventItem = (index: number) => {}
+  const tapEventItem = (backgroundImages: string[]) => {
+    const nextIndex = backGroundImageIndex + 1
+    const maxIndex = backgroundImages.length - 1
+    if (maxIndex < nextIndex) {
+      return
+    }
+    setBackGroundImageIndex(nextIndex)
+  }
 
   const fetchEvents = async () => {
     const results = await EventsRepository.getEventSlideItems()
@@ -61,6 +72,7 @@ export const useSwipeEvent = (): ReturnType => {
   }, [])
 
   return {
+    backGroundImageIndex,
     events:
       events.length > 0
         ? events

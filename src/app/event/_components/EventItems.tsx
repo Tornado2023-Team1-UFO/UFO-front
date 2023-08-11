@@ -6,7 +6,7 @@ import { useSwipeEvent } from '../_hooks/useSwipeEvent'
 import { EventTag } from '@/components/EventTag'
 
 export const EventItems: FC = () => {
-  const { events, swipeToLike, swipeToBad } = useSwipeEvent()
+  const { backGroundImageIndex, events, swipeToLike, swipeToBad, tapEventItem } = useSwipeEvent()
 
   const { carouselFragment, useListenToCustomEvent, slideToNextItem, slideToPrevItem } = useSpringCarousel({
     withLoop: true,
@@ -15,7 +15,6 @@ export const EventItems: FC = () => {
       id: event.id,
       renderItem: (
         <EvetntItem
-          backgrountImageUrl={event.imageUrls[0]}
           title={event.title}
           prefecture={event.prefecture}
           attendeeCounts={event.attendeeCounts}
@@ -23,6 +22,8 @@ export const EventItems: FC = () => {
           startAt={event.startAt}
           endAt={event.endAt}
           backgroundImages={event.imageUrls}
+          currentIndex={backGroundImageIndex}
+          onTapEvent={tapEventItem}
         />
       ),
     })),

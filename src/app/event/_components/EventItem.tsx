@@ -6,7 +6,6 @@ import dayjs from 'dayjs'
 import { EventModal } from './EventModal'
 
 export type EventItemProps = {
-  backgrountImageUrl: string
   title: string
   prefecture: string
   attendeeCounts: number
@@ -14,10 +13,11 @@ export type EventItemProps = {
   startAt: Date
   endAt: Date
   backgroundImages: string[]
+  currentIndex: number
+  onTapEvent: (backgroundImages: string[]) => void
 }
 
 export const EvetntItem: FC<EventItemProps> = ({
-  backgrountImageUrl,
   title,
   prefecture,
   attendeeCounts,
@@ -25,6 +25,8 @@ export const EvetntItem: FC<EventItemProps> = ({
   startAt,
   endAt,
   backgroundImages,
+  currentIndex,
+  onTapEvent,
 }) => {
   const startDate = dayjs(startAt).format('YYYY/MM/DD(ddd)')
   const endDate = dayjs(endAt).format('MM/DD(ddd)')
@@ -32,8 +34,9 @@ export const EvetntItem: FC<EventItemProps> = ({
     <div
       className={styles.full}
       style={{
-        backgroundImage: `url("${backgrountImageUrl}")`,
+        backgroundImage: `url("${backgroundImages[currentIndex]}")`,
       }}
+      onClick={() => onTapEvent(backgroundImages)}
     >
       {title ? (
         <div className={styles.items}>
@@ -45,8 +48,13 @@ export const EvetntItem: FC<EventItemProps> = ({
           <p className={styles.text}>{`${startDate}〜${endDate}`}</p>
           <p className={styles.text}>{`現在参加者 ${attendeeCounts}/${recruitPeopleCounts}人`}</p>
           <div className={styles.circles}>
-            {backgroundImages.map((backgroundImage) => (
-              <span className={styles.circle} />
+            {backgroundImages.map((backgroundImage, index) => (
+              <span
+                className={styles.circle}
+                style={{
+                  backgroundColor: currentIndex === index ? '#FFC107' : '#fff',
+                }}
+              />
             ))}
           </div>
         </div>

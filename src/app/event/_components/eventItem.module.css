@@ -64,7 +64,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1px;
+  gap: 4px;
 }
 
 .circle {
