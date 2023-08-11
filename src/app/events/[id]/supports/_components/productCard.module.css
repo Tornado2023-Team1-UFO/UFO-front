@@ -1,0 +1,58 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  height: auto;
+  background-color: #ffffff;
+  border: 1px solid #d3d3d3;
+  padding: 22px;
+}
+
+.amount {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 12px;
+  color: #4a4a4a;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.quantity {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 6px;
+  padding: 16px;
+  background-color: #e4e4e4;
+}
+
+.quantity_input {
+  width: 42px;
+  height: 16px;
+  background-color: #ffffff;
+  border: 1px solid #d3d3d3;
+  text-align: center;
+}
+
+.quantity_input::-webkit-outer-spin-button {
+  opacity: 1;
+}
+
+.image {
+  height: 200px;
+  width: auto;
+}
+
+.title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #4a4a4a;
+}
+
+.content {
+  font-size: 12px;
+  font-weight: 400;
+  color: #4a4a4a;
+}
