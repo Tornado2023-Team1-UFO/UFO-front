@@ -5,7 +5,7 @@ import styles from './eventItem.module.css'
 import dayjs from 'dayjs'
 import { EventModal } from './EventModal'
 
-export type EventItemProps = {
+type Props = {
   title: string
   prefecture: string
   attendeeCounts: number
@@ -17,7 +17,7 @@ export type EventItemProps = {
   onTapEvent: (backgroundImages: string[]) => void
 }
 
-export const EvetntItem: FC<EventItemProps> = ({
+export const EvetntItem: FC<Props> = ({
   title,
   prefecture,
   attendeeCounts,
