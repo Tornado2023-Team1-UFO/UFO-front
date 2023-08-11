@@ -45,11 +45,13 @@ export const useSwipeEvent = (): ReturnType => {
     await LikeRepository.addLike(currentEventId)
     await UserRepository.addFavoriteEvent(currentEventId, auth.currentUser?.uid || '')
     setCurrentEventId(id)
+    setBackGroundImageIndex(0)
   }
 
   const swipeToBad = (id: string) => {
     deleteEvent(currentEventId)
     setCurrentEventId(id)
+    setBackGroundImageIndex(0)
   }
 
   const tapEventItem = (backgroundImages: string[]) => {
