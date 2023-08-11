@@ -1,8 +1,8 @@
 .full {
   position: relative;
-  width: 80%;
-  margin: 0 auto;
-  height: 84vh;
+  width: 100%;
+  margin: 0 12px;
+  height: 68vh;
   background-size: contain;
   background-repeat: none;
   background-position: center;
@@ -10,6 +10,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 6px;
 }
 
 .full::before {

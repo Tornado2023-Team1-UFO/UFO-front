@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 import { EventSlideItem } from '../_models/EventSlideItem'
 import { EventsRepository } from '@/repositories/EventsRepository'
+import { LikeRepository } from '@/repositories/LikeRepository'
+import { UserRepository } from '@/repositories/UserRepository'
+import { auth } from '@/libs/firebase'
 
 type ReturnType = {
   /*
@@ -33,8 +36,10 @@ export const useSwipeEvent = (): ReturnType => {
     setEvents(newEvents)
   }
 
-  const swipeToLike = (id: string) => {
+  const swipeToLike = async (id: string) => {
     deleteEvent(currentEventId)
+    await LikeRepository.addLike(currentEventId)
+    await UserRepository.addFavoriteEvent(currentEventId, auth.currentUser?.uid || '')
     setCurrentEventId(id)
   }
 

@@ -3,13 +3,15 @@ import { useSpringCarousel } from 'react-spring-carousel'
 import { EvetntItem } from './EventItem'
 import { NavigationMenu } from './NavigationMenu'
 import { useSwipeEvent } from '../_hooks/useSwipeEvent'
+import { EventTag } from '@/components/EventTag'
 
 export const EventItems: FC = () => {
   const { events, swipeToLike, swipeToBad } = useSwipeEvent()
 
-  const { carouselFragment, useListenToCustomEvent } = useSpringCarousel({
+  const { carouselFragment, useListenToCustomEvent, slideToNextItem, slideToPrevItem } = useSpringCarousel({
     withLoop: true,
     items: events.map((event) => ({
+      initialActiveItem: 1,
       id: event.id,
       renderItem: (
         <EvetntItem
@@ -26,11 +28,11 @@ export const EventItems: FC = () => {
     })),
   })
 
-  useListenToCustomEvent((event) => {
+  useListenToCustomEvent(async (event) => {
     if (event.eventName === 'onSlideStartChange') {
       switch (event.slideActionType) {
         case 'next':
-          swipeToLike(event.nextItem.id)
+          await swipeToLike(event.nextItem.id)
           break
         case 'prev':
           swipeToBad(event.nextItem.id)
@@ -43,8 +45,9 @@ export const EventItems: FC = () => {
 
   return (
     <div>
+      <EventTag title='夏の成功体験' />
       {carouselFragment}
-      <NavigationMenu />
+      <NavigationMenu onClickBack={slideToPrevItem} onClickHeart={slideToNextItem} />
     </div>
   )
 }

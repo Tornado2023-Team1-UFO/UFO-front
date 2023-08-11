@@ -3,6 +3,7 @@
 import { FC } from 'react'
 import styles from './eventItem.module.css'
 import dayjs from 'dayjs'
+import { EventModal } from './EventModal'
 
 export type EventItemProps = {
   backgrountImageUrl: string
@@ -34,20 +35,24 @@ export const EvetntItem: FC<EventItemProps> = ({
         backgroundImage: `url("${backgrountImageUrl}")`,
       }}
     >
-      <div className={styles.items}>
-        <h1 className={styles.title}>{title}</h1>
-        <div className={styles.box}>
-          <img src='images/pin.svg' alt='pin' />
-          <p>{prefecture}</p>
+      {title ? (
+        <div className={styles.items}>
+          <h1 className={styles.title}>{title}</h1>
+          <div className={styles.box}>
+            <img src='images/pin.svg' alt='pin' />
+            <p>{prefecture}</p>
+          </div>
+          <p className={styles.text}>{`${startDate}〜${endDate}`}</p>
+          <p className={styles.text}>{`現在参加者 ${attendeeCounts}/${recruitPeopleCounts}人`}</p>
+          <div className={styles.circles}>
+            {backgroundImages.map((backgroundImage) => (
+              <span className={styles.circle} />
+            ))}
+          </div>
         </div>
-        <p className={styles.text}>{`${startDate}〜${endDate}`}</p>
-        <p className={styles.text}>{`現在参加者 ${attendeeCounts}/${recruitPeopleCounts}人`}</p>
-        <div className={styles.circles}>
-          {backgroundImages.map((backgroundImage) => (
-            <span className={styles.circle} />
-          ))}
-        </div>
-      </div>
+      ) : (
+        <EventModal />
+      )}
     </div>
   )
 }

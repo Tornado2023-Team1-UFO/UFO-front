@@ -15,7 +15,7 @@
   align-items: center;
   justify-content: start;
   gap: 10px;
-  margin: 16px;
+  padding: 16px;
 }
 
 .title {
