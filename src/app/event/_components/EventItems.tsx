@@ -1,17 +1,11 @@
-import { FC, useCallback, useMemo, useState } from 'react'
-import { EventSlideItem } from '../_models/EventSlideItem'
+import { FC } from 'react'
 import { useSpringCarousel } from 'react-spring-carousel'
 import { EvetntItem } from './EventItem'
 import { NavigationMenu } from './NavigationMenu'
+import { useSwipeEvent } from '../_hooks/useSwipeEvent'
 
-type Props = {
-  events: EventSlideItem[]
-  deleteEvent: (eventId: string) => void
-}
-
-export const EventItems: FC<Props> = ({ events, deleteEvent }) => {
-  const firstEvent = events[0]
-  const [currentEventId, setCurrentEventId] = useState(firstEvent.id)
+export const EventItems: FC = () => {
+  const { events, swipeToLike, swipeToBad } = useSwipeEvent()
 
   const { carouselFragment, useListenToCustomEvent } = useSpringCarousel({
     withLoop: true,
@@ -19,30 +13,24 @@ export const EventItems: FC<Props> = ({ events, deleteEvent }) => {
       id: event.id,
       renderItem: (
         <EvetntItem
-          backgrountImageUrl={event.mainImageUrl}
-          attendCounts={event.attendCounts}
-          likeCounts={event.likeCounts}
+          backgrountImageUrl={event.imageUrls[0]}
+          title={event.title}
+          prefecture={event.prefecture}
+          attendeeCounts={event.attendeeCounts}
+          recruitPeopleCounts={event.recruitPeopleCounts}
+          startAt={event.startAt}
+          endAt={event.endAt}
+          backgroundImages={event.imageUrls}
         />
       ),
     })),
   })
 
-  // いいねをする、お気に入りに登録する
-  // 配列からは削除する
-  const swipeToLike = () => {}
-
-  // 配列からは削除する
-  const swipeToBad = (id: string) => {
-    console.log(currentEventId)
-    deleteEvent(currentEventId)
-    setCurrentEventId(id)
-  }
-
   useListenToCustomEvent((event) => {
     if (event.eventName === 'onSlideStartChange') {
       switch (event.slideActionType) {
         case 'next':
-          swipeToLike()
+          swipeToLike(event.nextItem.id)
           break
         case 'prev':
           swipeToBad(event.nextItem.id)
@@ -53,5 +41,10 @@ export const EventItems: FC<Props> = ({ events, deleteEvent }) => {
     }
   })
 
-  return <div>{carouselFragment}</div>
+  return (
+    <div>
+      {carouselFragment}
+      <NavigationMenu />
+    </div>
+  )
 }
