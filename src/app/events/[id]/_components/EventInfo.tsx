@@ -7,24 +7,30 @@ import { collection, getDoc, doc, DocumentData } from 'firebase/firestore';
 
 export default function EventInfo(data: any) {
     let userId: string = ""; 
-    let imageURLs: string[] = [];
     const [loaded, setLoaded] = useState(false);
+    const [initialLoad, setInitialLoad] = useState(true);
+    const [imageURLs, setImageURLs] = useState<string[]>([]);
     const [userInfo, setUserInfo] = useState<DocumentData>();
     const [startDate, setStartDate] = useState<Date>();
     const [endDate, setEndDate] = useState<Date>();
+    const [imageIndex, setImageIndex] = useState<number>(0);  // keep track of image index for the main image 
+    // wait for the prop to load. It takes a little bit of time for the data(prop) to load so wait
     useEffect(() => {
-        if (!loaded) {
-            if (Object.keys(data).length !== 0 && data.constructor === Object) {
-                setLoaded(true);
-            }
+        // if data is not empty then => 
+        // loaded = true
+        if (!loaded && Object.keys(data).length !== 0 && data.constructor === Object) {
+            console.log("Loaded: " + loaded);
+            setLoaded(true);
         }
     })
+    // get data from firebase
     useEffect(() => {
-        if (loaded) {
+        // if the data is loaded and it is a initial load
+        if (loaded && initialLoad) {
             console.log(data);
             userId = data.userId._key?.path?.segments[6];
             data.imageUrls.map((url: string) => {
-                imageURLs.push(url);
+                setImageURLs(imageURLs => [...imageURLs, url]);
             });
             // get date from data since date is UNIX timestamp
             setStartDate(new Date(data.startAt)); 
@@ -48,16 +54,54 @@ export default function EventInfo(data: any) {
                 }
             };
             fetchUserInfo();
+            setInitialLoad(false);  // once loaded it is not a initial load
         }
     }, [loaded]);
-    console.log(loaded);
+    // function for changing the main image
+    const changeMainImage = (index: number) => {
+        setImageIndex(index);
+    }
     if (!loaded) return <p>Loading...</p>
     return (
         <>
-            <div className={styles.eventimage}>
-                {/* <Image 
-                    src={data.}
-                /> */}
+            <div className={styles.eventimagecontainer}>
+                    {imageURLs.map((url: string, index: number) => {
+                    return (
+                        <div className={styles.maineventimage}
+                        style={{ display: index === imageIndex ? 'block' : 'none'}}
+                        >
+                            <Image
+                                className="eventimage"
+                                key={url}
+                                src={url}
+                                alt="event image"
+                                fill
+                                style={{
+                                    display: index === imageIndex ? 'block' : 'none',
+                                }}
+                            />
+                        </div>
+                    );}
+                    )}
+                <div className={styles.imagethumbnailscontainer}>
+                    {imageURLs.map((url: string, index) => {
+                        return (
+                            <div className={styles.imagethumbnails}
+                            key={url}>
+                                <Image
+                                    key={url}
+                                    src={url}
+                                    alt="event image"
+                                    fill
+                                    style={{
+                                        objectPosition: 'center',
+                                    }}
+                                    onClick={() => changeMainImage(index)}
+                                />
+                            </div>
+                        );
+                    })}
+                </div>
             </div>
             <div className={styles.eventinfocontainer}>
                 <div className={styles.eventtitle}>
