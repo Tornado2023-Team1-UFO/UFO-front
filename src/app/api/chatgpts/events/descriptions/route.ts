@@ -10,8 +10,6 @@ export async function POST(req: Request) {
     const completion = await openai.createChatCompletion({
       model: 'gpt-3.5-turbo',
       messages: [{ role: 'user', content: data.message }],
-      temperature: 0.9,
-      max_tokens: 100,
     })
 
     return NextResponse.json(completion.data.choices[0].message)
