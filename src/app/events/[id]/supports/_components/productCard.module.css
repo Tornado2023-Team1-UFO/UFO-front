@@ -1,0 +1,54 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  height: auto;
+  background-color: #ffffff;
+  border: 1px solid #d3d3d3;
+  padding: 22px;
+}
+
+.amount {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 12px;
+  color: #4a4a4a;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.quantity {
+  padding: 16px;
+  background-color: #e4e4e4;
+}
+
+.quantity_input {
+  margin-left: 6px;
+  background-color: #ffffff;
+  border: 1px solid #d3d3d3;
+}
+
+.image {
+  height: 200px;
+  width: 100%;
+}
+
+@media screen and (min-width: 767px) {
+  .image {
+    height: 600px;
+  }
+}
+
+.title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #4a4a4a;
+}
+
+.content {
+  font-size: 12px;
+  font-weight: 400;
+  color: #4a4a4a;
+}
