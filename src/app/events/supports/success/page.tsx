@@ -3,9 +3,11 @@ import styles from './index.module.css'
 const Page = () => {
   return (
     <div className={styles.title}>
-      <h1>Thanks</h1>
-      <h1>You</h1>
-      <Link href='/'>ホームに戻る</Link>
+      <p>支援が完了しました</p>
+      <div>Thanks you for your support 🎉</div>
+      <Link href='/'>
+        <button className={styles.button}>ホームに戻る</button>
+      </Link>
     </div>
   )
 }
