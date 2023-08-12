@@ -20,24 +20,14 @@
 }
 
 .quantity {
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  gap: 6px;
   padding: 16px;
   background-color: #e4e4e4;
 }
 
 .quantity_input {
-  width: 42px;
-  height: 16px;
+  margin-left: 6px;
   background-color: #ffffff;
   border: 1px solid #d3d3d3;
-  text-align: center;
-}
-
-.quantity_input::-webkit-outer-spin-button {
-  opacity: 1;
 }
 
 .image {

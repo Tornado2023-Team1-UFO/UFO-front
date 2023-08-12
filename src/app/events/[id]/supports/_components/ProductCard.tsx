@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import styles from './productCard.module.css'
+import { InputNumber } from 'primereact/inputnumber'
 
 type Props = {
   id: string
@@ -32,11 +33,15 @@ export const ProductCard: FC<Props> = ({
       </div>
       <div className={styles.quantity}>
         数量
-        <input
-          type='number'
+        <InputNumber
+          value={quantity > 0 ? quantity : 0}
+          onValueChange={(e) => onChangeQuantity(id, Number(e.value))}
+          showButtons
+          buttonLayout='vertical'
+          size={2}
           className={styles.quantity_input}
-          value={quantity > 0 ? quantity : ''}
-          onChange={(e) => onChangeQuantity(id, Number(e.target.value))}
+          min={1}
+          max={100}
         />
       </div>
 

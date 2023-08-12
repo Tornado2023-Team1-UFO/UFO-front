@@ -1,10 +1,12 @@
+import { SupportProduct } from '@/app/events/[id]/supports/_models/SupportProduct'
 import { stripe } from '@/libs/stripe'
 import { NextResponse } from 'next/server'
 import Stripe from 'stripe'
 
 export async function POST(req: Request) {
-  console.log(req)
-  const data: any = await req.json()
+  const data: {
+    products: SupportProduct[]
+  } = await req.json()
 
   const products = data.products
   if (!products) throw new Error('productsが設定されていません。')
