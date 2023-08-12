@@ -1,68 +1,13 @@
 'use client'
 
-import { nextApi } from '@/libs/axios'
-import { ReturnRepository } from '@/repositories/ReturnRepository'
-import { useParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
-import { SupportProduct } from './_models/SupportProduct'
 import { ProductCard } from './_components/ProductCard'
 import styles from './index.module.css'
+import { useSupportProducts } from './_hooks/useSupportProducts'
 
 const SupportsPage = () => {
-  const { id } = useParams()
-  const [supportProducts, setSupportProducts] = useState<SupportProduct[]>([])
-  const [selectedProducts, setSelectedProducts] = useState<SupportProduct[]>([])
-
-  const fetchReturns = async () => {
-    const data = await ReturnRepository.getReturns(id as string)
-    setSupportProducts(data)
-  }
-  useEffect(() => {
-    fetchReturns()
-  }, [])
-
-  const clickCheckBox = (id: string) => {
-    const newSupportProducts = supportProducts.map((supportProduct) => {
-      if (supportProduct.id === id) {
-        supportProduct.isChecked = !supportProduct.isChecked
-      }
-      return supportProduct
-    })
-    setSupportProducts(newSupportProducts)
-
-    const newSelectedProducts = supportProducts.filter(
-      (supportProduct) => supportProduct.isChecked && supportProduct.quantity > 0,
-    )
-    setSelectedProducts(newSelectedProducts)
-  }
-
-  const changeQuantity = (id: string, quantity: number) => {
-    if (quantity < 0) return
-
-    const newSupportProducts = supportProducts.map((supportProduct) => {
-      if (supportProduct.id === id) {
-        supportProduct.quantity = quantity
-      }
-      return supportProduct
-    })
-    setSupportProducts(newSupportProducts)
-
-    const newSelectedProducts = supportProducts.filter(
-      (supportProduct) => supportProduct.isChecked && supportProduct.quantity > 0,
-    )
-    setSelectedProducts(newSelectedProducts)
-  }
-
-  const clickBuyButton = async () => {
-    const { data } = await nextApi.post('/payments', {
-      products: selectedProducts,
-      id: id,
-    })
-
-    window.location.assign(data.url)
-  }
-
+  const { clickCheckBox, changeQuantity, clickBuyButton, selectedProducts, supportProducts } = useSupportProducts()
   const disabled = selectedProducts.length === 0
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>

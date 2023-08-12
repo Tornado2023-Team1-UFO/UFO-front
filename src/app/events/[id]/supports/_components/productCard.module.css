@@ -42,7 +42,13 @@
 
 .image {
   height: 200px;
-  width: auto;
+  width: 100%;
+}
+
+@media screen and (min-width: 767px) {
+  .image {
+    height: 600px;
+  }
 }
 
 .title {
