@@ -28,12 +28,12 @@ const Page = () => {
     changeEndAt,
     clickRegion,
     clickPrefecture,
-    clickNextFromRecruitPeopleCount,
     clickUploadImage,
     changeDescription,
     changeSnsLink,
     changeMovieLink,
     publishEvent,
+    clickNextToDescription,
   } = useEventCreate()
 
   const renderComponent = () => {
@@ -67,7 +67,7 @@ const Page = () => {
           <NumberOfPeople
             numberOfPeople={event.recruitPeopleCount}
             onChangeNumberOfPeople={changeRecruitPeopleCount}
-            onClickNext={clickNextFromRecruitPeopleCount}
+            onClickNext={() => setCurrentSection(section.get(5))}
           />
         )
       case section.get(5):
@@ -102,7 +102,7 @@ const Page = () => {
           <EventImage
             imageUrls={event.imageUrls}
             onClickFileUpload={clickUploadImage}
-            onClickNext={() => setCurrentSection(section.get(9))}
+            onClickNext={() => clickNextToDescription()}
           />
         )
       case section.get(9):

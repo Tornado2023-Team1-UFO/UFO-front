@@ -1,6 +1,8 @@
 import { storage } from '@/libs/firebase'
+import axios from 'axios'
 import { uploadBytes, ref, getDownloadURL } from 'firebase/storage'
 import { ChangeEvent, useState } from 'react'
+import { nextApi } from '@/libs/axios'
 
 export const section = new Map<number, string>([
   [1, 'EVENT_TITLE'],
@@ -43,12 +45,12 @@ type ReturnType = {
   changeEndAt: (endAt: string) => void
   clickRegion: (region: string) => void
   clickPrefecture: (prefecture: string) => void
-  clickNextFromRecruitPeopleCount: () => void
   clickUploadImage: (e: ChangeEvent<HTMLInputElement>) => void
   changeDescription: (description: string) => void
   changeSnsLink: (snsLink: string) => void
   changeMovieLink: (movieLink: string) => void
   publishEvent: () => void
+  clickNextToDescription: () => void
 }
 
 export const useEventCreate = (): ReturnType => {
@@ -96,9 +98,46 @@ export const useEventCreate = (): ReturnType => {
     }
   }
 
-  const clickNextFromRecruitPeopleCount = () => {
+  const clickNextToDescription = async () => {
+    const message = `あなたは、イベントの主催者です。以下のイベントに参加したくなるような文章を300文字で書いてください。
+    イベントのタイトル ${event.title}
+    対象ユーザー ${event.targetUser}
+    一人当たりの参加費 ${event.eventFee}円
+    目標人数 ${event.recruitPeopleCount}人
+    開催地 ${event.prefecture}
+    日時 ${event.startAt}から${event.endAt}
+    
+    
+    例：
+    入力
+    イベントのタイトル Tornade
+    対象ユーザー 10代から20代のユーザー
+    一人当たりの参加費 0円
+    目標人数 100人
+    開催地 東京都
+    日時 2023年8月1日から2023年9月9日
+    
+    出力
+    今回で開催3回目となる「トルネード」は、個人で参加できる
+    オンライン型ハッカソンです。
+    
+    チームは、6人1チームで構成され「プロダクトオーナー」
+    「デザイナー」「エンジニア」のそれぞれの役割の中で
+    1ヵ月間協力し合います。
+    各チームには、メンターとしてサポーター企業がつき、
+    自分たちの企画や開発に関してプロからの実用的なアドバイスを
+    もらうことができます。
+    
+    普段関わることのないような地域、分野の学生たちと
+    「ディスカッション」「プロダクト開発」「プレゼンテーション」の
+    活動を通して、最高の成長体験をつかみましょう！`
+
     // ここでchatgptに投げ,返ってきた文章をevent.contentに入れる
-    setCurrentSection(section.get(5))
+    const { data } = await nextApi.post('/chatgpts/events/descriptions', {
+      message: message,
+    })
+    setEvent({ ...event, description: data.content })
+    setCurrentSection(section.get(9))
   }
 
   const clickUploadImage = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -135,11 +174,11 @@ export const useEventCreate = (): ReturnType => {
     changeEndAt: (endAt: string) => setEvent({ ...event, endAt }),
     clickRegion: clickRegion,
     clickPrefecture: (prefecture: string) => setEvent({ ...event, prefecture }),
-    clickNextFromRecruitPeopleCount: clickNextFromRecruitPeopleCount,
     clickUploadImage: clickUploadImage,
     changeDescription: (description: string) => setEvent({ ...event, description }),
     changeSnsLink: (snsLink: string) => setEvent({ ...event, snsLink }),
     changeMovieLink: (movieLink: string) => setEvent({ ...event, movieLink }),
     publishEvent: publishEvent,
+    clickNextToDescription: clickNextToDescription,
   }
 }
