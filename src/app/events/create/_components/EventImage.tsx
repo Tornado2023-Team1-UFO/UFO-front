@@ -10,7 +10,7 @@ export const EventImage: FC<Props> = ({ imageUrls, onClickFileUpload, onClickNex
   <div>
     イベントの画像
     {imageUrls.map((imageUrl) => (
-      <img src={imageUrl} />
+      <img key={imageUrl} src={imageUrl} />
     ))}
     <input
       style={{

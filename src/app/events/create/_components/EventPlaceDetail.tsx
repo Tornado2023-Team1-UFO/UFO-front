@@ -11,7 +11,9 @@ export const EventPlaceDetail: FC<Props> = ({ prefectures, selectedPrefecture, o
   <div>
     <p>現在 {selectedPrefecture}</p>
     {prefectures.map((prefecture) => (
-      <h1 onClick={() => onChangePrefecture(prefecture)}>{prefecture}</h1>
+      <h1 key={prefecture} onClick={() => onChangePrefecture(prefecture)}>
+        {prefecture}
+      </h1>
     ))}
     <button onClick={() => onClickNext()}>次へ</button>
   </div>
