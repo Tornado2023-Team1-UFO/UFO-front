@@ -1,0 +1,87 @@
+/* --- info container --- */
+.eventinfocontainer {
+  background-color: #f1f1f1;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+.eventinfocontainer > div {
+  background-color: #fff;
+  width: 80%;
+  margin: 0.625rem auto;
+}
+/* ----- start of specific styling -----   */
+/* --- main event image ---  */
+.maineventimage {
+  position: relative;
+  margin: 0 auto;
+  margin-bottom: 0.5rem;
+  width: 100%;
+  height: 16rem;
+}
+.imagethumbnailscontainer {
+  display: flex;
+  justify-content: space-around;
+  background: #f1f1f1 !important;
+}
+.imagethumbnails {
+  position: relative;
+  width: 10rem;
+  height: 4rem;
+  overflow: hidden;
+  margin: 0 0.25rem;
+  cursor: pointer;
+}
+/* --- end of event image --- */
+.eventtitle {
+  height: 3.375rem;
+  line-height: 3.375rem;
+}
+.eventtitle h1 {
+  color: #4a4a4a;
+  font-family: Noto sans-serif;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 700;
+  text-align: center;
+}
+
+/*  --- eventhost styling ---  */
+.eventhost {
+  background-color: #f1f1f1 !important; /*override background-color:*/
+  display: flex;
+  height: 3rem;
+  line-height: 3rem;
+}
+.imagecontainer {
+  position: relative;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.eventhostname {
+  background: white;
+  line-height: auto;
+  margin-left: 1rem;
+}
+.eventhostname p {
+  text-align: center;
+  padding: 0 1rem;
+}
+/*  --- end of eventhost styling ---  */
+/* --- start of eventdate ---  */
+.eventdate {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.eventdate p {
+  text-align: center;
+}
+
+.eventextrainfo {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 1rem;
+}
