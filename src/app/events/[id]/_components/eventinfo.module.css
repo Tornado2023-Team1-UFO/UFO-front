@@ -1,0 +1,65 @@
+/* --- info container --- */
+.eventinfocontainer {
+    background-color: #F1F1F1;
+    display: flex; 
+    flex-direction: column; 
+    margin: 0 auto;
+}
+.eventinfocontainer > div {
+    background-color: #FFF;
+    width: 80%;
+    margin: 0.625rem auto;
+}
+/* --- start of specific styling ---  */
+.eventtitle {
+    height: 3.375rem;
+    line-height: 3.375rem;
+}
+.eventtitle h1 {
+    color: #4A4A4A;
+    font-family: Noto sans-serif;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 700;
+    text-align: center;
+}
+
+/*  --- eventhost styling ---  */
+.eventhost {
+    background-color: #F1F1F1 !important; /*override background-color:*/
+    display: flex;
+    height: 3rem; 
+    line-height: 3rem;
+}
+.imagecontainer {
+    position: relative;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.eventhostname {
+    background: white;
+    line-height: auto; 
+    margin-left: 1rem;
+}
+.eventhostname p {
+    text-align: center;
+    padding: 0 1rem; 
+}
+/*  --- end of eventhost styling ---  */
+/* --- start of eventdate ---  */
+.eventdate {
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center;
+}
+.eventdate p {
+    text-align: center;
+}
+
+.eventextrainfo {
+    display: flex; 
+    justify-content: space-between;
+    margin: 0 1rem;
+}
