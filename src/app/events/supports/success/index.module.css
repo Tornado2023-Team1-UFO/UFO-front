@@ -1,10 +1,20 @@
 .title {
-  font-size: 52px;
+  font-size: 24px;
   font-weight: 700;
-  color: #4a4a4a;
-  text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 20px;
+  height: 100vh;
+}
+
+.button {
+  background-color: #595959;
+  border: 1px solid #595959;
+  border-radius: 6px;
+  color: white;
+  width: 300px;
+  height: 40px;
+  font-size: 12px;
 }
