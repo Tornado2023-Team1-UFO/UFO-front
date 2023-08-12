@@ -157,7 +157,6 @@ export const useEventCreate = (): ReturnType => {
   const publishEvent = () => {
     // ここでイベントを作成する
     // chatgptに投げイベントのタイプを返してもらう
-    // firebase db登録
   }
 
   return {
