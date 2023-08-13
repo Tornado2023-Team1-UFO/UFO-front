@@ -1,18 +1,25 @@
-import styles from "@/app/events/[id]/_components/eventinfo.module.css"
 import { use, useEffect, useState } from "react";
 import Image from "next/image";
+// --- components ---
+import Loading from "@/components/Loading";
+import EventInfoFooter from "./EventInfoFooter";
+import styles from "@/app/events/[id]/_components/eventinfo.module.css"; 
+// --- third party ---
+import { FaLocationDot, FaPeopleGroup, FaYenSign } from "react-icons/fa6";
+import dayjs from "dayjs";
 // --- firebase --- 
 import { db } from '@/libs/firebase'
 import { collection, getDoc, doc, DocumentData } from 'firebase/firestore'; 
 
+
 export default function EventInfo(data: any) {
     let userId: string = ""; 
-    const [loaded, setLoaded] = useState(false);
+    const [loaded, setLoaded] = useState(false);    
     const [initialLoad, setInitialLoad] = useState(true);
     const [imageURLs, setImageURLs] = useState<string[]>([]);
     const [userInfo, setUserInfo] = useState<DocumentData>();
-    const [startDate, setStartDate] = useState<Date>();
-    const [endDate, setEndDate] = useState<Date>();
+    const [startDate, setStartDate] = useState<string>();
+    const [endDate, setEndDate] = useState<string>();
     const [imageIndex, setImageIndex] = useState<number>(0);  // keep track of image index for the main image 
     // wait for the prop to load. It takes a little bit of time for the data(prop) to load so wait
     useEffect(() => {
@@ -33,8 +40,11 @@ export default function EventInfo(data: any) {
                 setImageURLs(imageURLs => [...imageURLs, url]);
             });
             // get date from data since date is UNIX timestamp
-            setStartDate(new Date(data.startAt)); 
-            setEndDate(new Date(data.endAt));
+            console.log("start date is: " + data.startAt.toDate()); 
+            const startDate = dayjs(data.startAt.toDate()).format('YYYY/MM/DD(ddd)')
+            const endDate = dayjs(data.endAt.toDate()).format('MM/DD(ddd)')
+            setStartDate(startDate); 
+            setEndDate(endDate);
             console.log("startDate: " + startDate);
             // contact firebase to get userInfo
             // currently userId is just a random number -> need get actual name and picture
@@ -61,7 +71,7 @@ export default function EventInfo(data: any) {
     const changeMainImage = (index: number) => {
         setImageIndex(index);
     }
-    if (!loaded) return <p>Loading...</p>
+    if (!loaded) return <Loading />;
     return (
         <>
             <div className={styles.eventimagecontainer}>
@@ -113,8 +123,6 @@ export default function EventInfo(data: any) {
                             src={userInfo?.photoURL}
                             alt="user photo"
                             fill
-                            // width={80}
-                            // height={80}
                             style={{
                                 objectPosition: 'center',
                             }}
@@ -124,27 +132,34 @@ export default function EventInfo(data: any) {
                         <p>主催者名: {userInfo?.name}</p>
                     </div>
                 </div>
-                <div className={styles.eventdate}>
-                    <p>開催日時</p>
-                    {/* <p>`${startDate?.getMonth() + 1}</p> */}
+                <div className={styles.eventDate}>
+                    <p className={styles.eventDateTitle}>開催日時</p>
+                    <p className={styles.eventDateSE}>{startDate} ~ {endDate}</p>
                 </div>
-                <div className={styles.eventextrainfo}>
+                <div className={styles.eventExtraInfo}>
                     <div className={styles.count}>
-                        <p>人数</p>
+                        <FaPeopleGroup className={styles.icon}/>
                         <p>{data.recruitPeopleCounts}</p>
                     </div>
+                    <div className={styles.border}></div>
                     <div className={styles.location}>
-                        <p>Location</p>
+                        <FaLocationDot className={styles.icon} />
+                        <p>{data.prefecture}</p>
                     </div>
-                    <div className={styles.cost}> 
-                        <p>Cost</p>
+                    <div className={styles.border}></div>
+                    <div className={styles.cost}>
+                        <FaYenSign className={styles.icon} />
+                        <p>{data.eventFee}</p>
                     </div>
                 </div>
-                <div>
-                    <p>イベント概要</p>
-                    <p>{data.content}</p>
+                <div className={styles.eventContentContainer}>
+                    <p className={styles.eventContentTitle}>イベント概要</p>
+                    <p className={styles.eventContent}>{data.content}</p>
                 </div>
             </div>
+            <EventInfoFooter 
+                likeCounts={data.likeCounts}
+            />
         </>
     );
 }

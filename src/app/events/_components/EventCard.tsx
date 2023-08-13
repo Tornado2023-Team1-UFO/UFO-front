@@ -16,7 +16,7 @@ export default function EventCard (event: any) {
                 <div className={styles.cardimage}>
                     <figure>
                         <Image
-                         src="http://placekitten.com/300/300" 
+                         src="https://placekitten.com/300/300" 
                          alt="Placeholder image" 
                         //  width={300} 
                         //  height={300}

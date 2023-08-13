@@ -13,9 +13,8 @@ export default function EventDetails() {
     // router.push(firebase_id)
     // firebase_id を受け取る
     const id: string = "jrJxJvnTsGINW9CfSm91"; 
-    // useParams();  // -> {id: firebase_id}
-    // useEffect(() => {
-    // }
+    const param = useParams(); 
+    console.log(param.id);
     // const eventRef = db.collection('events').doc(params);
     const [data, setData] = useState({});
     useEffect(() => {

@@ -1,0 +1,32 @@
+/* Loading style from: https://dev.to/gustavosfq/pulse-loading-with-css-2ofn */
+/* this is to keep you loading wrapper on the middle of screen */
+.loadingWrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+}
+
+.loading {
+    height: 50px;
+    width: 50px;
+    background-color: rgb(199, 153, 8);
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    40% {
+        transform: scale(1.1);
+        box-shadow: 0 0 0 20px rgba(199, 153, 8, 0.3);
+    }
+
+    80% {
+        transform: scale(1);
+        box-shadow: 0 0 0 40px rgba(199, 153, 8, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(199, 153, 8, 0)
+    }
+}
