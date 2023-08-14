@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { useAuth } from '@/app/_hooks/useAuth'
 // import components
 
-
 export default function Home() {
   const { Logout } = useAuth()
 

@@ -1,0 +1,23 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  width: 100%;
+  gap: 24px;
+  height: 500px;
+}
+
+.input_box {
+  background-color: #ffffffff;
+  width: 100%;
+  height: 84px;
+}
+
+.input_container {
+  width: 100%;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
