@@ -6,6 +6,7 @@ import { useState } from 'react'
 import PageDetails from '@/components/PageDetails'
 import SearchBar from './_components/SearchBar'
 import EventContainer from './_components/EventContainer'
+import SeiShunStyle from './_components/SeishunStyle'
 
 function Events() {
   let searchCategories = ['All', 'Tokyo', 'Osaka', 'Kyoto', 'Hokkaido']
@@ -15,6 +16,7 @@ function Events() {
       <PageDetails title='イベント一覧' description='イベント一覧ページです。' />
       <div className='container'>
         <SearchBar />
+        <SeiShunStyle />
         {eventCategories.map((category) => (
           <EventContainer category={category} />
         ))}

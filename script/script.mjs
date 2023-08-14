@@ -30,17 +30,12 @@ async function generateRandomEvent() {
   const startAt = faker.date.future()
   let randomCategory = eventCategories[Math.floor(Math.random() * eventCategories.length)]
   return {
-    askingMaxFee: faker.number.int({ min: 100, max: 1000 }),
-    askingMinFee: faker.number.int({ min: 50, max: 500 }),
-    categories: Array.from({ length: faker.number.int({ min: 1, max: 5 }) }, () => faker.word.words()),
-    randomCategory: randomCategory,
+    category: randomCategory,
+    eventFee: faker.number.int({ min: 0, max: 3000 }),
     content: faker.lorem.paragraph(),
-    cost: faker.number.int({ min: 0, max: 3000 }),
-    createdAt: faker.date.past(),
     deadLine: faker.date.future(),
     imageUrls: Array.from({ length: faker.number.int({ min: 1, max: 3 }) }, () => faker.image.url()),
     likeCounts: faker.number.int({ min: 0, max: 1000 }),
-    outline: faker.lorem.sentence(),
     prefecture: faker.location.state(),
     recruitPeopleCounts: faker.number.int({ min: 1, max: 50 }),
     startAt: startAt,
