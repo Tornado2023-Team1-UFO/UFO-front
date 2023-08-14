@@ -1,0 +1,47 @@
+.container {
+  background-color: #d3d3d3;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  background-color: #ffffff;
+}
+
+.header_title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #4a4a4a;
+}
+
+.header_tag {
+  width: 40px;
+  font-size: 10px;
+  font-weight: 400;
+  background-color: #595959;
+  text-align: center;
+  padding: 3px;
+  color: #ffffff;
+  border-radius: 3px;
+}
+
+.button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 12px;
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+}

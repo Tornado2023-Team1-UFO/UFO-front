@@ -1,0 +1,18 @@
+.container {
+  height: 100vh;
+  background-color: #f1f1f1;
+  padding: 12px;
+  height: 100vh;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
