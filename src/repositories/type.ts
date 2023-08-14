@@ -7,7 +7,7 @@ type FirebaseEventType = {
   prefecture: string
   startAt: Date
   endAt: Date
-  deadline: Date
+  deadLine: Date
   likeCounts: number
   imageUrls: string[]
   recruitPeopleCounts: number

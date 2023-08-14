@@ -211,7 +211,7 @@ export const useEventCreate = (): ReturnType => {
       prefecture: event.prefecture,
       startAt: new Date(event.startAt),
       endAt: new Date(event.endAt),
-      deadline: new Date(event.startAt),
+      deadLine: new Date(event.startAt),
       likeCounts: 0,
       imageUrls: event.imageUrls,
       recruitPeopleCounts: event.recruitPeopleCount,
