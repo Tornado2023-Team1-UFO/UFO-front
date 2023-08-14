@@ -1,4 +1,4 @@
-import styles from './Header.module.css'
+import styles from './header.module.css'
 import Link from 'next/link'
 import { FiLogIn } from 'react-icons/fi'
 export default function Login() {
