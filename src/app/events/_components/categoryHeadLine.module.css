@@ -1,0 +1,20 @@
+.categoryheadline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.categoryheadline div:first-of-type {
+  flex-basis: 70%;
+}
+
+.categoryheadline p {
+  color: #4a4a4a;
+  font-family: Noto Sans JP;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 0.5rem;
+  letter-spacing: -0.03125rem;
+  margin-right: 0.5rem;
+}

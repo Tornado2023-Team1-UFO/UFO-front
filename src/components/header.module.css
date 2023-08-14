@@ -2,31 +2,29 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 auto;
+  padding-right: 6px;
   height: 48px;
   width: 100%;
   background: #f1f1f1;
 }
 
-.header div {
-  margin: 0.5rem 1rem;
-  width: 100%;
-  background-color: white;
+.link {
+  font-size: 0.75rem;
 }
 
-.header div p {
-  margin: 0;
-  text-align: center;
-  font-size: 0.75rem;
+.link:hover {
+  font-weight: bold;
 }
 
 .logo {
   height: 30px;
-  flex-basis: 50%;
+  flex-basis: 30%;
+  margin: 0.5rem 1rem;
+  width: 100%;
 }
 
 .login {
-  height: 30px;
+  height: 0px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -41,4 +39,9 @@
 .link {
   text-decoration: none;
   color: black;
+}
+
+.userButton {
+  display: flex;
+  justify-content: flex-end;
 }
