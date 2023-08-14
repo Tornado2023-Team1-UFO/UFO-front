@@ -5,7 +5,7 @@ import EventCard from './EventCard'
 import { useState, useEffect } from 'react'
 import { EventsRepository } from '@/repositories/EventsRepository'
 import { EventSlideItem } from '@/app/event/_components/_models/EventSlideItem'
-import { queryEvents } from './QueryEvents'
+import { queryEvents } from './queryEvents'
 
 export default function EventContainer(props: any) {
   const { category } = props

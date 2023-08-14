@@ -76,7 +76,11 @@ export default function EventInfo(data: any) {
       <div className={styles.eventimagecontainer}>
         {imageURLs.map((url: string, index: number) => {
           return (
-            <div className={styles.maineventimage} style={{ display: index === imageIndex ? 'block' : 'none' }}>
+            <div
+              key={url}
+              className={styles.maineventimage}
+              style={{ display: index === imageIndex ? 'block' : 'none' }}
+            >
               <Image
                 className='eventimage'
                 key={url}
