@@ -1,44 +1,44 @@
 'use client'
-import Link from "next/link"
-import Image from "next/image"
-import styles from "./eventcard.module.css"
-
-// this component is responsible for EventCard that will be displayed 
+import Link from 'next/link'
+import Image from 'next/image'
+import styles from './eventcard.module.css'
+import { useRouter } from 'next/navigation'
+// this component is responsible for EventCard that will be displayed
 // in the event page
-export default function EventCard (event: any) {
-    // attendees will change
-    console.log("event inside eventcard: " + JSON.stringify(event)); 
-    const {title, date, attendees} = event; 
-    console.log(title, date, attendees);
-    return (
-        <>
-            <div className={styles.card}>
-                <div className={styles.cardimage}>
-                    <figure>
-                        <Image
-                         src="https://placekitten.com/300/300" 
-                         alt="Placeholder image" 
-                        //  width={300} 
-                        //  height={300}
-                        fill
-                        style={{
-                            objectPosition: 'center',
-                        }}
-                        />
-                    </figure>
-                </div>
-                <div className={styles.cardcontent}>
-                    <div>
-                        <div>
-                            <h1 className={styles.content}>{title}</h1>
-                        </div>
-                        <div>
-                            <p className={styles.content}>{date}</p>
-                            <p className={styles.content}>現在参加者: {attendees}人</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </>
-    )
+export default function EventCard(event: any) {
+  const router = useRouter()
+  const handleClick = () => {
+    // redirect to the event details page
+    router.push(`/events/${event.id}`)
+  }
+  // attendees will change
+  console.log(event)
+  return (
+    <>
+      <div className={styles.card}>
+        <div className={styles.cardimage}>
+          <figure>
+            <Image
+              src={event.imageUrls[0]}
+              alt='Placeholder image'
+              fill
+              style={{
+                objectPosition: 'center',
+              }}
+              onClick={handleClick}
+            />
+          </figure>
+        </div>
+        <div className={styles.firstContent}>
+          <h1 className={styles.cardTitle}>{event.title}</h1>
+        </div>
+        <div className={styles.secondContent}>
+          <p className={styles.cardDate}>{event.date}</p>
+          <p className={styles.cardAttendees}>現在参加者: {event.attendeeCounts}</p>
+          <span className={styles.cardAttendeesCount}>/</span>
+          <p className={styles.cardAttendees}>{event.recruitPeopleCounts}人</p>
+        </div>
+      </div>
+    </>
+  )
 }
