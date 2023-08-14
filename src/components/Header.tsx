@@ -1,27 +1,25 @@
-'use client'
-
 import styles from './header.module.css'
 import Link from 'next/link'
-import { FiLogIn } from 'react-icons/fi'
+import Login from './Login'
+import { UserButton, SignedIn, SignedOut } from '@clerk/nextjs'
+// header fix
 export default function Header() {
   return (
     <>
       <header className={styles.header}>
         <div className={styles.logo}>
           <p>
-            <Link className={styles.link} href='/'>
+            <Link className={styles.link} href='/events'>
               ロゴ
             </Link>
           </p>
         </div>
-        <div className={styles.login}>
-          <FiLogIn className={styles.icon} />
-          <p>
-            <Link className={styles.link} href='/register'>
-              ログイン / 新規会員登録
-            </Link>
-          </p>
-        </div>
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
+        <SignedOut>
+          <Login />
+        </SignedOut>
       </header>
     </>
   )

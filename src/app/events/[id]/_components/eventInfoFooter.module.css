@@ -1,0 +1,14 @@
+.footerContainer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100px;
+    background: #FFF;
+}
+.buttonContainer {
+    width: 141px;
+    height: 38px;
+    background: #9B9B9B;
+    text-align: center;
+    line-height: 38px;
+}
