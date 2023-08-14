@@ -20,7 +20,7 @@ export const EventConfirmation: FC<Props> = ({ event, onChangeSnsLink, onChangeM
     <h1>{event.recruitPeopleCount}</h1>
     参加費
     <h1>{event.eventFee}</h1>
-    画像一枚め
+    画像1枚目
     <img src={event.imageUrls[0]} alt='event' />
     説明
     <h1>{event.description}</h1>県<h1>{event.prefecture}</h1>

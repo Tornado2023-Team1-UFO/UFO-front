@@ -1,8 +1,9 @@
-import { storage } from '@/libs/firebase'
-import axios from 'axios'
+import { auth, storage } from '@/libs/firebase'
 import { uploadBytes, ref, getDownloadURL } from 'firebase/storage'
 import { ChangeEvent, useState } from 'react'
 import { nextApi } from '@/libs/axios'
+import { EventsRepository } from '@/repositories/EventsRepository'
+import { getAuth } from 'firebase/auth'
 
 export const section = new Map<number, string>([
   [1, 'EVENT_TITLE'],
@@ -19,7 +20,7 @@ export const section = new Map<number, string>([
 
 export type Event = {
   title: string
-  targetUser: string
+  genre: string[]
   eventFee: number
   recruitPeopleCount: number
   startAt: string
@@ -38,7 +39,6 @@ type ReturnType = {
   prefectures: string[]
   setCurrentSection: (section: string | undefined) => void
   changeEventTitle: (title: string) => void
-  changeTargetUser: (targetUser: string) => void
   changeEventFee: (eventFee: number) => void
   changeRecruitPeopleCount: (recruitPeopleCount: number) => void
   changeStartAt: (startAt: string) => void
@@ -51,6 +51,7 @@ type ReturnType = {
   changeMovieLink: (movieLink: string) => void
   publishEvent: () => void
   clickNextToDescription: () => void
+  clickGenre: (genre: string) => void
 }
 
 export const useEventCreate = (): ReturnType => {
@@ -60,7 +61,7 @@ export const useEventCreate = (): ReturnType => {
 
   const [event, setEvent] = useState<Event>({
     title: '',
-    targetUser: '',
+    genre: [],
     eventFee: 0,
     recruitPeopleCount: 0,
     startAt: '',
@@ -101,7 +102,7 @@ export const useEventCreate = (): ReturnType => {
   const clickNextToDescription = async () => {
     const message = `あなたは、イベントの主催者です。以下のイベントに参加したくなるような文章を300文字で書いてください。
     イベントのタイトル ${event.title}
-    対象ユーザー ${event.targetUser}
+    ジャンル ${event.genre}
     一人当たりの参加費 ${event.eventFee}円
     目標人数 ${event.recruitPeopleCount}人
     開催地 ${event.prefecture}
@@ -111,7 +112,7 @@ export const useEventCreate = (): ReturnType => {
     例：
     入力
     イベントのタイトル Tornade
-    対象ユーザー 10代から20代のユーザー
+    ジャンル ハッカソン
     一人当たりの参加費 0円
     目標人数 100人
     開催地 東京都
@@ -154,9 +155,71 @@ export const useEventCreate = (): ReturnType => {
     setEvent({ ...event, imageUrls: [...event.imageUrls, url] })
   }
 
-  const publishEvent = () => {
-    // ここでイベントを作成する
-    // chatgptに投げイベントのタイプを返してもらう
+  const publishEvent = async () => {
+    const categories = ['夏の成長体験', '仲間とハジける', '新しい自分に出会う', 'インドアなヲタク集合！']
+    const message = `次のイベントは、どのカテゴリーに分類されるでしょうか？
+    選択肢の中から１つ選んでください。
+    選択肢:
+    夏の成長体験
+    ${categories[0]}
+    ${categories[1]}
+    ${categories[2]}
+    ${categories[3]}
+
+
+    イベントのタイトル ${event.title}
+    ジャンル ${event.genre}
+    一人当たりの参加費 ${event.eventFee}円
+    目標人数 ${event.recruitPeopleCount}人
+    開催地 ${event.prefecture}
+    日時 ${event.startAt}から${event.endAt}
+    イベントの説明 ${event.description}
+
+
+    例：
+    入力:
+    イベントのタイトル Tornade
+    ジャンル ハッカソン
+    一人当たりの参加費 0円
+    目標人数 100人
+    開催地 東京都
+    日時 2023年8月1日から2023年9月9日
+    イベントの説明 今回で開催3回目となる「トルネード」は、個人で参加できる
+    オンライン型ハッカソンです。 
+    チームは、6人1チームで構成され「プロダクトオーナー」
+    「デザイナー」「エンジニア」のそれぞれの役割の中で
+    1ヵ月間協力し合います。
+
+
+    出力:
+    夏の成長体験
+    `
+    const { data } = await nextApi.post('/chatgpts/events/descriptions', {
+      message: message,
+    })
+
+    const category = categories.find((category) => category === data.content)
+
+    const user = await getAuth().currentUser
+
+    EventsRepository.postEvent({
+      title: event.title,
+      userId: `${user?.uid}`,
+      status: 1,
+      content: event.description,
+      eventFee: event.eventFee,
+      prefecture: event.prefecture,
+      startAt: new Date(event.startAt),
+      endAt: new Date(event.endAt),
+      deadline: new Date(event.startAt),
+      likeCounts: 0,
+      imageUrls: event.imageUrls,
+      recruitPeopleCounts: event.recruitPeopleCount,
+      updatedAt: new Date(),
+      category: category ?? '新しい自分に出会う',
+    })
+
+    window.alert('イベントを作成しました！')
   }
 
   return {
@@ -166,7 +229,6 @@ export const useEventCreate = (): ReturnType => {
     prefectures,
     setCurrentSection,
     changeEventTitle: (title: string) => setEvent({ ...event, title }),
-    changeTargetUser: (targetUser: string) => setEvent({ ...event, targetUser }),
     changeEventFee: (eventFee: number) => setEvent({ ...event, eventFee }),
     changeRecruitPeopleCount: (recruitPeopleCount: number) => setEvent({ ...event, recruitPeopleCount }),
     changeStartAt: (startAt: string) => setEvent({ ...event, startAt }),
@@ -174,6 +236,7 @@ export const useEventCreate = (): ReturnType => {
     clickRegion: clickRegion,
     clickPrefecture: (prefecture: string) => setEvent({ ...event, prefecture }),
     clickUploadImage: clickUploadImage,
+    clickGenre: (genre: string) => setEvent({ ...event, genre: [genre] }),
     changeDescription: (description: string) => setEvent({ ...event, description }),
     changeSnsLink: (snsLink: string) => setEvent({ ...event, snsLink }),
     changeMovieLink: (movieLink: string) => setEvent({ ...event, movieLink }),

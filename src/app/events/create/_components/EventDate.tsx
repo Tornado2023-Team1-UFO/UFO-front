@@ -1,16 +1,16 @@
 import { FC } from 'react'
+import { Title } from './common/Title'
 
 type Props = {
   startAt: string
   endAt: string
   onChangeStartAt: (eventDate: string) => void
   onChangeEndAt: (eventDate: string) => void
-  onClickNext: () => void
 }
 
-export const EventDate: FC<Props> = ({ startAt, endAt, onChangeStartAt, onChangeEndAt, onClickNext }) => (
+export const EventDate: FC<Props> = ({ startAt, endAt, onChangeStartAt, onChangeEndAt }) => (
   <div>
-    イベントの日時
+    <Title title='開催日はいつ？' />
     <input
       style={{
         backgroundColor: 'white',
@@ -29,6 +29,5 @@ export const EventDate: FC<Props> = ({ startAt, endAt, onChangeStartAt, onChange
       onChange={(e) => onChangeEndAt(e.target.value)}
     />
     まで
-    <button onClick={() => onClickNext()}>次へ</button>
   </div>
 )

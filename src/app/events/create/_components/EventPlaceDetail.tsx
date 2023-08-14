@@ -4,10 +4,9 @@ type Props = {
   prefectures: string[]
   selectedPrefecture: string
   onChangePrefecture: (prefecture: string) => void
-  onClickNext: () => void
 }
 
-export const EventPlaceDetail: FC<Props> = ({ prefectures, selectedPrefecture, onChangePrefecture, onClickNext }) => (
+export const EventPlaceDetail: FC<Props> = ({ prefectures, selectedPrefecture, onChangePrefecture }) => (
   <div>
     <p>現在 {selectedPrefecture}</p>
     {prefectures.map((prefecture) => (
@@ -15,6 +14,5 @@ export const EventPlaceDetail: FC<Props> = ({ prefectures, selectedPrefecture, o
         {prefecture}
       </h1>
     ))}
-    <button onClick={() => onClickNext()}>次へ</button>
   </div>
 )

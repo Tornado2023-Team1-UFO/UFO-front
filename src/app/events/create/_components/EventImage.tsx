@@ -3,10 +3,9 @@ import { ChangeEvent, FC } from 'react'
 type Props = {
   imageUrls: string[]
   onClickFileUpload: (e: ChangeEvent<HTMLInputElement>) => void
-  onClickNext: () => void
 }
 
-export const EventImage: FC<Props> = ({ imageUrls, onClickFileUpload, onClickNext }) => (
+export const EventImage: FC<Props> = ({ imageUrls, onClickFileUpload }) => (
   <div>
     イベントの画像
     {imageUrls.map((imageUrl) => (
@@ -19,6 +18,5 @@ export const EventImage: FC<Props> = ({ imageUrls, onClickFileUpload, onClickNex
       type='file'
       onChange={(e) => onClickFileUpload(e)}
     />
-    <button onClick={() => onClickNext()}>つぎへ</button>
   </div>
 )
