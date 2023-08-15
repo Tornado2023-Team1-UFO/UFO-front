@@ -4,6 +4,9 @@ import { EventsRepository } from '@/repositories/EventsRepository'
 import { LikeRepository } from '@/repositories/LikeRepository'
 import { UserRepository } from '@/repositories/UserRepository'
 import { auth } from '@/libs/firebase'
+import { useAuth } from '@clerk/nextjs'
+import { useRouter, useSearchParams } from 'next/navigation'
+import toast from 'react-hot-toast'
 
 type ReturnType = {
   /*
@@ -34,6 +37,10 @@ export const useSwipeEvent = (): ReturnType => {
   const [events, setEvents] = useState<EventSlideItem[]>([])
   const [currentEventId, setCurrentEventId] = useState('')
   const [backGroundImageIndex, setBackGroundImageIndex] = useState(0)
+  const { isSignedIn } = useAuth()
+  const router = useRouter()
+  const params = useSearchParams()
+  const category = params.get('category')
 
   const deleteEvent = (eventId: string) => {
     const newEvents = events.filter((event) => event.id !== eventId)
@@ -41,6 +48,12 @@ export const useSwipeEvent = (): ReturnType => {
   }
 
   const swipeToLike = async (id: string) => {
+    if (!isSignedIn) {
+      router.push('/signin')
+      toast.error('この機能を使うにはログインが必要です')
+      return
+    }
+
     deleteEvent(currentEventId)
     await LikeRepository.addLike(currentEventId)
     await UserRepository.addFavoriteEvent(currentEventId, auth.currentUser?.uid || '')
@@ -64,7 +77,7 @@ export const useSwipeEvent = (): ReturnType => {
   }
 
   const fetchEvents = async () => {
-    const results = await EventsRepository.getEventSlideItems()
+    const results = await EventsRepository.getEventSlideItems(category ?? '')
     setEvents(results)
     setCurrentEventId(results[0].id)
   }
