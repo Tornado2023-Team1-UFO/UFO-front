@@ -1,9 +1,12 @@
 import { use, useEffect, useState } from 'react'
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 // --- components ---
 import Loading from '@/components/Loading'
 import EventInfoFooter from './EventInfoFooter'
 import styles from '@/app/events/[id]/_components/eventinfo.module.css'
+import WebShareButton from '@/components/WebShareButton'
+import { webShareData } from '@/components/webShareData'
 // --- third party ---
 import { FaLocationDot, FaPeopleGroup, FaYenSign } from 'react-icons/fa6'
 import dayjs from 'dayjs'
@@ -20,6 +23,7 @@ export default function EventInfo(data: any) {
   const [startDate, setStartDate] = useState<string>()
   const [endDate, setEndDate] = useState<string>()
   const [imageIndex, setImageIndex] = useState<number>(0) // keep track of image index for the main image
+  const pathname = usePathname()
   // wait for the prop to load. It takes a little bit of time for the data(prop) to load so wait
   useEffect(() => {
     // if data is not empty then =>
@@ -70,6 +74,11 @@ export default function EventInfo(data: any) {
   const changeMainImage = (index: number) => {
     setImageIndex(index)
   }
+  const shareData: webShareData = {
+    url: pathname,
+    text: 'イベントをシェアしよう！',
+    title: 'SNSでシェアしよう',
+  }
   if (!loaded) return <Loading />
   return (
     <>
@@ -91,6 +100,7 @@ export default function EventInfo(data: any) {
                   display: index === imageIndex ? 'block' : 'none',
                 }}
               />
+              <WebShareButton {...{ ...shareData }} />
             </div>
           )
         })}

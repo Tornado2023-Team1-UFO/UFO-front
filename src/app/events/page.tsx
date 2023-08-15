@@ -10,7 +10,13 @@ import SeiShunStyle from './_components/SeiShunStyle'
 
 function Events() {
   let searchCategories = ['All', 'Tokyo', 'Osaka', 'Kyoto', 'Hokkaido']
-  let eventCategories = ['人気上昇中のイベント', '夏の成長体験', '仲間と弾ける', 'インドアオタク集合']
+  let eventCategories = [
+    '人気上昇中のイベント',
+    '夏の成長体験',
+    '仲間と弾ける',
+    'インドアオタク集合',
+    '新しい自分に出会う',
+  ]
   return (
     <>
       <PageDetails title='イベント一覧' description='イベント一覧ページです。' />

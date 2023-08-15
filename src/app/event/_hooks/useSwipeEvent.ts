@@ -4,6 +4,7 @@ import { EventsRepository } from '@/repositories/EventsRepository'
 import { LikeRepository } from '@/repositories/LikeRepository'
 import { UserRepository } from '@/repositories/UserRepository'
 import { auth } from '@/libs/firebase'
+import { useSearchParams } from 'next/navigation'
 
 type ReturnType = {
   /*
@@ -28,13 +29,16 @@ type ReturnType = {
    * Tapしたときの処理
    */
   tapEventItem: (backgroundImages: string[]) => void
+
+  category: string
 }
 
 export const useSwipeEvent = (): ReturnType => {
   const [events, setEvents] = useState<EventSlideItem[]>([])
   const [currentEventId, setCurrentEventId] = useState('')
   const [backGroundImageIndex, setBackGroundImageIndex] = useState(0)
-
+  const param = useSearchParams()
+  const category = param.get('category')
   const deleteEvent = (eventId: string) => {
     const newEvents = events.filter((event) => event.id !== eventId)
     setEvents(newEvents)
@@ -64,9 +68,11 @@ export const useSwipeEvent = (): ReturnType => {
   }
 
   const fetchEvents = async () => {
-    const results = await EventsRepository.getEventSlideItems()
-    setEvents(results)
-    setCurrentEventId(results[0].id)
+    const results = await EventsRepository.getEventSlideItems(category ?? '')
+    {
+      results && setEvents(results)
+      setCurrentEventId(results[0].id)
+    }
   }
 
   useEffect(() => {
@@ -94,5 +100,6 @@ export const useSwipeEvent = (): ReturnType => {
     swipeToLike,
     swipeToBad,
     tapEventItem,
+    category: category ?? '',
   }
 }
