@@ -4,6 +4,7 @@ import { FC } from 'react'
 import styles from './eventItem.module.css'
 import dayjs from 'dayjs'
 import { EventModal } from './EventModal'
+import Image from 'next/image'
 
 type Props = {
   title: string

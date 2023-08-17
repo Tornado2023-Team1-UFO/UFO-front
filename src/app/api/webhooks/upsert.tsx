@@ -3,6 +3,7 @@ import { auth, db } from '@/libs/firebase'
 import { setDoc, doc, Timestamp } from 'firebase/firestore'
 
 export default async function upsert(externalId: string, attributes: any) {
+  console.log(attributes)
   const name = attributes.firstname + ' ' + attributes.lastname
   const email = attributes.email_addresses[0].email_address
   const photoURL = attributes.image_url
