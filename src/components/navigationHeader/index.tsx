@@ -7,7 +7,7 @@ export const NavigationHeader = () => (
       <p>イベントをつくる</p>
     </Link>
     <Link href='/events/support' className={styles.navigation}>
-      <p>イベントに協賛する</p>
+      <p>お気に入りのイベント</p>
     </Link>
   </div>
 )

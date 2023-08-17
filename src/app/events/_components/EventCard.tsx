@@ -15,7 +15,7 @@ export default function EventCard(event: any) {
   }
 
   // attendees will change
-  console.log(event)
+  // console.log(event)
   return (
     <>
       <div className={styles.card}>

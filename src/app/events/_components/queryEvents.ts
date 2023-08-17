@@ -1,11 +1,21 @@
 import { db } from '@/libs/firebase'
 import { collection, getCountFromServer, getDocs, query, where } from 'firebase/firestore'
 import { EventSlideItem } from '@/app/event/_components/_models/EventSlideItem'
+import { usePrefecture } from '../_hooks/usePrefecture'
 
-export async function queryEvents(category: string): Promise<EventSlideItem[]> {
+export async function queryEvents(category: string, prefecture: string): Promise<EventSlideItem[]> {
+  console.log(prefecture)
   const results: EventSlideItem[] = []
   // 開催中のイベントを取得する　０：開催前　１：開催中
-  const ref = query(collection(db, 'events'), where('status', '==', 1), where('category', '==', category))
+  let ref: any
+  prefecture === '地域で絞り込む'
+    ? (ref = query(collection(db, 'events'), where('status', '==', 1), where('category', '==', category)))
+    : (ref = query(
+        collection(db, 'events'),
+        where('status', '==', 1),
+        where('category', '==', category),
+        where('prefecture', '==', prefecture),
+      ))
   const docSnap = await getDocs(ref)
   for (const doc of docSnap.docs) {
     const data = doc.data()

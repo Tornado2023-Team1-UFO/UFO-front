@@ -1,6 +1,17 @@
+import { useState } from 'react'
 import styles from './searchBar.module.css'
-let searchCategories = ['All', 'Tokyo', 'Osaka', 'Kyoto', 'Hokkaido']
-export default function SearchBar() {
+import prefectureData from '@/app/data/prefectureData.json'
+
+interface searchBarProps {
+  sendDataToParent: (newPrefecture: string) => void
+}
+
+export default function SearchBar({ sendDataToParent }: searchBarProps) {
+  const [prefecture, setPrefecture] = useState('地域で絞り込む')
+  function handleLocationSearch(newPrefecture: string) {
+    setPrefecture(newPrefecture)
+    sendDataToParent(newPrefecture)
+  }
   return (
     <>
       <div className={styles.searchbar}>
@@ -10,10 +21,10 @@ export default function SearchBar() {
         </div>
         <div className={styles.searchothers}>
           <div className={styles.searchotherschild}>
-            <select name='location' onChange={() => alert('category changed')}>
-              {searchCategories.map((item) => (
-                <option key={item} value={item}>
-                  {item}
+            <select name='location' onChange={(e) => handleLocationSearch(e.target.value)}>
+              {prefectureData.map((prefecture: any) => (
+                <option key={prefecture.name} value={prefecture.name}>
+                  {prefecture.name}
                 </option>
               ))}
             </select>
