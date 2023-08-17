@@ -36,13 +36,14 @@ export const EventConfirmation: FC<Props> = ({
           {event.imageUrls.map((imageUrl) =>
             imageUrl === '' ? (
               <div
+                key={imageUrl}
                 className={styles.image}
                 style={{
                   backgroundColor: '#9b9b9b9b',
                 }}
               ></div>
             ) : (
-              <img src={imageUrl} alt='event' />
+              <img key={imageUrl} src={imageUrl} alt='event' />
             ),
           )}
         </div>
