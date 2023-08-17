@@ -67,7 +67,7 @@ type ReturnType = {
 }
 
 export const useEventCreate = (): ReturnType => {
-  const [currentSection, setCurrentSection] = useState(section.get(10))
+  const [currentSection, setCurrentSection] = useState(section.get(1))
   const [region, setRegion] = useState<string>('')
   const [prefectures, setPrefectures] = useState<string[]>([])
   const [returns, setReturns] = useState<Return[]>([
