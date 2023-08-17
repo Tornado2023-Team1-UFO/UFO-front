@@ -24,6 +24,7 @@ const Page = () => {
     setCurrentSection,
     event,
     region,
+    returns,
     prefectures,
     changeEventTitle,
     changeEventFee,
@@ -39,6 +40,7 @@ const Page = () => {
     publishEvent,
     clickNextToDescription,
     clickGenre,
+    addRuturn,
   } = useEventCreate()
 
   const router = useRouter()
@@ -166,8 +168,9 @@ const Page = () => {
       case section.get(10):
         return (
           <div className={styles.content}>
-            <ProgressBar bgColor='blue' completed={`${(100 / section.size) * 10}`} customLabel=' ' />
             <EventConfirmation
+              addReturn={addRuturn}
+              returns={returns}
               event={event}
               onClickSubmit={publishEvent}
               onChangeMovieLink={changeMovieLink}
