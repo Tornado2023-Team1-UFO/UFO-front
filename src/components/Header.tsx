@@ -15,7 +15,7 @@ export default function Header() {
           </p>
         </div>
         <SignedIn>
-          <UserButton />
+          <UserButton afterSignOutUrl='/events' />
         </SignedIn>
         <SignedOut>
           <Login />

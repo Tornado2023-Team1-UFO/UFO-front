@@ -7,18 +7,17 @@ import { EventsRepository } from '@/repositories/EventsRepository'
 import { EventSlideItem } from '@/app/event/_components/_models/EventSlideItem'
 import { queryEvents } from './queryEvents'
 
-// Hello change
 export default function EventContainer(props: any) {
-  const { category } = props
+  const { category, prefecture } = props
   const [events, setEvents] = useState<EventSlideItem[]>([])
   const fetchEvents = async () => {
-    const results = await queryEvents(category)
+    const results = await queryEvents(category, prefecture)
     console.log(results)
     setEvents(results)
   }
   useEffect(() => {
     fetchEvents()
-  }, [])
+  }, [prefecture])
   //   let eventCategories = ['人気上昇中のイベント', '夏の成長体験', '仲間と弾ける', 'インドアオタク集合']
   return (
     <>
@@ -26,9 +25,12 @@ export default function EventContainer(props: any) {
         <CategoryHeadLine title={category} />
         <div className={styles.cardcontainer}>
           {/* only show if there's data  */}
-          {events &&
-            events.map((event, index: number) => (index <= 3 ? <EventCard key={event.id} {...event} /> : null))}
-          {events && events.length === 0 && <p>There are no events available</p>}
+          {events && events.map((event, index: number) => <EventCard key={event.id} {...event} />)}
+          {events && events.length === 0 && (
+            <div className={styles.center}>
+              <p>イベントがありません</p>
+            </div>
+          )}
         </div>
       </div>
     </>

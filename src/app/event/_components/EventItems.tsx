@@ -6,7 +6,7 @@ import { useSwipeEvent } from '../_hooks/useSwipeEvent'
 import { EventTag } from '@/components/EventTag'
 
 export const EventItems: FC = () => {
-  const { backGroundImageIndex, events, swipeToLike, swipeToBad, tapEventItem } = useSwipeEvent()
+  const { backGroundImageIndex, events, swipeToLike, swipeToBad, tapEventItem, category } = useSwipeEvent()
 
   const { carouselFragment, useListenToCustomEvent, slideToNextItem, slideToPrevItem } = useSpringCarousel({
     withLoop: true,
@@ -46,7 +46,7 @@ export const EventItems: FC = () => {
 
   return (
     <div>
-      <EventTag title='夏の成功体験' />
+      <EventTag title={category} />
       {carouselFragment}
       <NavigationMenu onClickBack={slideToPrevItem} onClickHeart={slideToNextItem} />
     </div>

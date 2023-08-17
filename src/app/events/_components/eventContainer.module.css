@@ -1,6 +1,10 @@
 .cardcontainer {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  overflow-x: scroll;
+}
+.center {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }

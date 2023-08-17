@@ -19,7 +19,13 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig)
 const db = getFirestore(app)
-let eventCategories = ['人気上昇中のイベント', '夏の成長体験', '仲間と弾ける', 'インドアオタク集合']
+let eventCategories = [
+  '人気上昇中のイベント',
+  '夏の成長体験',
+  '仲間と弾ける',
+  'インドアオタク集合',
+  '新しい自分に出会う',
+]
 let myUserId = 'xGZV4iiPDaZSVJnhWUmpJrntqj43'
 const getUserId = async () => {
   const docRef = doc(db, 'users', myUserId)
@@ -31,17 +37,18 @@ async function generateRandomEvent() {
   let randomCategory = eventCategories[Math.floor(Math.random() * eventCategories.length)]
   return {
     category: randomCategory,
-    eventFee: faker.number.int({ min: 0, max: 3000 }),
     content: faker.lorem.paragraph(),
     deadLine: faker.date.future(),
+    endAt: faker.date.future({ refDate: startAt }),
+    deadLine: faker.date.future(),
+    eventFee: faker.number.int({ min: 0, max: 3000 }),
     imageUrls: Array.from({ length: faker.number.int({ min: 1, max: 3 }) }, () => faker.image.url()),
     likeCounts: faker.number.int({ min: 0, max: 1000 }),
     prefecture: faker.location.state(),
     recruitPeopleCounts: faker.number.int({ min: 1, max: 50 }),
     startAt: startAt,
-    endAt: faker.date.future({ refDate: startAt }),
     status: 1,
-    title: faker.lorem.words(2),
+    title: faker.lorem.words(1),
     updatedAt: faker.date.recent(),
     userId: id,
   }
