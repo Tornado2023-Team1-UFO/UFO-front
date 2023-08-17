@@ -4,6 +4,8 @@ import { ChangeEvent, useState } from 'react'
 import { nextApi } from '@/libs/axios'
 import { EventsRepository } from '@/repositories/EventsRepository'
 import { getAuth } from 'firebase/auth'
+import toast from 'react-hot-toast'
+import { useRouter } from 'next/navigation'
 
 export const section = new Map<number, string>([
   [1, 'EVENT_TITLE'],
@@ -32,11 +34,20 @@ export type Event = {
   movieLink: string
 }
 
+export type Return = {
+  name: string
+  amount: number
+  imageUrl: string
+  nickname: string
+  content: string
+}
+
 type ReturnType = {
   currentSection: string | undefined
   event: Event
   region: string
   prefectures: string[]
+  returns: Return[]
   setCurrentSection: (section: string | undefined) => void
   changeEventTitle: (title: string) => void
   changeEventFee: (eventFee: number) => void
@@ -52,12 +63,23 @@ type ReturnType = {
   publishEvent: () => void
   clickNextToDescription: () => void
   clickGenre: (genre: string) => void
+  addRuturn: () => void
 }
 
 export const useEventCreate = (): ReturnType => {
   const [currentSection, setCurrentSection] = useState(section.get(1))
   const [region, setRegion] = useState<string>('')
   const [prefectures, setPrefectures] = useState<string[]>([])
+  const [returns, setReturns] = useState<Return[]>([
+    {
+      name: '',
+      amount: 0,
+      imageUrl: '',
+      nickname: '',
+      content: '',
+    },
+  ])
+  const router = useRouter()
 
   const [event, setEvent] = useState<Event>({
     title: '',
@@ -219,7 +241,12 @@ export const useEventCreate = (): ReturnType => {
       category: category ?? '新しい自分に出会う',
     })
 
-    window.alert('イベントを作成しました！')
+    toast.success('イベントを作成しました！')
+    router.push('/events')
+  }
+
+  const addRuturn = () => {
+    setReturns([...returns, { name: '', amount: 0, imageUrl: '', nickname: '', content: '' }])
   }
 
   return {
@@ -227,6 +254,7 @@ export const useEventCreate = (): ReturnType => {
     event,
     region,
     prefectures,
+    returns,
     setCurrentSection,
     changeEventTitle: (title: string) => setEvent({ ...event, title }),
     changeEventFee: (eventFee: number) => setEvent({ ...event, eventFee }),
@@ -242,5 +270,6 @@ export const useEventCreate = (): ReturnType => {
     changeMovieLink: (movieLink: string) => setEvent({ ...event, movieLink }),
     publishEvent: publishEvent,
     clickNextToDescription: clickNextToDescription,
+    addRuturn,
   }
 }

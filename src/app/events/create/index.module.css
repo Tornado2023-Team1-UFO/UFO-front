@@ -1,8 +1,7 @@
 .container {
-  height: 100vh;
+  height: 100%;
   background-color: #f1f1f1;
   padding: 12px;
-  height: 100vh;
 }
 
 .content {
