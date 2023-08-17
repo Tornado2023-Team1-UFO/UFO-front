@@ -1,10 +1,8 @@
 import { db } from '@/libs/firebase'
 import { collection, getCountFromServer, getDocs, query, where } from 'firebase/firestore'
 import { EventSlideItem } from '@/app/event/_components/_models/EventSlideItem'
-import { usePrefecture } from '../_hooks/usePrefecture'
 
 export async function queryEvents(category: string, prefecture: string): Promise<EventSlideItem[]> {
-  console.log(prefecture)
   const results: EventSlideItem[] = []
   // 開催中のイベントを取得する　０：開催前　１：開催中
   let ref: any

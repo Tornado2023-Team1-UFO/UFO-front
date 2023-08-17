@@ -20,7 +20,6 @@ export default function Events() {
     'インドアオタク集合',
     '新しい自分に出会う',
   ]
-  console.log('New Prefecture inside Page.tsx is ' + prefecture)
   return (
     <>
       <PageDetails title='イベント一覧' description='イベント一覧ページです。' />

@@ -25,9 +25,12 @@ export default function EventContainer(props: any) {
         <CategoryHeadLine title={category} />
         <div className={styles.cardcontainer}>
           {/* only show if there's data  */}
-          {events &&
-            events.map((event, index: number) => (index <= 3 ? <EventCard key={event.id} {...event} /> : null))}
-          {events && events.length === 0 && <p>イベントがありません</p>}
+          {events && events.map((event, index: number) => <EventCard key={event.id} {...event} />)}
+          {events && events.length === 0 && (
+            <div className={styles.center}>
+              <p>イベントがありません</p>
+            </div>
+          )}
         </div>
       </div>
     </>
