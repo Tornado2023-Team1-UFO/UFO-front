@@ -5,7 +5,7 @@ import { EventSlideItem } from '@/app/event/_components/_models/EventSlideItem'
 export async function queryEvents(category: string, prefecture: string): Promise<EventSlideItem[]> {
   const results: EventSlideItem[] = []
   // 開催中のイベントを取得する　０：開催前　１：開催中
-  let ref: any
+  let ref
   prefecture === '地域で絞り込む'
     ? (ref = query(collection(db, 'events'), where('status', '==', 1), where('category', '==', category)))
     : (ref = query(
