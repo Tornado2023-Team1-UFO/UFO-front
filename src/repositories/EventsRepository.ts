@@ -1,4 +1,4 @@
-import { EventSlideItem } from '@/app/event/_components/_models/EventSlideItem'
+import { EventSlideItem } from '@/app/events/swipe/_components/_models/EventSlideItem'
 import { db } from '@/libs/firebase'
 import { addDoc, collection, getCountFromServer, getDocs, query, where } from 'firebase/firestore'
 

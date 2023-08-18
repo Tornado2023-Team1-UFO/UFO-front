@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { EventSlideItem } from '@/app/event/_components/_models/EventSlideItem'
+import { EventSlideItem } from '@/app/events/swipe/_components/_models/EventSlideItem'
 import { EventsRepository } from '@/repositories/EventsRepository'
 import { LikeRepository } from '@/repositories/LikeRepository'
 import { UserRepository } from '@/repositories/UserRepository'

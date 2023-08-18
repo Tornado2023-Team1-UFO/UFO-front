@@ -6,6 +6,7 @@ import { EventsRepository } from '@/repositories/EventsRepository'
 import { getAuth } from 'firebase/auth'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
+import { Path } from '@/constants/path'
 
 export const section = new Map<number, string>([
   [1, 'EVENT_TITLE'],
@@ -242,7 +243,7 @@ export const useEventCreate = (): ReturnType => {
     })
 
     toast.success('イベントを作成しました！')
-    router.push('/events')
+    router.push(Path.EVENT_LIST)
   }
 
   const addRuturn = () => {

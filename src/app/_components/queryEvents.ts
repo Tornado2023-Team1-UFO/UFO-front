@@ -1,6 +1,6 @@
 import { db } from '@/libs/firebase'
 import { collection, getCountFromServer, getDocs, query, where } from 'firebase/firestore'
-import { EventSlideItem } from '@/app/event/_components/_models/EventSlideItem'
+import { EventSlideItem } from '@/app/events/swipe/_components/_models/EventSlideItem'
 
 export async function queryEvents(category: string, prefecture: string): Promise<EventSlideItem[]> {
   const results: EventSlideItem[] = []

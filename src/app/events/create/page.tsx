@@ -17,6 +17,7 @@ import ProgressBar from '@ramonak/react-progress-bar'
 import { PrevButton } from './_components/common/PrevButton'
 import { useRouter } from 'next/navigation'
 import { NextButton } from './_components/common/NextButton'
+import { Path } from '@/constants/path'
 
 const Page = () => {
   const {
@@ -53,7 +54,7 @@ const Page = () => {
             <ProgressBar bgColor='blue' margin='46px 0px' completed={0} customLabel=' ' />
             <EventTitle title={event.title} onChangeTitle={changeEventTitle} />
             <div className={styles.navigation}>
-              <PrevButton onClickButton={() => router.push('/readyFor/events/create')} />
+              <PrevButton onClickButton={() => Path.EVENT_CREATE_TOP} />
               <NextButton onClickButton={() => setCurrentSection(section.get(2))} />
             </div>
           </div>

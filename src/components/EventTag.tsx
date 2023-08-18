@@ -1,6 +1,5 @@
 import { FC } from 'react'
-import styles from './eventTag.module.css'
-import Image from 'next/image'
+import styles from './EventTag.module.css'
 type Props = {
   title: string
 }

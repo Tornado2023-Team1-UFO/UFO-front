@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import styles from './eventcard.module.css'
 import { useRouter } from 'next/navigation'
+import { Path } from '@/constants/path'
 
 // this component is responsible for EventCard that will be displayed
 // in the event page
@@ -11,7 +12,7 @@ export default function EventCard(event: any) {
 
   const handleClick = () => {
     // redirect to the event details page
-    router.push(`/events/${event.id}`)
+    router.push(`${Path.EVENT_DETAIL}/${event.id}`)
   }
 
   // attendees will change
