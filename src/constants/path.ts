@@ -12,9 +12,9 @@ export const Path = {
   // EVENT作成ページ
   EVENT_CREATE: '/events/create',
   // EVENT STYLE 診断TOPページ
-  EVENT_STYLE_DIAGNOSIS: '/events/style_diagnosis/top',
+  EVENT_STYLE_DIAGNOSIS_TOP: '/events/style_diagnosis/top',
   // EVENT STYLE 診断
-  EVENT_STYLE_DIAGNOSIS_QUESTIONS: '/events/style_diagnosis',
+  EVENT_STYLE_DIAGNOSIS: '/events/style_diagnosis',
   // EVENT 応援ページ
   EVENT_SUPPORT: '/events/:id/supports',
   // EVENT 応援THANKSページ
