@@ -1,8 +1,0 @@
-.container {
-  width: 100%;
-  display: flex;
-  gap: 44px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: start;
-}
