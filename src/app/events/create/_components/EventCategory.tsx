@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import styles from './EventCategory.module.css'
+import styles from './eventCategory.module.css'
 
 type Props = {
   selectedCategory: string[]

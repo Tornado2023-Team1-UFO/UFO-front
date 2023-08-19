@@ -1,5 +1,5 @@
 import { GoShare } from 'react-icons/go'
-import styles from './WebShareButton.module.css'
+import styles from './webShareButton.module.css'
 import { webShareData } from './webShareData'
 
 export default function WebShareButton(data: webShareData) {

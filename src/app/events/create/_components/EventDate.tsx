@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import styles from './EventDate.module.css'
+import styles from './eventDate.module.css'
 
 type Props = {
   startAt: string

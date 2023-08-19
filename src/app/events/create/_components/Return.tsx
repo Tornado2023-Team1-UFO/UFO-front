@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { Return as ReturnType } from '../_hooks/useEventCreate'
-import styles from './Return.module.css'
+import styles from './return.module.css'
 
 type Props = {
   returns: ReturnType[]

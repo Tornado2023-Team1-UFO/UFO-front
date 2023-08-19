@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import styles from './Calculator.module.css'
+import styles from './calculator.module.css'
 type Props = {
   value: number
   unit: '円' | '人'

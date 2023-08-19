@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import styles from './StartButton.module.css'
+import styles from './startButton.module.css'
 type Props = {
   onClick: () => void
 }

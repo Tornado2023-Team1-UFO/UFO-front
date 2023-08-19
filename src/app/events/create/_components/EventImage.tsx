@@ -1,5 +1,5 @@
 import { ChangeEvent, FC } from 'react'
-import styles from './EventImage.module.css'
+import styles from './eventImage.module.css'
 
 type Props = {
   imageUrls: string[]

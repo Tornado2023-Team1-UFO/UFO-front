@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import styles from './EventPlace.module.css'
+import styles from './eventPlace.module.css'
 
 type Props = {
   region: string

@@ -1,5 +1,4 @@
 import { FC } from 'react'
-import { Title } from './common/Title'
 import { Calculator } from './common/Calclulator'
 
 type Props = {

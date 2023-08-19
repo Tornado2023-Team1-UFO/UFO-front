@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import styles from './EventTag.module.css'
+import styles from './eventTag.module.css'
 type Props = {
   title: string
 }

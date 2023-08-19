@@ -1,6 +1,6 @@
 'use client'
 
-import styles from './Header.module.css'
+import styles from './header.module.css'
 import Link from 'next/link'
 import Login from './Login'
 import { UserButton, SignedIn, SignedOut } from '@clerk/nextjs'

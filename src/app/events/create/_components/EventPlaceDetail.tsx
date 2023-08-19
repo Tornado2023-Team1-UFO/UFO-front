@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import styles from './EventPlaceDetail.module.css'
+import styles from './eventPlaceDetail.module.css'
 
 type Props = {
   prefectures: string[]

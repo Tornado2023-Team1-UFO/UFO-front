@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import styles from './EventDescription.module.css'
+import styles from './eventDescription.module.css'
 
 type Props = {
   description: string

@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import styles from './PrevButton.module.css'
+import styles from './prevButton.module.css'
 
 type Props = {
   onClickButton: () => void

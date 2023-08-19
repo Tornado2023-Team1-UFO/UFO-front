@@ -1,6 +1,6 @@
 'use client'
 
-import styles from './Completed.module.css'
+import styles from './completed.module.css'
 import { FC } from 'react'
 
 type Props = {
