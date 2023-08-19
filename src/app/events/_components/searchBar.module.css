@@ -1,26 +1,42 @@
 .searchbar {
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
 }
 
 .searchbytext {
-  margin: 2rem;
+  margin-top: 1rem;
+  display: flex;
 }
 
-.searchbytext input {
+.keyword {
   width: 80%;
-  height: 30px;
-  border-radius: 5px;
+  height: 1.875rem;
+  border-radius: 0.1875rem;
   border: 1px solid #ccc;
   margin: 0 auto;
+  padding-left: 0.7rem;
+  color: #979797;
+  font-family: Noto Sans JP;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 0.5rem;
+  letter-spacing: -0.03125rem;
 }
 
-.searchbytext button {
-  height: 30px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  margin: 0 auto;
+.button {
+  height: 1.875rem;
+  width: 20%;
+  border-radius: 0px 3px 3px 0px;
+  background: #494949;
+  color: #fff;
+  font-family: Noto Sans JP;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 8px;
+  /* 66.667% */
+  letter-spacing: -0.5px;
 }
 
 .searchothers {
@@ -28,16 +44,29 @@
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
-  margin: 0 2rem;
-  margin-top: 0;
+  margin-top: 0.5rem;
 }
 
 .searchotherschild {
   display: flex;
   flex-direction: row;
+  height: 32px;
   margin: 0;
   border-radius: 6.25rem;
   border: 1px solid #d9d9d9;
-  margin-right: 4rem;
-  padding: 0.5rem;
+  text-align: center;
+  line-height: auto;
+  padding: 0.2rem;
+}
+
+.prefectureName {
+  text-align: center;
+  color: #4a4a4a;
+  font-family: Noto Sans JP;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 0.5rem;
+  /* 66.667% */
+  letter-spacing: -0.03125rem;
 }

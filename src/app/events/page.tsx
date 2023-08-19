@@ -7,10 +7,12 @@ import PageDetails from '@/components/PageDetails'
 import SearchBar from './_components/SearchBar'
 import EventContainer from './_components/EventContainer'
 import SeiShunStyle from './_components/SeiShunStyle'
+import styles from './events.module.css'
 
 export default function Events() {
-  const [prefecture, setPrefecture] = useState('地域で絞り込む')
+  const [prefecture, setPrefecture] = useState('全地域')
   const handleChildData = (newPrefecture: string) => {
+    console.log(newPrefecture)
     setPrefecture(newPrefecture)
   }
   let eventCategories = [
@@ -23,7 +25,7 @@ export default function Events() {
   return (
     <>
       <PageDetails title='イベント一覧' description='イベント一覧ページです。' />
-      <div className='container'>
+      <div className={styles.container}>
         <SearchBar sendDataToParent={handleChildData} />
         <SeiShunStyle />
         {eventCategories.map((category) => (

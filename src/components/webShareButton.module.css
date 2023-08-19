@@ -2,7 +2,11 @@
   font-size: 2rem;
   width: fit-content;
   position: absolute;
-  right: 0.3125rem;
-  top: 0.3125rem;
+  left: 0.3125rem;
+  bottom: 0.3125rem;
   z-index: 1;
+}
+
+.goShare {
+  fill: white;
 }

@@ -3,7 +3,6 @@ import CategoryHeadLine from './CategoryHeadLine'
 import styles from './eventContainer.module.css'
 import EventCard from './EventCard'
 import { useState, useEffect } from 'react'
-import { EventsRepository } from '@/repositories/EventsRepository'
 import { EventSlideItem } from '@/app/event/_components/_models/EventSlideItem'
 import { queryEvents } from './queryEvents'
 
