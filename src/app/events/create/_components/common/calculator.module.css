@@ -1,0 +1,72 @@
+.box {
+  margin-top: 40px;
+  width: 320px;
+  height: 460px;
+  background-color: #ffffffff;
+}
+
+.display {
+  height: 40%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.display_text {
+  font-size: 48px;
+  font-weight: 700;
+  color: #4a4a4a;
+}
+
+.unit {
+  font-size: 20px;
+  font-weight: 700;
+  color: #4a4a4a;
+}
+
+.choice_box {
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  width: 80%;
+  border-top: 1px solid #4a4a4a;
+  border-bottom: 1px solid #4a4a4a;
+}
+
+.choice_text {
+  font-size: 20px;
+  font-weight: 700;
+  color: #4a4a4a;
+}
+
+.grid {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
+  align-items: center;
+  gap: 14px 2px;
+}
+
+.number {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 700;
+  color: #4a4a4a;
+}
+
+.delete {
+  margin: 0 auto;
+}
+
+.flex {
+  margin-top: 4px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px 2px;
+  justify-content: center;
+  align-items: center;
+}

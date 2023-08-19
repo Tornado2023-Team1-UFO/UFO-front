@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  width: 100%;
+}
+
+.input_box {
+  background-color: #ffffffff;
+  width: 100%;
+  height: 84px;
+  padding: 6px;
+}
+
+.input_container {
+  width: 100%;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
