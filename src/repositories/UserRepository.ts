@@ -1,6 +1,8 @@
-import { EventSlideItem } from '@/app/events/swipe/_models/EventSlideItem'
+import { FavoriteEvents } from '@/app/users/favoriteEvents/_models/favoriteEvent'
 import { db } from '@/libs/firebase'
 import { arrayUnion, doc, updateDoc, getDoc } from 'firebase/firestore'
+import { FirebaseEventType } from './type'
+import { th } from '@faker-js/faker'
 
 export const UserRepository = {
   addFavoriteEvent: async (eventId: string, userId: string) => {
@@ -10,38 +12,41 @@ export const UserRepository = {
     })
   },
 
-  getFavoriteEvents: async (userId: string): Promise<EventSlideItem[]> => {
+  getFavoriteEvents: async (userId: string): Promise<FavoriteEvents> => {
     const ref = doc(db, 'users', userId)
     const docSnap = await getDoc(ref)
 
     if (!docSnap.exists()) {
       return []
     }
-    const eventIds = docSnap.data().favoriteEventIds
+    const eventIds: string[] = docSnap.data().favoriteEventIds
 
-    return eventIds.map(async (eventId: string) => {
+    if (!eventIds) {
+      return []
+    }
+    const results: FavoriteEvents = []
+    for (const eventId of eventIds) {
       const ref = doc(db, 'events', eventId)
       const docSnap = await getDoc(ref)
       const data = docSnap.data()
 
-      if (!data) return
-      const deadLine = data.deadLine.toDate()
-      const startAt = data.startAt.toDate()
-      const endAt = data.endAt.toDate()
+      if (!data) {
+        throw new Error('Event not found')
+      }
 
-      const item = new EventSlideItem({
-        id: docSnap.id,
-        title: data.title,
-        prefecture: data.prefecture,
-        startAt: startAt,
-        endAt: endAt,
-        imageUrls: data.imageUrls,
-        attendeeCounts: 0,
-        recruitPeopleCounts: data.recruitPeopleCounts,
-        deadline: deadLine,
-      })
+      const imageUrls: string[] = data.imageUrls
+      const title: string = data.title
+      const likeCounts: number = data.likeCounts
 
-      return item
-    })
+      const item = {
+        id: eventId,
+        imageUrls: imageUrls,
+        title: title,
+        likeCounts: likeCounts,
+      }
+      results.push(item)
+    }
+
+    return results
   },
 }

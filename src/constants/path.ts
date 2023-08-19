@@ -6,7 +6,7 @@ export const Path = {
   // EVENT SWIPEページ category? でカテゴリーを指定できる
   EVENT_SWIPE: '/events/swipe',
   // USER お気に入りイベント一覧ページ
-  USER_FAVORITE_EVENT_LIST: '/users/favorite_events',
+  USER_FAVORITE_EVENT_LIST: '/users/favoriteEvents',
   // EVENT作成TOPページ
   EVENT_CREATE_TOP: '/events/create/top',
   // EVENT作成ページ
