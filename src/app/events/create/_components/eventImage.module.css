@@ -1,0 +1,30 @@
+.images {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  align-items: start;
+}
+
+.image {
+  width: 140px;
+  height: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #9b9b9b9b;
+  border-radius: 3px;
+  background-color: #9b9b9b9b;
+  text-align: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.camera {
+  width: 100px;
+  height: 100px;
+}
+
+.input {
+  display: none;
+}

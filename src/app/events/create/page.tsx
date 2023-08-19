@@ -1,5 +1,6 @@
 'use client'
 
+import styles from './page.module.css'
 import { EventTitle } from './_components/EventTitle'
 import { EventFee } from './_components/EventFee'
 import { NumberOfPeople } from './_components/NumberOfPeople'
@@ -8,103 +9,142 @@ import { EventPlace } from './_components/EventPlace'
 import { EventPlaceDetail } from './_components/EventPlaceDetail'
 import { EventImage } from './_components/EventImage'
 import { EventDescription } from './_components/EventDescription'
-import { EventConfirmation } from './_components/EventConfirmation'
-import { useEventCreate } from './_hooks/useEventCreate'
-import { section } from './_hooks/useEventCreate'
-import { EventGenre } from './_components/EventGenre'
-import styles from './index.module.css'
-import ProgressBar from '@ramonak/react-progress-bar'
+import { EventCategory } from './_components/EventCategory'
 import { PrevButton } from './_components/common/PrevButton'
-import { useRouter } from 'next/navigation'
 import { NextButton } from './_components/common/NextButton'
+import {
+  CATEGORY_SECTION,
+  DESCRIPTION_SECTION,
+  EVENT_DATE_SECTION,
+  EVENT_FEE_SECTION,
+  EVENT_IMAGE_SECTION,
+  EVENT_PREFECTURE_SECTION,
+  EVENT_REGION_SECTION,
+  PEOPLE_COUNT_SECTION,
+  PUBLISH_SECTION,
+  RETURN_SECTION,
+  TITLE_SECTION,
+  useEventCreate,
+} from './_hooks/useEventCreate'
+import { QuestionWithProgress } from './_components/common/QuestionWithProgress'
+import { Loading } from './_components/Loading'
+import { Return } from './_components/Return'
+import { Completed } from './_components/Completed'
 
 const Page = () => {
   const {
+    isLoading,
     currentSection,
-    setCurrentSection,
     event,
-    region,
-    returns,
-    prefectures,
-    changeEventTitle,
-    changeEventFee,
-    changeRecruitPeopleCount,
+    changeTitle,
+    clickNextByTitle,
+    clickPrevByTitle,
+    changeCategory,
+    clickNextByCategory,
+    clickPrevByCategory,
+    clickPrice,
+    clickNumber,
+    deletePrice,
+    clickNextByEventFee,
+    clickPrevByEventFee,
+    clickPeopleCount,
+    clickPeopleNumber,
+    deletePeopleCount,
+    clickNextByPeopleCount,
+    clickPrevByPeopleCount,
     changeStartAt,
     changeEndAt,
+    clickNextByEventDate,
+    clickPrevByEventDate,
+    region,
     clickRegion,
+    clickNextByEventRegion,
+    clickPrevByEventRegion,
+    prefectures,
     clickPrefecture,
+    clickNextByEventPrefecture,
+    clickPrevByEventPrefecture,
     clickUploadImage,
+    clickNextByImage,
+    clickPrevByImage,
     changeDescription,
-    changeSnsLink,
-    changeMovieLink,
+    clickNextByDescription,
+    clickPrevByDescription,
+    returns,
+    addNewRuturn,
+    changeReturnName,
+    changeReturnAmount,
+    changeContent,
+    changeReturnImageUrl,
+    clickNextByReturn,
+    clickPrevByReturn,
     publishEvent,
-    clickNextToDescription,
-    clickGenre,
-    addRuturn,
+    clickPrevByComplete,
   } = useEventCreate()
-
-  const router = useRouter()
 
   const renderComponent = () => {
     switch (currentSection) {
-      case section.get(1):
+      case TITLE_SECTION:
         return (
-          <div className={styles.content}>
-            <ProgressBar bgColor='blue' margin='46px 0px' completed={0} customLabel=' ' />
-            <EventTitle title={event.title} onChangeTitle={changeEventTitle} />
+          <>
+            <QuestionWithProgress progress={currentSection.progress} question={currentSection.value} />
+            <EventTitle title={event.title} onChangeTitle={changeTitle} />
             <div className={styles.navigation}>
-              <PrevButton onClickButton={() => router.push('/readyFor/events/create')} />
-              <NextButton onClickButton={() => setCurrentSection(section.get(2))} />
+              <PrevButton onClickButton={clickPrevByTitle} />
+              <NextButton onClickButton={clickNextByTitle} />
             </div>
-          </div>
+          </>
         )
-      case section.get(2):
+      case CATEGORY_SECTION:
         return (
-          <div className={styles.content}>
-            <ProgressBar bgColor='blue' completed={`${(100 / section.size) * 2}`} customLabel=' ' />
-            <EventGenre eventGenres={event.genre} onClickEventGenre={clickGenre} />
+          <>
+            <QuestionWithProgress progress={currentSection.progress} question={currentSection.value} />
+            <EventCategory selectedCategory={event.category} onClickCategory={changeCategory} />
             <div className={styles.navigation}>
-              <PrevButton onClickButton={() => setCurrentSection(section.get(1))} />
-              <NextButton onClickButton={() => setCurrentSection(section.get(3))} />
+              <PrevButton onClickButton={clickPrevByCategory} />
+              <NextButton onClickButton={clickNextByCategory} />
             </div>
-          </div>
+          </>
         )
-      case section.get(3):
+
+      case EVENT_FEE_SECTION:
         return (
-          <div className={styles.content}>
-            <ProgressBar bgColor='blue' completed={`${(100 / section.size) * 3}`} customLabel=' ' />
+          <>
+            <QuestionWithProgress progress={currentSection.progress} question={currentSection.value} />
             <EventFee
               eventFee={event.eventFee}
-              onChangeEventFee={changeEventFee}
-              onClickNext={() => setCurrentSection(section.get(4))}
-              onClickPrev={() => setCurrentSection(section.get(2))}
+              onClickPrice={clickPrice}
+              onClickNumber={clickNumber}
+              onClickDelete={deletePrice}
             />
             <div className={styles.navigation}>
-              <PrevButton onClickButton={() => setCurrentSection(section.get(2))} />
-              <NextButton onClickButton={() => setCurrentSection(section.get(4))} />
+              <PrevButton onClickButton={clickPrevByEventFee} />
+              <NextButton onClickButton={clickNextByEventFee} />
             </div>
-          </div>
+          </>
         )
-      case section.get(4):
+
+      case PEOPLE_COUNT_SECTION:
         return (
-          <div className={styles.content}>
-            <ProgressBar bgColor='blue' completed={`${(100 / section.size) * 4}`} customLabel=' ' />
+          <>
+            <QuestionWithProgress progress={currentSection.progress} question={currentSection.value} />
             <NumberOfPeople
               numberOfPeople={event.recruitPeopleCount}
-              onChangeNumberOfPeople={changeRecruitPeopleCount}
-              onClickNext={() => setCurrentSection(section.get(5))}
-              onClickPrev={() => setCurrentSection(section.get(3))}
+              onClickDelete={deletePeopleCount}
+              onClickNumber={clickPeopleNumber}
+              onClickPeople={clickPeopleCount}
             />
             <div className={styles.navigation}>
-              <PrevButton onClickButton={() => setCurrentSection(section.get(3))} />
-              <NextButton onClickButton={() => setCurrentSection(section.get(5))} />
+              <PrevButton onClickButton={clickPrevByPeopleCount} />
+              <NextButton onClickButton={clickNextByPeopleCount} />
             </div>
-          </div>
+          </>
         )
-      case section.get(5):
+
+      case EVENT_DATE_SECTION:
         return (
-          <div className={styles.content}>
-            <ProgressBar bgColor='blue' completed={`${(100 / section.size) * 5}`} customLabel=' ' />
+          <>
+            <QuestionWithProgress progress={currentSection.progress} question={currentSection.value} />
             <EventDate
               startAt={event.startAt}
               endAt={event.endAt}
@@ -112,77 +152,105 @@ const Page = () => {
               onChangeEndAt={changeEndAt}
             />
             <div className={styles.navigation}>
-              <PrevButton onClickButton={() => setCurrentSection(section.get(4))} />
-              <NextButton onClickButton={() => setCurrentSection(section.get(6))} />
+              <PrevButton onClickButton={clickPrevByEventDate} />
+              <NextButton onClickButton={clickNextByEventDate} />
             </div>
-          </div>
+          </>
         )
-      case section.get(6):
+      case EVENT_REGION_SECTION:
         return (
-          <div className={styles.contentß}>
-            <ProgressBar bgColor='blue' completed={`${(100 / section.size) * 6}`} customLabel=' ' />
+          <>
+            <QuestionWithProgress progress={currentSection.progress} question={currentSection.value} />
             <EventPlace region={region} onChangeRegion={clickRegion} />
             <div className={styles.navigation}>
-              <PrevButton onClickButton={() => setCurrentSection(section.get(5))} />
-              <NextButton onClickButton={() => setCurrentSection(section.get(7))} />
+              <PrevButton onClickButton={clickPrevByEventRegion} />
+              <NextButton onClickButton={clickNextByEventRegion} />
             </div>
-          </div>
+          </>
         )
-      case section.get(7):
+
+      case EVENT_PREFECTURE_SECTION:
         return (
-          <div className={styles.content}>
-            <ProgressBar bgColor='blue' completed={`${(100 / section.size) * 7}`} customLabel=' ' />
+          <>
+            <QuestionWithProgress progress={currentSection.progress} question={currentSection.value} />
             <EventPlaceDetail
               prefectures={prefectures}
               onChangePrefecture={clickPrefecture}
               selectedPrefecture={event.prefecture}
             />
             <div className={styles.navigation}>
-              <PrevButton onClickButton={() => setCurrentSection(section.get(6))} />
-              <NextButton onClickButton={() => setCurrentSection(section.get(8))} />
+              <PrevButton onClickButton={clickPrevByEventPrefecture} />
+              <NextButton onClickButton={clickNextByEventPrefecture} />
             </div>
-          </div>
+          </>
         )
-      case section.get(8):
+
+      case EVENT_IMAGE_SECTION:
         return (
-          <div className={styles.content}>
-            <ProgressBar bgColor='blue' completed={`${(100 / section.size) * 8}`} customLabel=' ' />
+          <>
+            <QuestionWithProgress progress={currentSection.progress} question={currentSection.value} />
             <EventImage imageUrls={event.imageUrls} onClickFileUpload={clickUploadImage} />
             <div className={styles.navigation}>
-              <PrevButton onClickButton={() => setCurrentSection(section.get(7))} />
-              <NextButton onClickButton={() => clickNextToDescription()} />
+              <PrevButton onClickButton={clickPrevByImage} />
+              <NextButton onClickButton={clickNextByImage} />
             </div>
-          </div>
+          </>
         )
-      case section.get(9):
+
+      case DESCRIPTION_SECTION:
         return (
-          <div className={styles.content}>
-            <ProgressBar bgColor='blue' completed={`${(100 / section.size) * 9}`} customLabel=' ' />
+          <>
+            <QuestionWithProgress progress={currentSection.progress} question={currentSection.value} />
             <EventDescription description={event.description} onChangeDescription={changeDescription} />
             <div className={styles.navigation}>
-              <PrevButton onClickButton={() => setCurrentSection(section.get(8))} />
-              <NextButton onClickButton={() => setCurrentSection(section.get(10))} />
+              <PrevButton onClickButton={clickPrevByDescription} />
+              <NextButton onClickButton={clickNextByDescription} />
             </div>
-          </div>
+          </>
         )
-      case section.get(10):
+
+      case RETURN_SECTION:
         return (
-          <div className={styles.content}>
-            <EventConfirmation
-              addReturn={addRuturn}
+          <>
+            <QuestionWithProgress progress={currentSection.progress} question={currentSection.value} />
+            <Return
               returns={returns}
-              event={event}
-              onClickSubmit={publishEvent}
-              onChangeMovieLink={changeMovieLink}
-              onChangeSnsLink={changeSnsLink}
+              onClickFileUpload={changeReturnImageUrl}
+              onChangeReturnAmount={changeReturnAmount}
+              onChangeReturnContent={changeContent}
+              onChangeReturnName={changeReturnName}
+              addNewReturn={addNewRuturn}
             />
-          </div>
+            <div className={styles.navigation}>
+              <PrevButton onClickButton={clickPrevByReturn} />
+              <NextButton onClickButton={clickNextByReturn} />
+            </div>
+          </>
         )
+
+      case PUBLISH_SECTION:
+        return (
+          <>
+            <QuestionWithProgress progress={currentSection.progress} question={currentSection.value} />
+            <Completed onClickSubmit={publishEvent} />
+            <div className={styles.navigation}>
+              <PrevButton onClickButton={clickPrevByComplete} />
+            </div>
+          </>
+        )
+
       default:
         return null
     }
   }
-  return <div className={styles.container}>{renderComponent()}</div>
+  return (
+    <div className={styles.container}>
+      <div className={styles.content}>
+        {isLoading && <Loading />}
+        {!isLoading && renderComponent()}
+      </div>
+    </div>
+  )
 }
 
 export default Page

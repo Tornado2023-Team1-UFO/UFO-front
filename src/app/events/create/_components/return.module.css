@@ -1,0 +1,82 @@
+.container {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  width: 100%;
+}
+
+.returns {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  width: 100%;
+  gap: 12px;
+}
+
+.image {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #9b9b9b9b;
+  border-radius: 3px;
+  background-color: #9b9b9b9b;
+  text-align: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.camera {
+  width: 100px;
+  height: 100px;
+}
+
+.input_file {
+  display: none;
+}
+
+.input_label {
+  font-size: 15px;
+  color: #4a4a4a;
+  font-weight: 700;
+}
+
+.input_container {
+  width: 100%;
+}
+
+.input_text {
+  width: 100%;
+  height: 50px;
+  border-radius: 3px;
+  border: 1px solid #4a4a4a;
+  padding: 10px;
+  background-color: white;
+}
+
+.textarea {
+  width: 100%;
+  height: 200px;
+  border-radius: 3px;
+  border: 1px solid #4a4a4a;
+  padding: 10px;
+  background-color: white;
+  resize: none;
+}
+
+.button {
+  margin-top: 24px;
+  width: 100%;
+  height: 50px;
+  background-color: white;
+  border: 1px solid #595959;
+  border-radius: 6px;
+  color: #979797;
+  font-size: 15px;
+  font-weight: 700;
+}

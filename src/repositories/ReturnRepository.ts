@@ -1,6 +1,7 @@
 import { SupportProduct } from '@/app/events/[id]/supports/_models/SupportProduct'
+import { Return } from '@/app/events/create/_hooks/useEventCreate'
 import { db } from '@/libs/firebase'
-import { collection, getDocs, orderBy, query } from 'firebase/firestore'
+import { collection, getDocs, orderBy, query, doc, setDoc, addDoc } from 'firebase/firestore'
 
 export const ReturnRepository = {
   getReturns: async (eventId: string): Promise<SupportProduct[]> => {
@@ -24,5 +25,13 @@ export const ReturnRepository = {
     })
 
     return results
+  },
+
+  postReturn: async (eventId: string, returns: Return[]): Promise<void> => {
+    const ref = collection(db, 'events', eventId, 'returns')
+
+    for (const r of returns) {
+      await addDoc(ref, r)
+    }
   },
 }

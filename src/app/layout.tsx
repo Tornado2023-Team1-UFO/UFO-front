@@ -5,6 +5,7 @@ import 'ress'
 import { ClerkProvider } from '@clerk/nextjs'
 import Header from '@/components/Header'
 import { Toaster } from 'react-hot-toast'
+import { NavigationHeader } from '@/components/navigationHeader'
 const inter = Inter({ subsets: ['latin'] })
 const clerkKey: string = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || ''
 
@@ -19,6 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <html lang='en'>
         <body className={inter.className}>
           <Header />
+          <NavigationHeader />
           {children}
           <Toaster />
         </body>
