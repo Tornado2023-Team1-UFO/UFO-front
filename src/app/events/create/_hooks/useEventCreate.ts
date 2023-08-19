@@ -146,13 +146,73 @@ export const useEventCreate = () => {
     }
   }
 
+  const getRandomFileName = () => {
+    if (event.category.length === 0) return
+    const randomIndex = Math.floor(Math.random() * event.category.length)
+
+    const category = event.category[randomIndex]
+
+    switch (category) {
+      case 'IT・開発':
+        return 'T_IT.jpg'
+      case 'スポーツ':
+        return 'T_sports.jpg'
+      case '音楽':
+        return 'T_music.jpg'
+      case '芸術':
+        return 'T_art.jpg'
+      case 'デザイン':
+        return 'T_design.jpg'
+      case 'ファッション':
+        return 'T_fashion.jpg'
+      case '料理':
+        return 'T_cooking.jpg'
+      case 'ゲーム':
+        return 'T_game.jpg'
+      case 'カフェ':
+        return 'T_cafe.jpg'
+      case '山':
+        return 'T_mountain.jpg'
+      case '海':
+        return 'T_sea.jpg'
+      case '映画':
+        return 'T_movie.jpg'
+      case '旅行':
+        return 'T_trip.jpg'
+      case '語学':
+        return 'T_gogaku.jpg'
+      case '車':
+        return 'T_car.jpg'
+      case 'カメラ':
+        return 'T_camera.jpg'
+      case '食べ歩き':
+        return 'T_walkingLunch.jpg'
+      case '散歩':
+        return 'T_sanpo.jpg'
+      case 'お笑い':
+        return 'T_owarai.jpg'
+      case 'アニメ':
+        return 'T_anime.jpg'
+      case '交流会':
+        return 'T_kouryuu.jpg'
+      case 'プログラミング':
+        return 'T_programing.jpg'
+      case 'その他':
+        return 'T_kouryuu.jpg'
+      default:
+        return 'T_kouryuu.jpg'
+    }
+  }
+
   const clickNextByImage = async () => {
+    let defaultImageUrl = ''
     if (event.imageUrls.length === 0) {
       if (window.confirm('イメージをアップロードしない場合は、デフォルトの画像になりますが、よろしいですか？')) {
-        setEvent({
-          ...event,
-          imageUrls: ['https://www.ohk.co.jp/img/tobira/event.jpg'],
-        })
+        const fileName = getRandomFileName()
+        const storageRef = ref(storage, `default/${fileName}`)
+        const url = await getDownloadURL(storageRef)
+
+        defaultImageUrl = url
       } else {
         return
       }
@@ -199,7 +259,12 @@ export const useEventCreate = () => {
     const { data } = await nextApi.post('/chatgpts/events/descriptions', {
       message: message,
     })
-    setEvent({ ...event, description: data.content })
+
+    if (event.imageUrls.length === 0) {
+      setEvent({ ...event, description: data.content, imageUrls: [defaultImageUrl] })
+    } else {
+      setEvent({ ...event, description: data.content })
+    }
     setCurrentSection(DESCRIPTION_SECTION)
 
     setIsLoading(false)
