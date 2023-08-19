@@ -23,7 +23,7 @@ let eventCategories = [
   '人気上昇中のイベント',
   '夏の成長体験',
   '仲間とハジける',
-  'インドアオタク集合',
+  'インドアなヲタク集合!',
   '新しい自分に出会う',
 ]
 let myUserId = 'xGZV4iiPDaZSVJnhWUmpJrntqj43'
