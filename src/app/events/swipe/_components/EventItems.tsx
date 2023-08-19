@@ -33,10 +33,10 @@ export const EventItems: FC = () => {
     if (event.eventName === 'onSlideStartChange') {
       switch (event.slideActionType) {
         case 'next':
-          await swipeToLike(event.nextItem.id)
+          await swipeToBad(event.nextItem.id)
           break
         case 'prev':
-          swipeToBad(event.nextItem.id)
+          await swipeToLike(event.nextItem.id)
           break
         default:
           break
@@ -48,7 +48,7 @@ export const EventItems: FC = () => {
     <div>
       <EventTag title={category} />
       {carouselFragment}
-      <NavigationMenu onClickBack={slideToPrevItem} onClickHeart={slideToNextItem} />
+      <NavigationMenu onClickBack={slideToNextItem} onClickHeart={slideToPrevItem} />
     </div>
   )
 }
