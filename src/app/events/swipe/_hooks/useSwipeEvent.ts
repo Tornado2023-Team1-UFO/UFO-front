@@ -4,7 +4,9 @@ import { EventsRepository } from '@/repositories/EventsRepository'
 import { LikeRepository } from '@/repositories/LikeRepository'
 import { UserRepository } from '@/repositories/UserRepository'
 import { auth } from '@/libs/firebase'
-import { useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { useAuth } from '@clerk/nextjs'
+import { toast } from 'react-hot-toast'
 
 type ReturnType = {
   /*
@@ -44,7 +46,15 @@ export const useSwipeEvent = (): ReturnType => {
     setEvents(newEvents)
   }
 
+  const { userId } = useAuth()
+  const router = useRouter()
+
   const swipeToLike = async (id: string) => {
+    if (!userId) {
+      toast.error('いいねをするにはログインが必要です')
+      router.push('/signin')
+      return
+    }
     deleteEvent(currentEventId)
     await LikeRepository.addLike(currentEventId)
     await UserRepository.addFavoriteEvent(currentEventId, auth.currentUser?.uid || '')

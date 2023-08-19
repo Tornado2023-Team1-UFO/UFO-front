@@ -7,7 +7,7 @@ type Props = {
 export const EventTag: FC<Props> = ({ title }) => (
   <div className={styles.event_tag}>
     <span className={styles.hash_tag}>
-      <img src='images/hash.svg' alt='hash' />
+      <img src='/images/hash.svg' alt='hash' />
     </span>
     <h1 className={styles.title}>{title}</h1>
   </div>

@@ -43,7 +43,7 @@ export const EvetntItem: FC<Props> = ({
         <div className={styles.items}>
           <h1 className={styles.title}>{title}</h1>
           <div className={styles.box}>
-            <img src='images/pin.svg' alt='pin' />
+            <img src='/images/pin.svg' alt='pin' />
             <p>{prefecture}</p>
           </div>
           <p className={styles.text}>{`${startDate}〜${endDate}`}</p>
