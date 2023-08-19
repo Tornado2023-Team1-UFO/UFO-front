@@ -30,7 +30,7 @@ export async function POST(req: Request) {
   }
 
   const session = await stripe.checkout.sessions.create({
-    success_url: `${process.env.NEXT_PUBLIC_WEB_URL}/events/supports/success`,
+    success_url: `${process.env.NEXT_PUBLIC_WEB_URL}/events/supports/thanks`,
     line_items: lineItems,
     mode: 'payment',
   })

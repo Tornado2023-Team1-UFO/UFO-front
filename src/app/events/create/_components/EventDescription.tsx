@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import styles from './eventDescription.module.css'
 
 type Props = {
   description: string
@@ -7,13 +8,8 @@ type Props = {
 
 export const EventDescription: FC<Props> = ({ onChangeDescription, description }) => {
   return (
-    <div>
-      イベントの説明
-      <textarea
-        style={{ backgroundColor: 'white', height: '200px' }}
-        onChange={(e) => onChangeDescription(e.target.value)}
-        value={description}
-      />
+    <div className={styles.container}>
+      <textarea className={styles.textarea} onChange={(e) => onChangeDescription(e.target.value)} value={description} />
     </div>
   )
 }

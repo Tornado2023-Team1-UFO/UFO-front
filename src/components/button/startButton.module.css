@@ -1,0 +1,16 @@
+.button {
+  width: 200px;
+  height: 50px;
+  background: #9b9b9b;
+  border-radius: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button_text {
+  font-size: 20px;
+  /* FIX ME */
+  color: white;
+  font-weight: 700;
+}

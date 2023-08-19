@@ -1,6 +1,7 @@
-import { EventSlideItem } from '@/app/event/_components/_models/EventSlideItem'
+import { EventSlideItem } from '@/app/events/swipe/_components/_models/EventSlideItem'
 import { db } from '@/libs/firebase'
 import { addDoc, collection, getCountFromServer, getDocs, query, where } from 'firebase/firestore'
+import { FirebaseEventType } from './type'
 
 export const EventsRepository = {
   async getEventSlideItems(category: string): Promise<EventSlideItem[]> {
@@ -36,10 +37,11 @@ export const EventsRepository = {
     return results
   },
 
-  async postEvent(req: FirebaseEventType): Promise<void> {
+  async postEvent(req: FirebaseEventType): Promise<string> {
     const ref = collection(db, 'events')
 
-    await addDoc(ref, req)
+    const docRef = await addDoc(ref, req)
+    return docRef.id
   },
 
   async getAttendeeCount(eventId: string): Promise<number> {

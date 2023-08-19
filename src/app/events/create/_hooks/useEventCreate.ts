@@ -1,28 +1,78 @@
-import { auth, storage } from '@/libs/firebase'
+import { storage } from '@/libs/firebase'
 import { uploadBytes, ref, getDownloadURL } from 'firebase/storage'
 import { ChangeEvent, useState } from 'react'
 import { nextApi } from '@/libs/axios'
 import { EventsRepository } from '@/repositories/EventsRepository'
-import { getAuth } from 'firebase/auth'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
+import { Path } from '@/constants/path'
+import { useAuth } from '@clerk/nextjs'
+import { Timestamp } from 'firebase/firestore'
+import { ReturnRepository } from '@/repositories/ReturnRepository'
 
-export const section = new Map<number, string>([
-  [1, 'EVENT_TITLE'],
-  [2, 'TARGET_USER'],
-  [3, 'EVENT_FEE'],
-  [4, 'NUMBER_OF_PEOPLE'],
-  [5, 'EVENT_DATE'],
-  [6, 'EVENT_PLACE'],
-  [7, 'EVENT_PLACE_DETAIL'],
-  [8, 'EVENT_IMAGE'],
-  [9, 'EVENT_DESCRIPTION'],
-  [10, 'EVENT_CONFIRMATION'],
-])
+type Section = {
+  progress: number
+  value: string
+}
+
+export const TITLE_SECTION: Section = {
+  progress: 0,
+  value: 'イベントタイトルは？',
+}
+
+export const CATEGORY_SECTION: Section = {
+  progress: 10,
+  value: '当てはまるカテゴリーはどれ？',
+}
+
+export const EVENT_FEE_SECTION: Section = {
+  progress: 20,
+  value: '1人あたりの参加費は？',
+}
+
+export const PEOPLE_COUNT_SECTION: Section = {
+  progress: 30,
+  value: '目標参加人数は？',
+}
+
+export const EVENT_DATE_SECTION: Section = {
+  progress: 40,
+  value: '開催日はいつ？',
+}
+
+export const EVENT_REGION_SECTION: Section = {
+  progress: 50,
+  value: '開催地域はどこ？',
+}
+
+export const EVENT_PREFECTURE_SECTION: Section = {
+  progress: 60,
+  value: '開催地域はどこ？',
+}
+
+export const EVENT_IMAGE_SECTION: Section = {
+  progress: 70,
+  value: 'イベントの画像をアップロードしよう（任意）',
+}
+
+export const DESCRIPTION_SECTION: Section = {
+  progress: 80,
+  value: 'イベントの説明を書こう！',
+}
+
+export const RETURN_SECTION: Section = {
+  progress: 90,
+  value: 'リターンを設定しよう(任意)',
+}
+
+export const PUBLISH_SECTION: Section = {
+  progress: 100,
+  value: 'イベントを公開しよう！',
+}
 
 export type Event = {
   title: string
-  genre: string[]
+  category: string[]
   eventFee: number
   recruitPeopleCount: number
   startAt: string
@@ -30,8 +80,6 @@ export type Event = {
   prefecture: string
   imageUrls: string[]
   description: string
-  snsLink: string
-  movieLink: string
 }
 
 export type Return = {
@@ -42,32 +90,9 @@ export type Return = {
   content: string
 }
 
-type ReturnType = {
-  currentSection: string | undefined
-  event: Event
-  region: string
-  prefectures: string[]
-  returns: Return[]
-  setCurrentSection: (section: string | undefined) => void
-  changeEventTitle: (title: string) => void
-  changeEventFee: (eventFee: number) => void
-  changeRecruitPeopleCount: (recruitPeopleCount: number) => void
-  changeStartAt: (startAt: string) => void
-  changeEndAt: (endAt: string) => void
-  clickRegion: (region: string) => void
-  clickPrefecture: (prefecture: string) => void
-  clickUploadImage: (e: ChangeEvent<HTMLInputElement>) => void
-  changeDescription: (description: string) => void
-  changeSnsLink: (snsLink: string) => void
-  changeMovieLink: (movieLink: string) => void
-  publishEvent: () => void
-  clickNextToDescription: () => void
-  clickGenre: (genre: string) => void
-  addRuturn: () => void
-}
-
-export const useEventCreate = (): ReturnType => {
-  const [currentSection, setCurrentSection] = useState(section.get(1))
+export const useEventCreate = () => {
+  const { userId } = useAuth()
+  const [currentSection, setCurrentSection] = useState<Section>(TITLE_SECTION)
   const [region, setRegion] = useState<string>('')
   const [prefectures, setPrefectures] = useState<string[]>([])
   const [returns, setReturns] = useState<Return[]>([
@@ -75,7 +100,7 @@ export const useEventCreate = (): ReturnType => {
       name: '',
       amount: 0,
       imageUrl: '',
-      nickname: '',
+      nickname: 'nicname',
       content: '',
     },
   ])
@@ -83,7 +108,7 @@ export const useEventCreate = (): ReturnType => {
 
   const [event, setEvent] = useState<Event>({
     title: '',
-    genre: [],
+    category: [],
     eventFee: 0,
     recruitPeopleCount: 0,
     startAt: '',
@@ -91,9 +116,9 @@ export const useEventCreate = (): ReturnType => {
     prefecture: '',
     imageUrls: [],
     description: '',
-    snsLink: '',
-    movieLink: '',
   })
+
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const clickRegion = (region: string) => {
     setRegion(region)
@@ -121,10 +146,25 @@ export const useEventCreate = (): ReturnType => {
     }
   }
 
-  const clickNextToDescription = async () => {
+  const clickNextByImage = async () => {
+    if (event.imageUrls.length === 0) {
+      if (window.confirm('イメージをアップロードしない場合は、デフォルトの画像になりますが、よろしいですか？')) {
+        setEvent({
+          ...event,
+          imageUrls: ['https://www.ohk.co.jp/img/tobira/event.jpg'],
+        })
+      } else {
+        return
+      }
+    }
+
+    if (isLoading) return
+
+    setIsLoading(true)
+
     const message = `あなたは、イベントの主催者です。以下のイベントに参加したくなるような文章を300文字で書いてください。
     イベントのタイトル ${event.title}
-    ジャンル ${event.genre}
+    カテゴリー ${event.category}
     一人当たりの参加費 ${event.eventFee}円
     目標人数 ${event.recruitPeopleCount}人
     開催地 ${event.prefecture}
@@ -160,12 +200,17 @@ export const useEventCreate = (): ReturnType => {
       message: message,
     })
     setEvent({ ...event, description: data.content })
-    setCurrentSection(section.get(9))
+    setCurrentSection(DESCRIPTION_SECTION)
+
+    setIsLoading(false)
   }
 
   const clickUploadImage = async (e: ChangeEvent<HTMLInputElement>) => {
-    // ここで画像をアップロードする
-    // アップロードした画像のURLをevent.imageUrlsに入れる
+    if (event.imageUrls.length >= 6) {
+      toast.error('画像は6枚までしかアップロードできません')
+      return
+    }
+
     const files = e.target.files
     if (!files) return
     const file = files[0]
@@ -178,6 +223,9 @@ export const useEventCreate = (): ReturnType => {
   }
 
   const publishEvent = async () => {
+    if (isLoading) return
+    setIsLoading(true)
+
     const categories = ['夏の成長体験', '仲間とハジける', '新しい自分に出会う', 'インドアなヲタク集合！']
     const message = `次のイベントは、どのカテゴリーに分類されるでしょうか？
     選択肢の中から１つ選んでください。
@@ -190,7 +238,7 @@ export const useEventCreate = (): ReturnType => {
 
 
     イベントのタイトル ${event.title}
-    ジャンル ${event.genre}
+    カテゴリー ${event.category}
     一人当たりの参加費 ${event.eventFee}円
     目標人数 ${event.recruitPeopleCount}人
     開催地 ${event.prefecture}
@@ -216,60 +264,343 @@ export const useEventCreate = (): ReturnType => {
     出力:
     夏の成長体験
     `
-    const { data } = await nextApi.post('/chatgpts/events/descriptions', {
-      message: message,
-    })
 
-    const category = categories.find((category) => category === data.content)
+    try {
+      const { data } = await nextApi.post('/chatgpts/events/descriptions', {
+        message: message,
+      })
 
-    const user = await getAuth().currentUser
+      const category = categories.find((category) => category === data.content)
+      const eventId = await EventsRepository.postEvent({
+        title: event.title,
+        userId: `${userId}`,
+        status: 1,
+        content: event.description,
+        eventFee: event.eventFee,
+        prefecture: event.prefecture,
+        startAt: Timestamp.fromDate(new Date(event.startAt)),
+        endAt: Timestamp.fromDate(new Date(event.endAt)),
+        deadLine: Timestamp.fromDate(new Date(event.startAt)),
+        likeCounts: 0,
+        imageUrls: event.imageUrls,
+        recruitPeopleCounts: event.recruitPeopleCount,
+        updatedAt: Timestamp.fromDate(new Date()),
+        category: category ?? '新しい自分に出会う',
+      })
 
-    EventsRepository.postEvent({
-      title: event.title,
-      userId: `${user?.uid}`,
-      status: 1,
-      content: event.description,
-      eventFee: event.eventFee,
-      prefecture: event.prefecture,
-      startAt: new Date(event.startAt),
-      endAt: new Date(event.endAt),
-      deadLine: new Date(event.startAt),
-      likeCounts: 0,
-      imageUrls: event.imageUrls,
-      recruitPeopleCounts: event.recruitPeopleCount,
-      updatedAt: new Date(),
-      category: category ?? '新しい自分に出会う',
-    })
-
-    toast.success('イベントを作成しました！')
-    router.push('/events')
+      await ReturnRepository.postReturn(eventId, returns)
+      toast.success('イベントを作成しました！')
+      router.push(Path.EVENT_LIST)
+    } catch (error) {
+      console.log(error)
+      toast.error('予期しないエラーが発生しました')
+    } finally {
+      setIsLoading(false)
+    }
   }
 
-  const addRuturn = () => {
+  const addNewRuturn = () => {
     setReturns([...returns, { name: '', amount: 0, imageUrl: '', nickname: '', content: '' }])
   }
 
+  const changeReturnName = (index: number, name: string) => {
+    const newReturns = returns.map((r, i) => {
+      if (i === index) {
+        return { ...r, name: name }
+      }
+      return r
+    })
+    setReturns(newReturns)
+  }
+
+  const changeReturnAmount = (index: number, amount: number) => {
+    const newReturns = returns.map((r, i) => {
+      if (i === index) {
+        return { ...r, amount: amount }
+      }
+      return r
+    })
+    setReturns(newReturns)
+  }
+
+  const changeContent = (index: number, content: string) => {
+    const newReturns = returns.map((r, i) => {
+      if (i === index) {
+        return { ...r, content: content }
+      }
+      return r
+    })
+    setReturns(newReturns)
+  }
+
+  const changeReturnImageUrl = async (index: number, e: ChangeEvent<HTMLInputElement>) => {
+    const newReturns = []
+    for (const [i, r] of returns.entries()) {
+      if (i === index) {
+        const files = e.target.files
+        if (!files) continue
+        const file = files[0]
+        const storageRef = ref(storage, `returns/${event.title}/${file.name}`)
+
+        await uploadBytes(storageRef, file)
+        const url = await getDownloadURL(storageRef)
+
+        newReturns.push({ ...r, imageUrl: url })
+      } else {
+        newReturns.push(r)
+      }
+    }
+    setReturns(newReturns)
+  }
+
+  // Title
+  const clickNextByTitle = () => {
+    if (event.title === '') {
+      toast.error('タイトルを入力してください')
+      return
+    }
+
+    setCurrentSection(CATEGORY_SECTION)
+  }
+
+  const clickPrevByTitle = () => {
+    router.push(Path.EVENT_CREATE_TOP)
+  }
+
+  // Category
+  const changeCategory = (selectedCategory: string) => {
+    const isSelected = event.category.includes(selectedCategory)
+
+    if (isSelected) {
+      const newCategory = event.category.filter((c) => c !== selectedCategory)
+      setEvent({ ...event, category: newCategory })
+      return
+    }
+    if (event.category.length >= 3) {
+      toast.error('カテゴリーは3つまで選択できます')
+      return
+    }
+    setEvent({ ...event, category: [...event.category, selectedCategory] })
+  }
+
+  const clickNextByCategory = () => {
+    if (event.category.length === 0) {
+      toast.error('1つはカテゴリーを選択してください')
+      return
+    }
+
+    setCurrentSection(EVENT_FEE_SECTION)
+  }
+
+  const clickPrevByCategory = () => {
+    setCurrentSection(TITLE_SECTION)
+  }
+
+  const clickPrice = (price: number) => {
+    setEvent({ ...event, eventFee: price })
+  }
+
+  const clickPeopleCount = (peopleCount: number) => {
+    setEvent({ ...event, recruitPeopleCount: peopleCount })
+  }
+
+  const clickNumber = (num: string) => {
+    const newNum = event.eventFee + num
+    if (Number(newNum) < 0) return
+
+    if (newNum.length >= 7) {
+      toast.error('7桁までしか入力できません')
+      return
+    }
+    setEvent({ ...event, eventFee: Number(newNum) })
+  }
+
+  const clickPeopleNumber = (num: string) => {
+    const newNum = event.recruitPeopleCount + num
+    if (Number(newNum) < 0) return
+
+    if (newNum.length >= 7) {
+      toast.error('7桁までしか入力できません')
+      return
+    }
+    setEvent({ ...event, recruitPeopleCount: Number(newNum) })
+  }
+
+  const deletePrice = () => {
+    const newPrice = event.eventFee.toString().slice(0, -1)
+    if (Number(newPrice) < 0) return
+    setEvent({ ...event, eventFee: Number(newPrice) })
+  }
+
+  const deletePeopleCount = () => {
+    const newPeopleCount = event.recruitPeopleCount.toString().slice(0, -1)
+    if (Number(newPeopleCount) < 0) return
+    setEvent({ ...event, recruitPeopleCount: Number(newPeopleCount) })
+  }
+
+  const clickNextByEventFee = () => {
+    setCurrentSection(PEOPLE_COUNT_SECTION)
+  }
+
+  const clickPrevByEventFee = () => {
+    setCurrentSection(CATEGORY_SECTION)
+  }
+
+  const clickNextByPeopleCount = () => {
+    setCurrentSection(EVENT_DATE_SECTION)
+  }
+
+  const clickPrevByPeopleCount = () => {
+    setCurrentSection(EVENT_FEE_SECTION)
+  }
+
+  const changeStartAt = (startAt: string) => {
+    setEvent({ ...event, startAt: startAt })
+  }
+
+  const changeEndAt = (endAt: string) => {
+    setEvent({ ...event, endAt: endAt })
+  }
+
+  const clickNextByEventDate = () => {
+    if (event.startAt === '' || event.endAt === '') {
+      toast.error('開催日を入力してください')
+      return
+    }
+
+    if (new Date(event.startAt) < new Date()) {
+      toast.error('開催日は明日以降にしてください')
+      return
+    }
+
+    if (event.startAt > event.endAt) {
+      toast.error('終了日は開始日より後にしてください')
+      return
+    }
+
+    setCurrentSection(EVENT_REGION_SECTION)
+  }
+
+  const clickPrevByEventDate = () => {
+    setCurrentSection(PEOPLE_COUNT_SECTION)
+  }
+
+  const clickNextByEventRegion = () => {
+    if (region === '') {
+      toast.error('開催地域を選択してください')
+      return
+    }
+    setCurrentSection(EVENT_PREFECTURE_SECTION)
+  }
+
+  const clickPrevByEventRegion = () => {
+    setCurrentSection(EVENT_DATE_SECTION)
+  }
+
+  const clickPrefecture = (prefecture: string) => {
+    setEvent({ ...event, prefecture: prefecture })
+  }
+
+  const clickNextByEventPrefecture = () => {
+    if (event.prefecture === '') {
+      toast.error('都道府県を選択してください')
+      return
+    }
+    setCurrentSection(EVENT_IMAGE_SECTION)
+  }
+
+  const clickPrevByEventPrefecture = () => {
+    setCurrentSection(EVENT_REGION_SECTION)
+  }
+
+  const clickPrevByImage = () => {
+    setCurrentSection(EVENT_PREFECTURE_SECTION)
+  }
+
+  const changeDescription = (description: string) => {
+    setEvent({ ...event, description: description })
+  }
+
+  const clickPrevByDescription = () => {
+    setCurrentSection(EVENT_IMAGE_SECTION)
+  }
+
+  const clickNextByDescription = () => {
+    setCurrentSection(RETURN_SECTION)
+  }
+
+  const clickNextByReturn = () => {
+    const filteredReturns = returns.filter((r) => r.name !== '' && r.amount !== 0 && r.content !== '')
+    setReturns(filteredReturns)
+    setCurrentSection(PUBLISH_SECTION)
+  }
+
+  const clickPrevByReturn = () => {
+    setCurrentSection(DESCRIPTION_SECTION)
+  }
+
+  const clickPrevByComplete = () => {
+    setCurrentSection(RETURN_SECTION)
+  }
+
   return {
+    isLoading,
     currentSection,
     event,
-    region,
-    prefectures,
-    returns,
-    setCurrentSection,
-    changeEventTitle: (title: string) => setEvent({ ...event, title }),
-    changeEventFee: (eventFee: number) => setEvent({ ...event, eventFee }),
-    changeRecruitPeopleCount: (recruitPeopleCount: number) => setEvent({ ...event, recruitPeopleCount }),
-    changeStartAt: (startAt: string) => setEvent({ ...event, startAt }),
-    changeEndAt: (endAt: string) => setEvent({ ...event, endAt }),
+    // Title
+    changeTitle: (title: string) => setEvent({ ...event, title: title }),
+    clickNextByTitle: clickNextByTitle,
+    clickPrevByTitle: clickPrevByTitle,
+    // Category
+    changeCategory: changeCategory,
+    clickNextByCategory: clickNextByCategory,
+    clickPrevByCategory: clickPrevByCategory,
+    // EventFee
+    clickPrice: clickPrice,
+    clickNumber: clickNumber,
+    deletePrice: deletePrice,
+    clickNextByEventFee: clickNextByEventFee,
+    clickPrevByEventFee: clickPrevByEventFee,
+    // PeopleCount
+    clickPeopleCount: clickPeopleCount,
+    clickPeopleNumber: clickPeopleNumber,
+    deletePeopleCount: deletePeopleCount,
+    clickNextByPeopleCount: clickNextByPeopleCount,
+    clickPrevByPeopleCount: clickPrevByPeopleCount,
+    // EventDate
+    changeStartAt: changeStartAt,
+    changeEndAt: changeEndAt,
+    clickNextByEventDate: clickNextByEventDate,
+    clickPrevByEventDate: clickPrevByEventDate,
+    // EventRegion
+    region: region,
     clickRegion: clickRegion,
-    clickPrefecture: (prefecture: string) => setEvent({ ...event, prefecture }),
+    clickNextByEventRegion: clickNextByEventRegion,
+    clickPrevByEventRegion: clickPrevByEventRegion,
+    // EventPrefecture
+    prefectures: prefectures,
+    clickPrefecture: clickPrefecture,
+    clickNextByEventPrefecture: clickNextByEventPrefecture,
+    clickPrevByEventPrefecture: clickPrevByEventPrefecture,
+    // EventImage
     clickUploadImage: clickUploadImage,
-    clickGenre: (genre: string) => setEvent({ ...event, genre: [genre] }),
-    changeDescription: (description: string) => setEvent({ ...event, description }),
-    changeSnsLink: (snsLink: string) => setEvent({ ...event, snsLink }),
-    changeMovieLink: (movieLink: string) => setEvent({ ...event, movieLink }),
+    clickNextByImage: clickNextByImage,
+    clickPrevByImage: clickPrevByImage,
+    // EventDescription
+    changeDescription: changeDescription,
+    clickNextByDescription: clickNextByDescription,
+    clickPrevByDescription: clickPrevByDescription,
+    // Return
+    returns: returns,
+    addNewRuturn: addNewRuturn,
+    changeReturnName: changeReturnName,
+    changeReturnAmount: changeReturnAmount,
+    changeContent: changeContent,
+    changeReturnImageUrl: changeReturnImageUrl,
+    clickNextByReturn: clickNextByReturn,
+    clickPrevByReturn: clickPrevByReturn,
+    // Publish
     publishEvent: publishEvent,
-    clickNextToDescription: clickNextToDescription,
-    addRuturn,
+    clickPrevByComplete: clickPrevByComplete,
   }
 }

@@ -1,4 +1,5 @@
 import { ChangeEvent, FC } from 'react'
+import styles from './eventImage.module.css'
 
 type Props = {
   imageUrls: string[]
@@ -6,17 +7,15 @@ type Props = {
 }
 
 export const EventImage: FC<Props> = ({ imageUrls, onClickFileUpload }) => (
-  <div>
-    イベントの画像
+  <div className={styles.images}>
     {imageUrls.map((imageUrl) => (
-      <img key={imageUrl} src={imageUrl} />
+      <img src={imageUrl} alt='event' className={styles.image} key={imageUrl} />
     ))}
-    <input
-      style={{
-        backgroundColor: 'white',
-      }}
-      type='file'
-      onChange={(e) => onClickFileUpload(e)}
-    />
+    <div className={styles.image}>
+      <label htmlFor='new'>
+        <img src='/images/camera.svg' alt='camera' className={styles.camera} />
+        <input id='new' className={styles.input} type='file' onChange={(e) => onClickFileUpload(e)} />
+      </label>
+    </div>
   </div>
 )

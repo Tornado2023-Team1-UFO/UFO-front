@@ -1,22 +1,62 @@
 import { FC } from 'react'
-import { Title } from './common/Title'
+import styles from './eventPlace.module.css'
 
 type Props = {
   region: string
   onChangeRegion: (region: string) => void
 }
 
+const REGION_MASTER = [
+  {
+    region: '北海道 東北',
+    label: '北海道・',
+    label2: '東北エリア',
+  },
+  {
+    region: '関東',
+    label: '関東',
+    label2: 'エリア',
+  },
+  {
+    region: '中部',
+    label: '中部',
+    label2: 'エリア',
+  },
+  {
+    region: '関西',
+    label: '関西',
+    label2: 'エリア',
+  },
+  {
+    region: '中国 四国',
+    label: '中国・四国',
+    label2: 'エリア',
+  },
+  {
+    region: '九州 沖縄',
+    label: '九州・沖縄',
+    label2: 'エリア',
+  },
+]
+
 export const EventPlace: FC<Props> = ({ region, onChangeRegion }) => {
   return (
-    <div>
-      <Title title='開催地域はどこ？' />
-      {region}
-      <h1 onClick={() => onChangeRegion('北海道 東北')}>北海道・東北エリア</h1>
-      <h1 onClick={() => onChangeRegion('関東')}>関東エリア</h1>
-      <h1 onClick={() => onChangeRegion('中部')}>中部エリア</h1>
-      <h1 onClick={() => onChangeRegion('関西')}>関西エリア</h1>
-      <h1 onClick={() => onChangeRegion('中国 四国')}>中国・四国エリア</h1>
-      <h1 onClick={() => onChangeRegion('九州 沖縄')}>九州・沖縄エリア</h1>
+    <div className={styles.cards}>
+      {REGION_MASTER.map((item) => (
+        <div
+          key={item.region}
+          style={{
+            backgroundColor: region === item.region ? 'skyblue' : '#ffffff',
+          }}
+          className={styles.card}
+          onClick={() => onChangeRegion(item.region)}
+        >
+          <div>
+            <h1 className={styles.card_title}>{item.label}</h1>
+            <h1 className={styles.card_title}>{item.label2}</h1>
+          </div>
+        </div>
+      ))}
     </div>
   )
 }

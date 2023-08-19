@@ -34,6 +34,7 @@
     "react-dom": "18.2.0",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.10.1",
+    "react-loader-spinner": "^5.3.4",
     "react-spring-carousel": "^2.0.19",
     "ress": "^5.0.2",
     "stripe": "^12.18.0",

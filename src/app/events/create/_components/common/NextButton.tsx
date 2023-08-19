@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import styles from './nextButton.module.css'
+
 type Props = {
   onClickButton: () => void
 }

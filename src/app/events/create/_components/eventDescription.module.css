@@ -1,0 +1,17 @@
+.container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.textarea {
+  width: 300px;
+  height: 400px;
+  border-radius: 3px;
+  border: 1px solid #4a4a4a;
+  padding: 10px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #4a4a4a;
+  resize: none;
+}
