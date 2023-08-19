@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import styles from './EventPlaceDetail.module.css'
 
 type Props = {
   prefectures: string[]
@@ -7,12 +8,18 @@ type Props = {
 }
 
 export const EventPlaceDetail: FC<Props> = ({ prefectures, selectedPrefecture, onChangePrefecture }) => (
-  <div>
-    <p>現在 {selectedPrefecture}</p>
+  <div className={styles.cards}>
     {prefectures.map((prefecture) => (
-      <h1 key={prefecture} onClick={() => onChangePrefecture(prefecture)}>
-        {prefecture}
-      </h1>
+      <div
+        key={prefecture}
+        className={styles.card}
+        onClick={() => onChangePrefecture(prefecture)}
+        style={{
+          backgroundColor: selectedPrefecture === prefecture ? 'skyblue' : '#ffffff',
+        }}
+      >
+        <h1 className={styles.card_text}>{prefecture}</h1>
+      </div>
     ))}
   </div>
 )

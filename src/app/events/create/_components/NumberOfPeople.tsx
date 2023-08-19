@@ -1,21 +1,21 @@
 import { FC } from 'react'
 import { Title } from './common/Title'
+import { Calculator } from './common/Calclulator'
 
 type Props = {
   numberOfPeople: number
-  onChangeNumberOfPeople: (numberOfPeople: number) => void
-  onClickPrev: () => void
-  onClickNext: () => void
+  onClickPeople: (numberOfPeople: number) => void
+  onClickNumber: (number: string) => void
+  onClickDelete: () => void
 }
 
-export const NumberOfPeople: FC<Props> = ({ numberOfPeople, onChangeNumberOfPeople, onClickNext, onClickPrev }) => (
-  <div>
-    <Title title='目標参加人数は？' />
-    <input
-      style={{ backgroundColor: 'white' }}
-      type='number'
-      value={numberOfPeople > 0 ? numberOfPeople : ''}
-      onChange={(e) => onChangeNumberOfPeople(Number(e.target.value))}
-    />
-  </div>
+export const NumberOfPeople: FC<Props> = ({ numberOfPeople, onClickPeople, onClickNumber, onClickDelete }) => (
+  <Calculator
+    value={numberOfPeople}
+    unit='人'
+    choices={[10, 20, 30]}
+    onClickNumber={onClickNumber}
+    onClickChoice={onClickPeople}
+    onClickDelete={onClickDelete}
+  />
 )

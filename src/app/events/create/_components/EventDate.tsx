@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { Title } from './common/Title'
+import styles from './EventDate.module.css'
 
 type Props = {
   startAt: string
@@ -9,25 +9,15 @@ type Props = {
 }
 
 export const EventDate: FC<Props> = ({ startAt, endAt, onChangeStartAt, onChangeEndAt }) => (
-  <div>
-    <Title title='開催日はいつ？' />
+  <div className={styles.container}>
     <input
-      style={{
-        backgroundColor: 'white',
-      }}
+      className={styles.input_date}
       type='date'
       value={startAt}
       onChange={(e) => onChangeStartAt(e.target.value)}
     />
-    から
-    <input
-      style={{
-        backgroundColor: 'white',
-      }}
-      type='date'
-      value={endAt}
-      onChange={(e) => onChangeEndAt(e.target.value)}
-    />
-    まで
+    <p className={styles.text}>から</p>
+    <input className={styles.input_date} type='date' value={endAt} onChange={(e) => onChangeEndAt(e.target.value)} />
+    <p className={styles.text}>まで</p>
   </div>
 )
