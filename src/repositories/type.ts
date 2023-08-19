@@ -1,16 +1,18 @@
-type FirebaseEventType = {
+import { Timestamp } from 'firebase/firestore'
+
+export type FirebaseEventType = {
   title: string
   userId: string
   status: 1 | 0
   content: string
   eventFee: number
   prefecture: string
-  startAt: Date
-  endAt: Date
-  deadLine: Date
+  startAt: Timestamp
+  endAt: Timestamp
+  deadLine: Timestamp
   likeCounts: number
   imageUrls: string[]
   recruitPeopleCounts: number
-  updatedAt: Date
+  updatedAt: Timestamp
   category: string
 }

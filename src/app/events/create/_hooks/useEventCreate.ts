@@ -1,12 +1,14 @@
-import { auth, storage } from '@/libs/firebase'
+import { storage } from '@/libs/firebase'
 import { uploadBytes, ref, getDownloadURL } from 'firebase/storage'
 import { ChangeEvent, useState } from 'react'
 import { nextApi } from '@/libs/axios'
 import { EventsRepository } from '@/repositories/EventsRepository'
-import { getAuth } from 'firebase/auth'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
 import { Path } from '@/constants/path'
+import { useAuth } from '@clerk/nextjs'
+import { Timestamp } from 'firebase/firestore'
+import { ReturnRepository } from '@/repositories/ReturnRepository'
 
 type Section = {
   progress: number
@@ -89,7 +91,8 @@ export type Return = {
 }
 
 export const useEventCreate = () => {
-  const [currentSection, setCurrentSection] = useState<Section>(EVENT_IMAGE_SECTION)
+  const { userId } = useAuth()
+  const [currentSection, setCurrentSection] = useState<Section>(TITLE_SECTION)
   const [region, setRegion] = useState<string>('')
   const [prefectures, setPrefectures] = useState<string[]>([])
   const [returns, setReturns] = useState<Return[]>([
@@ -97,7 +100,7 @@ export const useEventCreate = () => {
       name: '',
       amount: 0,
       imageUrl: '',
-      nickname: '',
+      nickname: 'nicname',
       content: '',
     },
   ])
@@ -144,14 +147,17 @@ export const useEventCreate = () => {
   }
 
   const clickNextByImage = async () => {
-    if (window.confirm('イメージをアップロードしない場合は、デフォルトの画像になりますが、よろしいですか？')) {
-      setEvent({
-        ...event,
-        imageUrls: ['https://www.ohk.co.jp/img/tobira/event.jpg'],
-      })
-    } else {
-      return
+    if (event.imageUrls.length === 0) {
+      if (window.confirm('イメージをアップロードしない場合は、デフォルトの画像になりますが、よろしいですか？')) {
+        setEvent({
+          ...event,
+          imageUrls: ['https://www.ohk.co.jp/img/tobira/event.jpg'],
+        })
+      } else {
+        return
+      }
     }
+
     if (isLoading) return
 
     setIsLoading(true)
@@ -217,6 +223,9 @@ export const useEventCreate = () => {
   }
 
   const publishEvent = async () => {
+    if (isLoading) return
+    setIsLoading(true)
+
     const categories = ['夏の成長体験', '仲間とハジける', '新しい自分に出会う', 'インドアなヲタク集合！']
     const message = `次のイベントは、どのカテゴリーに分類されるでしょうか？
     選択肢の中から１つ選んでください。
@@ -255,33 +264,39 @@ export const useEventCreate = () => {
     出力:
     夏の成長体験
     `
-    const { data } = await nextApi.post('/chatgpts/events/descriptions', {
-      message: message,
-    })
 
-    const category = categories.find((category) => category === data.content)
+    try {
+      const { data } = await nextApi.post('/chatgpts/events/descriptions', {
+        message: message,
+      })
 
-    const user = await getAuth().currentUser
+      const category = categories.find((category) => category === data.content)
+      const eventId = await EventsRepository.postEvent({
+        title: event.title,
+        userId: `${userId}`,
+        status: 1,
+        content: event.description,
+        eventFee: event.eventFee,
+        prefecture: event.prefecture,
+        startAt: Timestamp.fromDate(new Date(event.startAt)),
+        endAt: Timestamp.fromDate(new Date(event.endAt)),
+        deadLine: Timestamp.fromDate(new Date(event.startAt)),
+        likeCounts: 0,
+        imageUrls: event.imageUrls,
+        recruitPeopleCounts: event.recruitPeopleCount,
+        updatedAt: Timestamp.fromDate(new Date()),
+        category: category ?? '新しい自分に出会う',
+      })
 
-    EventsRepository.postEvent({
-      title: event.title,
-      userId: `${user?.uid}`,
-      status: 1,
-      content: event.description,
-      eventFee: event.eventFee,
-      prefecture: event.prefecture,
-      startAt: new Date(event.startAt),
-      endAt: new Date(event.endAt),
-      deadLine: new Date(event.startAt),
-      likeCounts: 0,
-      imageUrls: event.imageUrls,
-      recruitPeopleCounts: event.recruitPeopleCount,
-      updatedAt: new Date(),
-      category: category ?? '新しい自分に出会う',
-    })
-
-    toast.success('イベントを作成しました！')
-    router.push(Path.EVENT_LIST)
+      await ReturnRepository.postReturn(eventId, returns)
+      toast.success('イベントを作成しました！')
+      router.push(Path.EVENT_LIST)
+    } catch (error) {
+      console.log(error)
+      toast.error('予期しないエラーが発生しました')
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const addNewRuturn = () => {
@@ -454,7 +469,7 @@ export const useEventCreate = () => {
     }
 
     if (new Date(event.startAt) < new Date()) {
-      toast.error('開催日は今日以降にしてください')
+      toast.error('開催日は明日以降にしてください')
       return
     }
 
@@ -515,11 +530,17 @@ export const useEventCreate = () => {
   }
 
   const clickNextByReturn = () => {
+    const filteredReturns = returns.filter((r) => r.name !== '' && r.amount !== 0 && r.content !== '')
+    setReturns(filteredReturns)
     setCurrentSection(PUBLISH_SECTION)
   }
 
   const clickPrevByReturn = () => {
     setCurrentSection(DESCRIPTION_SECTION)
+  }
+
+  const clickPrevByComplete = () => {
+    setCurrentSection(RETURN_SECTION)
   }
 
   return {
@@ -580,5 +601,6 @@ export const useEventCreate = () => {
     clickPrevByReturn: clickPrevByReturn,
     // Publish
     publishEvent: publishEvent,
+    clickPrevByComplete: clickPrevByComplete,
   }
 }

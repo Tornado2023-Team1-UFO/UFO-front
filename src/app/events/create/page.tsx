@@ -1,5 +1,6 @@
 'use client'
 
+import styles from './page.module.css'
 import { EventTitle } from './_components/EventTitle'
 import { EventFee } from './_components/EventFee'
 import { NumberOfPeople } from './_components/NumberOfPeople'
@@ -9,9 +10,7 @@ import { EventPlaceDetail } from './_components/EventPlaceDetail'
 import { EventImage } from './_components/EventImage'
 import { EventDescription } from './_components/EventDescription'
 import { EventCategory } from './_components/EventCategory'
-import styles from './index.module.css'
 import { PrevButton } from './_components/common/PrevButton'
-import { useRouter } from 'next/navigation'
 import { NextButton } from './_components/common/NextButton'
 import {
   CATEGORY_SECTION,
@@ -22,6 +21,7 @@ import {
   EVENT_PREFECTURE_SECTION,
   EVENT_REGION_SECTION,
   PEOPLE_COUNT_SECTION,
+  PUBLISH_SECTION,
   RETURN_SECTION,
   TITLE_SECTION,
   useEventCreate,
@@ -29,6 +29,7 @@ import {
 import { QuestionWithProgress } from './_components/common/QuestionWithProgress'
 import { Loading } from './_components/Loading'
 import { Return } from './_components/Return'
+import { Completed } from './_components/Completed'
 
 const Page = () => {
   const {
@@ -77,9 +78,10 @@ const Page = () => {
     changeReturnImageUrl,
     clickNextByReturn,
     clickPrevByReturn,
+    publishEvent,
+    clickPrevByComplete,
   } = useEventCreate()
 
-  console.log('isLoading', isLoading)
   const renderComponent = () => {
     switch (currentSection) {
       case TITLE_SECTION:
@@ -211,10 +213,28 @@ const Page = () => {
         return (
           <>
             <QuestionWithProgress progress={currentSection.progress} question={currentSection.value} />
-            <Return returns={returns} onClickFileUpload={changeReturnImageUrl} />
+            <Return
+              returns={returns}
+              onClickFileUpload={changeReturnImageUrl}
+              onChangeReturnAmount={changeReturnAmount}
+              onChangeReturnContent={changeContent}
+              onChangeReturnName={changeReturnName}
+              addNewReturn={addNewRuturn}
+            />
             <div className={styles.navigation}>
               <PrevButton onClickButton={clickPrevByReturn} />
               <NextButton onClickButton={clickNextByReturn} />
+            </div>
+          </>
+        )
+
+      case PUBLISH_SECTION:
+        return (
+          <>
+            <QuestionWithProgress progress={currentSection.progress} question={currentSection.value} />
+            <Completed onClickSubmit={publishEvent} />
+            <div className={styles.navigation}>
+              <PrevButton onClickButton={clickPrevByComplete} />
             </div>
           </>
         )

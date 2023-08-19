@@ -44,6 +44,7 @@ export const EventPlace: FC<Props> = ({ region, onChangeRegion }) => {
     <div className={styles.cards}>
       {REGION_MASTER.map((item) => (
         <div
+          key={item.region}
           style={{
             backgroundColor: region === item.region ? 'skyblue' : '#ffffff',
           }}

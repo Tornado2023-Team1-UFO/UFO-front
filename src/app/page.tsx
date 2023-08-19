@@ -16,7 +16,7 @@ export default function Events() {
   let eventCategories = [
     '人気上昇中のイベント',
     '夏の成長体験',
-    '仲間と弾ける',
+    '仲間とハジける',
     'インドアオタク集合',
     '新しい自分に出会う',
   ]
