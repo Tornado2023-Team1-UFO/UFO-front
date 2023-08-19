@@ -8,7 +8,7 @@ export default function CategoryHeadLine(props: any) {
   // handClick function when clicked on "もっと見る"
   // if clicked on "もっと見る", then it will jump to the "tinder" style swiping page
   const handleClick = () => {
-    const url = Path.EVENT_SWIPE + title // title is the category name
+    const url = Path.EVENT_SWIPE + `?category=${title}` // title is the category name
     router.push(url)
   }
   return (

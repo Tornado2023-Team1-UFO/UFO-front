@@ -6,6 +6,7 @@ import { ClerkProvider } from '@clerk/nextjs'
 import Header from '@/components/Header'
 import { Toaster } from 'react-hot-toast'
 import { NavigationHeader } from '@/components/navigationHeader'
+import styles from './index.module.css'
 const inter = Inter({ subsets: ['latin'] })
 const clerkKey: string = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || ''
 
@@ -17,11 +18,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <ClerkProvider publishableKey={clerkKey}>
-      <html lang='en'>
+      <html lang='ja'>
         <body className={inter.className}>
           <Header />
           <NavigationHeader />
-          {children}
+          <div className={styles.bg}>{children}</div>
           <Toaster />
         </body>
       </html>
