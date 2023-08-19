@@ -291,7 +291,7 @@ export const useEventCreate = () => {
     if (isLoading) return
     setIsLoading(true)
 
-    const categories = ['夏の成長体験', '仲間とハジける', '新しい自分に出会う', 'インドアなヲタク集合！']
+    const categories = ['夏の成長体験', '仲間とハジける', '新しい自分に出会う', '']
     const message = `次のイベントは、どのカテゴリーに分類されるでしょうか？
     選択肢の中から１つ選んでください。
     選択肢:
