@@ -1,3 +1,5 @@
+'use client'
+
 import styles from './Header.module.css'
 import Link from 'next/link'
 import Login from './Login'
