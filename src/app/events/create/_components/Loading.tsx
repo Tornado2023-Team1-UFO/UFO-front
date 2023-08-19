@@ -1,5 +1,5 @@
 import { FallingLines } from 'react-loader-spinner'
-import styles from './loading.module.css'
+import styles from './Loading.module.css'
 
 export const Loading = () => (
   <div className={styles.container}>
