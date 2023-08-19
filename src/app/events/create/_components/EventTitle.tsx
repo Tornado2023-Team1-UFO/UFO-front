@@ -1,6 +1,4 @@
-import Link from 'next/link'
 import { FC } from 'react'
-import { Title } from './common/Title'
 import styles from './EventTitle.module.css'
 
 type Props = {
