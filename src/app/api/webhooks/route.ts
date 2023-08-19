@@ -1,15 +1,12 @@
 // code referenced from:
 // https://github.com/clerkinc/clerk-nextjs-examples/blob/main/examples/widget/pages/api/webhooks/user.ts
 // https://docs.svix.com/receiving/verifying-payloads/how#nodejs-nextjs
-
-import { IncomingHttpHeaders } from 'http'
-import type { NextApiRequest, NextApiResponse } from 'next'
-import { Webhook, WebhookRequiredHeaders } from 'svix'
-import upsert from './upsert'
 import { NextResponse } from 'next/server'
+import { IncomingHttpHeaders } from 'http'
+import { Webhook, WebhookRequiredHeaders } from 'svix'
 
-// Disable the bodyParser so we can access the raw
-// request body for verification.
+import upsert from './upsert'
+import deleteUser from './deleteUser'
 
 const webhookSecret: string = process.env.WEBHOOK_SECRET || ''
 
@@ -43,8 +40,21 @@ export async function POST(req: any) {
   if (eventType === 'user.created' || eventType === 'user.updated') {
     const { id, ...attributes } = evt.data
     console.log('id is ' + id)
-    await upsert(id as string, attributes)
+    try {
+      await upsert(id as string, attributes)
+    } catch (err) {
+      return NextResponse.json({ message: 'Error inside upsert', status: 201 })
+    }
     return NextResponse.json({ message: 'Handled successfully' }, { status: 200 })
+  } else if (eventType === 'user.deleted') {
+    const { id, ...attributes } = evt.data
+    console.log('id to delete is ' + id)
+    try {
+      await deleteUser(id as string)
+    } catch (err) {
+      return NextResponse.json({ message: 'Error inside deleteUser', status: 201 })
+    }
+    return NextResponse.json({ message: 'Successfully deleted user' }, { status: 200 })
   }
 }
 
@@ -60,4 +70,4 @@ type Event = {
   type: EventType
 }
 
-type EventType = 'user.created' | 'user.updated' | '*'
+type EventType = 'user.created' | 'user.updated' | 'user.deleted' | '*'
