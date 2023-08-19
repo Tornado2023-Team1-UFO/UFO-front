@@ -1,6 +1,6 @@
 import ProgressBar from '@ramonak/react-progress-bar'
 import { FC } from 'react'
-import styles from './CustomProgressBar.module.css'
+import styles from './customProgressbar.module.css'
 
 type Props = {
   progress: number
