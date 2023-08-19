@@ -3,7 +3,6 @@ import { EventSlideItem } from '@/app/events/swipe/_components/_models/EventSlid
 import { EventsRepository } from '@/repositories/EventsRepository'
 import { LikeRepository } from '@/repositories/LikeRepository'
 import { UserRepository } from '@/repositories/UserRepository'
-import { auth } from '@/libs/firebase'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useAuth } from '@clerk/nextjs'
 import { toast } from 'react-hot-toast'
@@ -57,7 +56,7 @@ export const useSwipeEvent = (): ReturnType => {
     }
     deleteEvent(currentEventId)
     await LikeRepository.addLike(currentEventId)
-    await UserRepository.addFavoriteEvent(currentEventId, auth.currentUser?.uid || '')
+    await UserRepository.addFavoriteEvent(currentEventId, userId || '')
     setCurrentEventId(id)
     setBackGroundImageIndex(0)
   }
