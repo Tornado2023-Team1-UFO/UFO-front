@@ -1,6 +1,6 @@
 import { EventSlideItem } from '@/app/events/swipe/_components/_models/EventSlideItem'
 import { db } from '@/libs/firebase'
-import { addDoc, collection, getCountFromServer, getDocs, query, where } from 'firebase/firestore'
+import { doc, addDoc, collection, getCountFromServer, getDocs, query, setDoc, where } from 'firebase/firestore'
 import { FirebaseEventType } from './type'
 
 export const EventsRepository = {
@@ -39,9 +39,26 @@ export const EventsRepository = {
 
   async postEvent(req: FirebaseEventType): Promise<string> {
     const ref = collection(db, 'events')
-
     const docRef = await addDoc(ref, req)
     return docRef.id
+  },
+
+  // add attendee to event's subcollection(attendees)
+  async addAttendee(eventId: string, userId: string): Promise<void> {
+    // const ref = collection(db, 'events', eventId, 'attendees')
+    await setDoc(doc(db, 'events', eventId, 'attendees', userId), {})
+  },
+
+  // get all the attendees from event's subcollection(attendees)
+  async getAttendees(eventId: string): Promise<string[]> {
+    const attendees: string[] = []
+    const querySnapshot = await getDocs(collection(db, 'events', eventId, 'attendees'))
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      console.log(doc.id, ' => ', doc.data())
+      attendees.push(doc.id)
+    })
+    return attendees
   },
 
   async getAttendeeCount(eventId: string): Promise<number> {

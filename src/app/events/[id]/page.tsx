@@ -10,13 +10,10 @@ import EventInfo from './_components/EventInfo'
 
 export default function EventDetails() {
   // [id] = firebase のevent のunique id
-  // router.push(firebase_id)
   // firebase_id を受け取る
-  // const id: string = "jrJxJvnTsGINW9CfSm91";
+  // ex: const id: string = "jrJxJvnTsGINW9CfSm91";
   const param = useParams()
   const id = String(param.id)
-  console.log(param.id)
-  // const eventRef = db.collection('events').doc(params);
   const [data, setData] = useState({})
   useEffect(() => {
     if (id) {
@@ -37,10 +34,9 @@ export default function EventDetails() {
       fetchEventData()
     }
   }, [id])
-  // console.log(JSON.stringify(data));
   return (
     <>
-      <EventInfo {...data} />
+      <EventInfo id={id} data={{ ...data }} />
     </>
   )
 }

@@ -14,7 +14,9 @@ export default function CategoryHeadLine(props: any) {
   return (
     <>
       <div className={styles.categoryheadline}>
-        <EventTag title={title} />
+        <div className={styles.eventTag}>
+          <EventTag title={title} />
+        </div>
         <div className={styles.more}>
           <p onClick={handleClick}>もっと見る {'>'}</p>
         </div>

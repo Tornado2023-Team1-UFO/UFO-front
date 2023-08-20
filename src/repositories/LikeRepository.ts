@@ -1,6 +1,7 @@
 import { db } from '@/libs/firebase'
 import { doc, increment, updateDoc } from 'firebase/firestore'
 
+// this function will update the likecounts in firebase database
 export const LikeRepository = {
   addLike: async (eventId: string) => {
     const ref = doc(db, 'events', eventId)

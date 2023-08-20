@@ -7,26 +7,23 @@ import PageDetails from '@/components/PageDetails'
 import SearchBar from './_components/SearchBar'
 import EventContainer from './_components/EventContainer'
 import SeiShunStyle from './_components/SeiShunStyle'
-
+import { eventCategories } from '@/constants/eventCategories'
 import styles from './index.module.css'
 
 export default function Events() {
   const [prefecture, setPrefecture] = useState('全地域')
-  const handleChildData = (newPrefecture: string) => {
+  const [category, setCategory] = useState('全カテゴリー')
+  const setNewPrefecture = (newPrefecture: string) => {
     setPrefecture(newPrefecture)
   }
-  let eventCategories = [
-    '人気上昇中のイベント',
-    '夏の成長体験',
-    '仲間とハジける',
-    'インドアなヲタク集合!',
-    '新しい自分に出会う',
-  ]
+  const setNewCategory = (newCategory: string) => {
+    setCategory(newCategory)
+  }
   return (
     <>
       <PageDetails title='イベント一覧' description='イベント一覧ページです。' />
       <div className={styles.container}>
-        <SearchBar sendDataToParent={handleChildData} />
+        <SearchBar sendNewPrefecture={setNewPrefecture} sendNewCategory={setNewCategory} />
         <SeiShunStyle />
         {eventCategories.map((category) => (
           <EventContainer key={category} category={category} prefecture={prefecture} />

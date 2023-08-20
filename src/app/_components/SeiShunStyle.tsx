@@ -14,7 +14,9 @@ export default function SeiShunStyle() {
         </div>
         <div>
           <button className={styles.buttonContainer}>
-            <Link href={Path.EVENT_STYLE_DIAGNOSIS_TOP}>はじめる</Link>
+            <Link className={styles.start} href={Path.EVENT_STYLE_DIAGNOSIS_TOP}>
+              はじめる
+            </Link>
           </button>
         </div>
       </div>
