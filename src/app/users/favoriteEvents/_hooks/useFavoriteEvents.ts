@@ -4,6 +4,7 @@ import { UserRepository } from '@/repositories/UserRepository'
 import { useAuth } from '@clerk/nextjs'
 import { toast } from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
+import { Path } from '@/constants/path'
 
 export const useFavoriteEvents = () => {
   const [favoriteEvents, setFavoriteEvents] = useState<FavoriteEvents>([])
@@ -13,6 +14,7 @@ export const useFavoriteEvents = () => {
   const fetchfavoriteEvents = async () => {
     if (!userId) {
       toast.error('お気に入りイベントを見るにはログインが必要です')
+      router.push(Path.SIGNIN)
       return
     }
     const favoriteEvents = await UserRepository.getFavoriteEvents(userId)
