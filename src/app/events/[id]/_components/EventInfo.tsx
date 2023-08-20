@@ -115,7 +115,8 @@ export default function EventInfo(props: any) {
                   alt='event image'
                   fill
                   style={{
-                    objectPosition: 'center',
+                    objectFit: 'contain',
+                    // objectPosition: 'center',
                   }}
                   onClick={() => changeMainImage(index)}
                 />

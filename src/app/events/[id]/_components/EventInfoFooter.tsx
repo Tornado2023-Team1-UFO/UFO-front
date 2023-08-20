@@ -13,6 +13,7 @@ export default function EventInfoFooter(props: any) {
   const [liked, setLiked] = useState(false)
   const [isAttendee, setIsAttendee] = useState(false)
   const { eventId, likeCounts } = props
+  const [eventLikeCounts, setEventLikeCounts] = useState(likeCounts)
   const { isSignedIn, user } = useUser()
   console.log(eventId)
   useEffect(() => {
@@ -51,6 +52,7 @@ export default function EventInfoFooter(props: any) {
       toast.success('お気に入りに追加しました')
       addLike(eventId) // update firebase like counts
       user && addToUserFavoriteList(eventId, user.id) // update user's favorite list
+      setEventLikeCounts(eventLikeCounts + 1)
     } else {
       toast.error('そのイベントはすでにお気に入りに登録しています')
     }
@@ -75,7 +77,7 @@ export default function EventInfoFooter(props: any) {
           <div onClick={handleClickLike}>
             <FaHeart />
           </div>
-          <p>{likeCounts}</p>
+          <p>{eventLikeCounts}</p>
         </div>
         <div className={styles.buttonContainer}>
           <button onClick={handleClickParticipate}>
