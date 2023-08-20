@@ -1,9 +1,17 @@
 'use client'
+import { RedirectToSignIn, useAuth } from '@clerk/nextjs'
 import { useFavoriteEvents } from './_hooks/useFavoriteEvents'
 import styles from './index.module.css'
+import toast from 'react-hot-toast'
 
 export default function Page() {
+  const { userId } = useAuth()
   const { favoriteEvents, clickFavoriteCard } = useFavoriteEvents()
+  if (!userId) {
+    toast.error('スタイル診断をするにはログインが必要です')
+    return <RedirectToSignIn />
+  }
+
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>お気に入りのイベント一覧</h1>
