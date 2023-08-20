@@ -1,4 +1,4 @@
-import { use, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 // --- components ---
@@ -12,9 +12,10 @@ import { FaLocationDot, FaPeopleGroup, FaYenSign } from 'react-icons/fa6'
 import dayjs from 'dayjs'
 // --- firebase ---
 import { db } from '@/libs/firebase'
-import { collection, getDoc, doc, DocumentData } from 'firebase/firestore'
+import { getDoc, doc, DocumentData } from 'firebase/firestore'
 
-export default function EventInfo(data: any) {
+export default function EventInfo(props: any) {
+  const { id, data } = props
   let userId: string = ''
   const [loaded, setLoaded] = useState(false)
   const [initialLoad, setInitialLoad] = useState(true)
@@ -169,7 +170,7 @@ export default function EventInfo(data: any) {
           <p className={styles.eventContent}>{data.content}</p>
         </div>
       </div>
-      <EventInfoFooter likeCounts={data.likeCounts} />
+      <EventInfoFooter eventId={id} likeCounts={data.likeCounts} />
     </>
   )
 }

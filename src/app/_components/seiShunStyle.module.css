@@ -35,3 +35,15 @@
   border-radius: 2.5rem;
   background: #fff;
 }
+
+.start {
+  color: #4a4a4a;
+  font-family: Sahitya;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 8px;
+  /* 57.143% */
+  letter-spacing: -0.5px;
+  text-decoration: none;
+}

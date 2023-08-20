@@ -8,6 +8,10 @@
   flex-basis: 70%;
 }
 
+.eventTag {
+  margin-left: -16px !important;
+}
+
 .more p {
   color: #4a4a4a;
   font-family: Noto Sans JP;
