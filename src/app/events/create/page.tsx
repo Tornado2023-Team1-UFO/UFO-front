@@ -30,6 +30,8 @@ import { QuestionWithProgress } from './_components/common/QuestionWithProgress'
 import { Loading } from './_components/Loading'
 import { Return } from './_components/Return'
 import { Completed } from './_components/Completed'
+import { RedirectToSignIn, useAuth } from '@clerk/nextjs'
+import { toast } from 'react-hot-toast'
 
 const Page = () => {
   const {
@@ -82,6 +84,7 @@ const Page = () => {
     clickPrevByComplete,
   } = useEventCreate()
 
+  const { userId } = useAuth()
   const renderComponent = () => {
     switch (currentSection) {
       case TITLE_SECTION:
@@ -243,6 +246,12 @@ const Page = () => {
         return null
     }
   }
+
+  if (!userId) {
+    toast.error('イベント作成にはログインが必要です')
+    return <RedirectToSignIn />
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.content}>

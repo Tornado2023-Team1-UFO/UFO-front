@@ -9,7 +9,7 @@ export default function Page() {
   const { userId } = useAuth()
   const { clickAnswer, currentQuestion } = useQuestion()
   if (!userId) {
-    toast.error('スタイル診断をするにはログインが必要です。')
+    toast.error('スタイル診断をするにはログインが必要です')
     return <RedirectToSignIn />
   }
 
