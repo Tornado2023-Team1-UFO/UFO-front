@@ -1,3 +1,7 @@
 .bg {
   background-color: #f1f1f1;
 }
+
+.container > div {
+  margin: 0 1.0625rem;
+}

@@ -18,7 +18,7 @@ export default function WebShareButton(data: webShareData) {
   return (
     <>
       <div className={styles.icon}>
-        <GoShare onClick={share} />
+        <GoShare className={styles.goShare} onClick={share} />
       </div>
     </>
   )

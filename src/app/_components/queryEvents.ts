@@ -2,11 +2,13 @@ import { db } from '@/libs/firebase'
 import { collection, getCountFromServer, getDocs, query, where } from 'firebase/firestore'
 import { EventSlideItem } from '@/app/events/swipe/_components/_models/EventSlideItem'
 
+const allPrefecture: string = '全地域'
+
 export async function queryEvents(category: string, prefecture: string): Promise<EventSlideItem[]> {
   const results: EventSlideItem[] = []
   // 開催中のイベントを取得する　０：開催前　１：開催中
   let ref
-  prefecture === '地域で絞り込む'
+  prefecture === allPrefecture
     ? (ref = query(collection(db, 'events'), where('status', '==', 1), where('category', '==', category)))
     : (ref = query(
         collection(db, 'events'),

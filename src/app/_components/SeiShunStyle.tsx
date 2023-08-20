@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import styles from './seiShunStyle.module.css'
 
 export default function SeiShunStyle() {
@@ -11,7 +12,9 @@ export default function SeiShunStyle() {
           <p className={styles.title2}>青春スタイル診断</p>
         </div>
         <div>
-          <button className={styles.buttonContainer}>はじめる</button>
+          <button className={styles.buttonContainer}>
+            <Link href='/events/style_diagnosis'>はじめる</Link>
+          </button>
         </div>
       </div>
     </>
