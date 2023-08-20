@@ -4,6 +4,7 @@ import { EvetntItem } from './EventItem'
 import { NavigationMenu } from './NavigationMenu'
 import { useSwipeEvent } from '../_hooks/useSwipeEvent'
 import { EventTag } from '@/components/EventTag'
+import styles from './eventItems.module.css'
 
 export const EventItems: FC = () => {
   const { backGroundImageIndex, events, swipeToLike, swipeToBad, tapEventItem, category } = useSwipeEvent()
@@ -45,7 +46,7 @@ export const EventItems: FC = () => {
   })
 
   return (
-    <div>
+    <div className={styles.container}>
       <EventTag title={category} />
       {carouselFragment}
       <NavigationMenu onClickBack={slideToNextItem} onClickHeart={slideToPrevItem} />
