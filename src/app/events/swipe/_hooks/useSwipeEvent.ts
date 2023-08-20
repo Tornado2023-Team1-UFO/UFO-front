@@ -6,6 +6,7 @@ import { UserRepository } from '@/repositories/UserRepository'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useAuth } from '@clerk/nextjs'
 import { toast } from 'react-hot-toast'
+import { Path } from '@/constants/path'
 
 type ReturnType = {
   /*
@@ -39,7 +40,9 @@ export const useSwipeEvent = (): ReturnType => {
   const [currentEventId, setCurrentEventId] = useState('')
   const [backGroundImageIndex, setBackGroundImageIndex] = useState(0)
   const param = useSearchParams()
-  const category = param.get('category')
+  let category = param.get('category')
+  const type = param.get('type')
+
   const deleteEvent = (eventId: string) => {
     const newEvents = events.filter((event) => event.id !== eventId)
     setEvents(newEvents)
@@ -51,7 +54,7 @@ export const useSwipeEvent = (): ReturnType => {
   const swipeToLike = async (id: string) => {
     if (!userId) {
       toast.error('いいねをするにはログインが必要です')
-      router.push('/signin')
+      router.push(Path.SIGNIN)
       return
     }
     deleteEvent(currentEventId)
@@ -77,6 +80,22 @@ export const useSwipeEvent = (): ReturnType => {
   }
 
   const fetchEvents = async () => {
+    if (type === 'a' || type === 'b' || type === 'c' || type === 'd') {
+      switch (type) {
+        case 'a':
+          category = '夏の成長体験'
+          break
+        case 'b':
+          category = '仲間とハジける'
+          break
+        case 'c':
+          category = 'インドアなヲタク集合!'
+          break
+        case 'd':
+          category = '新しい自分に出会う'
+          break
+      }
+    }
     const results = await EventsRepository.getEventSlideItems(category ?? '')
     {
       results && setEvents(results)

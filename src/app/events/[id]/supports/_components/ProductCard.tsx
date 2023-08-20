@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import styles from './productCard.module.css'
-import { InputNumber } from 'primereact/inputnumber'
+import Select from 'react-select'
 
 type Props = {
   id: string
@@ -13,6 +13,14 @@ type Props = {
   onClickCheckBox: (id: string) => void
   onChangeQuantity: (id: string, quantity: number) => void
 }
+
+const options = [
+  { value: '1', label: '1個' },
+  { value: '2', label: '2個' },
+  { value: '3', label: '3個' },
+  { value: '4', label: '4個' },
+  { value: '5', label: '5個' },
+]
 
 export const ProductCard: FC<Props> = ({
   onClickCheckBox,
@@ -32,17 +40,8 @@ export const ProductCard: FC<Props> = ({
         {amount}
       </div>
       <div className={styles.quantity}>
-        数量
-        <InputNumber
-          value={quantity > 0 ? quantity : 0}
-          onValueChange={(e) => onChangeQuantity(id, Number(e.value))}
-          showButtons
-          buttonLayout='vertical'
-          size={2}
-          className={styles.quantity_input}
-          min={1}
-          max={100}
-        />
+        <p>数量</p>
+        <Select defaultValue={options[0]} options={options} onChange={(e) => onChangeQuantity(id, Number(e?.value))} />
       </div>
 
       <img className={styles.image} src={imageUrl} alt={name} />

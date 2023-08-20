@@ -14,6 +14,8 @@ export default authMiddleware({
     Path.SIGNUP,
     Path.EVENT_SUPPORT,
     '/Events(.*)',
+    Path.EVENT_STYLE_DIAGNOSIS,
+    Path.EVENT_CREATE,
     '/api(.*)',
   ],
   ignoredRoutes: ['/api/webhooks/'],
