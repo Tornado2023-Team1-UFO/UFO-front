@@ -40,12 +40,10 @@ export default function EventInfoFooter(props: any) {
     await UserRepository.addFavoriteEvent(id, userID)
   }
   const handleClickLike = () => {
-    window.alert('clicked')
     if (!isSignedIn) {
       toast.error('お気に入りに追加するにはログインが必要です')
     }
     if (!user) {
-      toast.error('ユーザー情報が読み込まれていません')
       return // Early return to prevent further execution
     }
     !liked ? setLiked(true) : setLiked(false)
@@ -59,10 +57,9 @@ export default function EventInfoFooter(props: any) {
   }
   const handleClickParticipate = () => {
     if (!isSignedIn) {
-      toast.error('参加するにはログインが必要です')
+      toast.error('参加登録をするにはログインが必要です')
     }
     if (!user) {
-      toast.error('ユーザー情報が読み込まれていません')
       return // Early return to prevent further execution
     }
     if (!isAttendee) {
