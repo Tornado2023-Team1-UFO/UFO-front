@@ -1,8 +1,9 @@
 import { nextApi } from '@/libs/axios'
 import { ReturnRepository } from '@/repositories/ReturnRepository'
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { SupportProduct } from '../_models/SupportProduct'
+import { toast } from 'react-hot-toast'
 
 type ReturnType = {
   /*
@@ -34,9 +35,13 @@ export const useSupportProducts = (): ReturnType => {
   const { id } = useParams()
   const [supportProducts, setSupportProducts] = useState<SupportProduct[]>([])
   const [selectedProducts, setSelectedProducts] = useState<SupportProduct[]>([])
-
+  const router = useRouter()
   const fetchReturns = async () => {
     const data = await ReturnRepository.getReturns(id as string)
+    if (data.length === 0) {
+      toast.error('このイベントは支援を受け付けていません')
+      router.push(`/events/${id}`)
+    }
     setSupportProducts(data)
   }
   useEffect(() => {

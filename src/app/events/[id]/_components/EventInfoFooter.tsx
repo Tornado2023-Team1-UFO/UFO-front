@@ -86,7 +86,7 @@ export default function EventInfoFooter(props: any) {
         </div>
         <div className={styles.buttonContainer}>
           <button>
-            <Link href='/events/supports'>応援する</Link>
+            <Link href={`/events/${eventId}/supports`}>応援する</Link>
           </button>
         </div>
       </div>
