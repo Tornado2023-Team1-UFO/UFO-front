@@ -2,6 +2,7 @@
 
 import { EventItems } from './_components/EventItems'
 import { useSwipeEvent } from './_hooks/useSwipeEvent'
+
 const EventPage = () => {
   const { events } = useSwipeEvent()
 
