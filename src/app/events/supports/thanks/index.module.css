@@ -6,7 +6,7 @@
   justify-content: center;
   align-items: center;
   gap: 20px;
-  height: 100vh;
+  padding-top: 200px;
 }
 
 .button {
@@ -17,4 +17,8 @@
   width: 300px;
   height: 40px;
   font-size: 12px;
+}
+
+.container {
+  min-height: 100vh;
 }
