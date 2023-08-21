@@ -1,21 +1,24 @@
 .card {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   min-width: 10rem;
-  height: 14.375rem;
+  height: 14rem;
   min-height: 8rem;
-  background-color: lightgrey;
   margin-right: 0.5rem;
   margin-bottom: 1rem;
+  border-radius: 3px;
+  background: #fff;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
 }
 
 .cardimage {
   position: relative;
-  flex-basis: 60%;
+  flex-basis: 70%;
   min-height: 100px;
-  width: 100%;
+  width: 90%;
+  margin-top: 0.875rem;
 }
 
 .firstContent,
@@ -25,7 +28,6 @@
 }
 
 .secondContent {
-  flex-basis: 20%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;

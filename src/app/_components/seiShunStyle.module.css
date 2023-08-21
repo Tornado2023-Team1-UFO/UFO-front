@@ -4,13 +4,13 @@
   align-items: center;
   justify-content: space-around;
   min-height: 10.5rem;
-  background: #9b9b9b;
-  border-radius: 0.1875rem 0.1875rem 0.1875rem 0.1875rem;
+  border-radius: 0.1875rem;
+  background: #fff;
   margin-top: 0.5rem !important;
 }
 
 .title {
-  color: #fff;
+  color: #13519a;
   font-family: sans-serif;
   font-size: 16px;
   font-style: normal;
@@ -19,7 +19,7 @@
 }
 
 .title2 {
-  color: #fff;
+  color: #13519a;
   font-family: Sahitya;
   font-size: 1.25rem;
   font-style: normal;
@@ -33,6 +33,7 @@
   width: 8.1875rem;
   height: 2.1875rem;
   border-radius: 2.5rem;
+  border-color: linear-gradient(#21aaf8, #62ffbd92, #58ebe8cd, #3abdef);
   background: #fff;
 }
 
@@ -46,4 +47,12 @@
   /* 57.143% */
   letter-spacing: -0.5px;
   text-decoration: none;
+}
+
+/* media query */
+@media (min-width: 768px) {
+  .container {
+    width: 50%;
+    margin: 0 auto;
+  }
 }

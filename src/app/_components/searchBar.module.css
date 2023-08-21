@@ -11,11 +11,10 @@
 .keyword {
   width: 80%;
   height: 1.875rem;
-  border-radius: 0.1875rem;
-  border: 1px solid #ccc;
   margin: 0 auto;
+  border-radius: 1.25rem;
+  background: #fff;
   padding-left: 0.7rem;
-  color: #979797;
   font-family: Noto Sans JP;
   font-size: 0.75rem;
   font-style: normal;
@@ -69,4 +68,17 @@
   line-height: 0.5rem;
   /* 66.667% */
   letter-spacing: -0.03125rem;
+}
+
+/* media query */
+@media (min-width: 768px) {
+  .searchbytext {
+    width: 50%;
+    align-self: center;
+  }
+  .searchothers {
+    width: 50%;
+    justify-content: center;
+    align-self: center;
+  }
 }

@@ -10,9 +10,21 @@
   justify-content: center;
   align-items: center;
   border: 0.7px solid #d3d3d3;
-  color: #4a4a4a;
-  font-size: 12px;
-  font-weight: 700;
   cursor: pointer;
   text-decoration: none;
+  color: #13519a;
+  font-family: Noto Sans JP;
+  font-size: 0.7rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 0.5rem;
+  /* 66.667% */
+  letter-spacing: -0.03125rem;
+}
+
+/* --- media query --- */
+@media (min-width: 768px) {
+  .navigation {
+    border: none;
+  }
 }
