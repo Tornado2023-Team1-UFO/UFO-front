@@ -24,7 +24,9 @@ export default function SearchBar({ sendNewPrefecture, sendNewCategory }: search
       <div className={styles.searchbar}>
         <div className={styles.searchbytext}>
           <input className={styles.keyword} type='text' placeholder='キーワードから探す' />
-          <button className={styles.button}>検索</button>
+          <button className={styles.button}>
+            <img src='/images/search.svg' alt='search' />
+          </button>
         </div>
         <div className={styles.searchothers}>
           <div className={styles.searchotherschild}>
@@ -35,6 +37,7 @@ export default function SearchBar({ sendNewPrefecture, sendNewCategory }: search
                 </option>
               ))}
             </select>
+            <img className={styles.arrowIcon} src='/images/downarrow.svg' alt='downarrwow' />
           </div>
           <div className={styles.searchotherschild}>
             <select className={styles.selectBox} name='category' onChange={(e) => handleCategorySearch(e.target.value)}>
@@ -44,6 +47,7 @@ export default function SearchBar({ sendNewPrefecture, sendNewCategory }: search
                 </option>
               ))}
             </select>
+            <img className={styles.arrowIcon} src='/images/downarrow.svg' alt='downarrwow' />
           </div>
         </div>
       </div>

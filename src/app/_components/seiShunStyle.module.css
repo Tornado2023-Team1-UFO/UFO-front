@@ -9,32 +9,20 @@
   margin-top: 0.5rem !important;
 }
 
-.title {
-  color: #13519a;
-  font-family: sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 700;
-  letter-spacing: -0.03125rem;
-}
-
-.title2 {
-  color: #13519a;
-  font-family: Sahitya;
-  font-size: 1.25rem;
-  font-style: normal;
-  font-weight: 700;
-  /* line-height: 0.5rem; */
-  /* 40% */
-  letter-spacing: -0.03125rem;
+.image {
+  position: relative;
+  width: 13.25rem;
+  height: 4.8125rem;
 }
 
 .buttonContainer {
   width: 8.1875rem;
   height: 2.1875rem;
   border-radius: 2.5rem;
-  border-color: linear-gradient(#21aaf8, #62ffbd92, #58ebe8cd, #3abdef);
-  background: #fff;
+  border-width: 0.25rem;
+  border-image: linear-gradient(90deg, #21aaf8 100%, #62ffbd 57.29%, #58ebe8 80.23%, #3abdef 100%);
+  border-image-slice: 1;
+  /* Ensures the entire border is filled with the gradient */
 }
 
 .start {

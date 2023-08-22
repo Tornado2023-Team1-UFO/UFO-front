@@ -8,7 +8,8 @@
   min-height: 8rem;
   margin-right: 0.5rem;
   margin-bottom: 1rem;
-  border-radius: 3px;
+  border-radius: 0.1875rem;
+  border: 1px solid #9b9b9b;
   background: #fff;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
 }
@@ -18,7 +19,6 @@
   flex-basis: 70%;
   min-height: 100px;
   width: 90%;
-  margin-top: 0.875rem;
 }
 
 .firstContent,
@@ -39,33 +39,32 @@
 }
 .cardTitle {
   margin-top: 0;
-  color: #4a4a4a;
-  font-family: Noto Sans JP;
-  font-size: 1rem;
+  color: #13519a;
+  font-family: AsagoHonmaruGothic-R;
+  font-size: 0.75rem;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 400;
   line-height: 0.5rem;
   /* 66.667% */
   letter-spacing: -0.03125rem;
 }
 .cardDate {
-  color: #4a4a4a;
-  font-family: Noto Sans JP;
-  font-size: 0.6rem;
+  color: #13519a;
+  font-family: apricotJapanesefont;
+  font-size: 0.625rem;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 400;
   line-height: 0.5rem;
   /* 80% */
   letter-spacing: -0.03125rem;
 }
-.cardAttendees {
+/* .cardAttendees {
   color: #4a4a4a;
   font-family: Noto Sans JP;
   font-size: 0.8rem;
   font-style: normal;
   font-weight: 700;
   line-height: 0.5rem;
-  /* 80% */
   letter-spacing: -0.03125rem;
 }
 
@@ -76,7 +75,6 @@
   font-style: normal;
   font-weight: 700;
   line-height: 0.5rem;
-  /* 80% */
   letter-spacing: -0.03125rem;
   margin: auto 0.25rem;
-}
+} */
