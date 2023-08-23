@@ -2,7 +2,9 @@ type FavoriteEvent = {
   id: string
   imageUrls: string[]
   title: string
-  likeCounts: number
+  prefecture: string
+  startAt: Date
+  endAt: Date
 }
 
 export type FavoriteEvents = FavoriteEvent[]

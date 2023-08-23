@@ -36,13 +36,17 @@ export const UserRepository = {
 
       const imageUrls: string[] = data.imageUrls
       const title: string = data.title
-      const likeCounts: number = data.likeCounts
+      const prefecture: string = data.prefecture
+      const startAt: Date = data.startAt.toDate()
+      const endAt: Date = data.endAt.toDate()
 
       const item = {
         id: eventId,
         imageUrls: imageUrls,
         title: title,
-        likeCounts: likeCounts,
+        prefecture: prefecture,
+        startAt: startAt,
+        endAt: endAt,
       }
       results.push(item)
     }
