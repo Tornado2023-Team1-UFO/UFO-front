@@ -1,7 +1,7 @@
 .modal {
   z-index: 9999;
   width: 80%;
-  height: 500px;
+  height: 68vh;
   background-color: white;
   display: flex;
   flex-direction: column;
