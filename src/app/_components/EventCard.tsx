@@ -44,11 +44,11 @@ export default function EventCard(event: any) {
               {startDate} ~ {endDate}
             </p>
           </div>
-          <div className={styles.attendees}>
+          {/* <div className={styles.attendees}>
             <p className={styles.cardAttendees}>現在参加者: {event.attendeeCounts}</p>
             <span className={styles.cardAttendeesCount}>/</span>
             <p className={styles.cardAttendees}>{event.recruitPeopleCounts}人</p>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

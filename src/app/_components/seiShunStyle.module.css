@@ -4,36 +4,25 @@
   align-items: center;
   justify-content: space-around;
   min-height: 10.5rem;
-  background: #9b9b9b;
-  border-radius: 0.1875rem 0.1875rem 0.1875rem 0.1875rem;
+  border-radius: 0.1875rem;
+  background: #fff;
   margin-top: 0.5rem !important;
 }
 
-.title {
-  color: #fff;
-  font-family: sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 700;
-  letter-spacing: -0.03125rem;
-}
-
-.title2 {
-  color: #fff;
-  font-family: Sahitya;
-  font-size: 1.25rem;
-  font-style: normal;
-  font-weight: 700;
-  /* line-height: 0.5rem; */
-  /* 40% */
-  letter-spacing: -0.03125rem;
+.image {
+  position: relative;
+  width: 13.25rem;
+  height: 4.8125rem;
 }
 
 .buttonContainer {
   width: 8.1875rem;
   height: 2.1875rem;
   border-radius: 2.5rem;
-  background: #fff;
+  border-width: 0.25rem;
+  border-image: linear-gradient(90deg, #21aaf8 100%, #62ffbd 57.29%, #58ebe8 80.23%, #3abdef 100%);
+  border-image-slice: 1;
+  /* Ensures the entire border is filled with the gradient */
 }
 
 .start {
@@ -46,4 +35,12 @@
   /* 57.143% */
   letter-spacing: -0.5px;
   text-decoration: none;
+}
+
+/* media query */
+@media (min-width: 768px) {
+  .container {
+    width: 50%;
+    margin: 0 auto;
+  }
 }

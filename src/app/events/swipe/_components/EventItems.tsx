@@ -16,6 +16,7 @@ export const EventItems: FC = () => {
       id: event.id,
       renderItem: (
         <EvetntItem
+          id={event.id}
           title={event.title}
           prefecture={event.prefecture}
           attendeeCounts={event.attendeeCounts}
@@ -25,6 +26,7 @@ export const EventItems: FC = () => {
           backgroundImages={event.imageUrls}
           currentIndex={backGroundImageIndex}
           onTapEvent={tapEventItem}
+          eventFee={event.eventFee}
         />
       ),
     })),

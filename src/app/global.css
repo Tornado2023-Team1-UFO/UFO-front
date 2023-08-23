@@ -1,0 +1,10 @@
+:root {
+  --primary-color: #13519a;
+  --secondary-color: #ffffff;
+  --black-color: #9b9b9b9b;
+}
+
+@font-face {
+  font-family: 'AsagoHonmaruGothic-R';
+  src: url('/fonts/asago-mini.otf');
+}

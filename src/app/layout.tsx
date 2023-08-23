@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import dynamic from 'next/dynamic'
 import { Inter } from 'next/font/google'
 import 'ress'
 import { ClerkProvider } from '@clerk/nextjs'
@@ -7,6 +6,9 @@ import Header from '@/components/Header'
 import { Toaster } from 'react-hot-toast'
 import { NavigationHeader } from '@/components/navigationHeader'
 import styles from './index.module.css'
+// These styles apply to every route in the application
+import './global.css'
+
 const inter = Inter({ subsets: ['latin'] })
 const clerkKey: string = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || ''
 
@@ -21,7 +23,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <html lang='ja'>
         <body className={inter.className}>
           <Header />
-          <NavigationHeader />
           <div className={styles.bg}>{children}</div>
           <Toaster />
         </body>

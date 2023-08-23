@@ -9,13 +9,23 @@
 }
 
 .keyword {
-  width: 80%;
+  width: 85%;
   height: 1.875rem;
-  border-radius: 0.1875rem;
-  border: 1px solid #ccc;
   margin: 0 auto;
+  border: 1px solid #9b9b9b;
+  border-radius: 1.25rem 0rem 0rem 1.25rem;
+  background: #fff;
   padding-left: 0.7rem;
-  color: #979797;
+  color: #a1bbda;
+  font-family: Noto Sans JP;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 0.5rem;
+  letter-spacing: -0.03125rem;
+}
+.keyword::placeholder {
+  color: #a1bbda;
   font-family: Noto Sans JP;
   font-size: 0.75rem;
   font-style: normal;
@@ -26,17 +36,13 @@
 
 .button {
   height: 1.875rem;
-  width: 20%;
-  border-radius: 0px 3px 3px 0px;
-  background: #494949;
-  color: #fff;
-  font-family: Noto Sans JP;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 8px;
-  /* 66.667% */
-  letter-spacing: -0.5px;
+  width: 15%;
+  text-align: center;
+  line-height: 1.875rem;
+  border-radius: 0rem 1.25rem 1.25rem 0rem;
+  border: 1px solid #9b9b9b;
+  border-left: 0;
+  background: linear-gradient(45deg, #0affde 0%, #3ecaf6 46.88%, #587cfc 100%);
 }
 
 .searchothers {
@@ -50,23 +56,40 @@
 .searchotherschild {
   display: flex;
   flex-direction: row;
-  height: 32px;
+  align-items: center;
+  width: auto;
+  height: 2rem;
   margin-right: 0.5rem;
   border-radius: 6.25rem;
   border: 1px solid #d9d9d9;
   text-align: center;
   line-height: auto;
-  padding: 0.2rem;
+  padding: 0 0.5rem;
 }
-
-.prefectureName {
-  text-align: center;
-  color: #4a4a4a;
+.selectBox {
+  color: #13519a;
   font-family: Noto Sans JP;
-  font-size: 0.75rem;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 700;
-  line-height: 0.5rem;
-  /* 66.667% */
   letter-spacing: -0.03125rem;
+}
+
+.arrowIcon {
+  width: 1rem;
+  height: 1rem;
+  line-height: 2rem;
+}
+
+/* media query */
+@media (min-width: 768px) {
+  .searchbytext {
+    width: 50%;
+    align-self: center;
+  }
+  .searchothers {
+    width: 50%;
+    justify-content: center;
+    align-self: center;
+  }
 }

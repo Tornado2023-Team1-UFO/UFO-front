@@ -1,0 +1,24 @@
+.login {
+  height: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  margin: 0;
+  margin-right: 1rem;
+  text-align: center;
+}
+
+.link {
+  color: #13519a;
+  font-family: Noto Sans JP;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 0.5rem;
+  /* 66.667% */
+  letter-spacing: -0.03125rem;
+  text-decoration: none;
+}

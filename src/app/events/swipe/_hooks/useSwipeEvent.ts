@@ -123,6 +123,7 @@ export const useSwipeEvent = (): ReturnType => {
               attendeeCounts: 0,
               recruitPeopleCounts: 0,
               deadline: new Date(),
+              eventFee: 0,
             },
           ],
     swipeToLike,

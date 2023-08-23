@@ -8,6 +8,7 @@ export class EventSlideItem {
   attendeeCounts!: number
   recruitPeopleCounts!: number
   deadline!: Date
+  eventFee!: number
 
   constructor(event: Partial<EventSlideItem>) {
     Object.assign(this, event)
