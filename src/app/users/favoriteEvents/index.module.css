@@ -1,7 +1,8 @@
 .container {
+  position: relative;
   padding: 40px;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -9,58 +10,212 @@
   gap: 50px;
 }
 
+.title_button {
+  position: absolute;
+  top: 28px;
+  left: 13px;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  height: 42px;
+  width: 200px;
+  border-radius: 20px;
+  text-align: center;
+  padding: 5px;
+  z-index: 1;
+}
+
+.title_button2 {
+  position: absolute;
+  top: 82px;
+  left: -16px;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  height: 42px;
+  width: 200px;
+  border-radius: 20px;
+  text-align: center;
+  padding: 5px;
+  z-index: 1;
+}
+
 .title {
   font-size: 20px;
   font-weight: 700;
-  color: #4a4a4a;
 }
 
 .cards {
+  margin-top: 180px;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
+  width: 100%;
+
   gap: 24px;
 }
 
-.card {
+.card:nth-child(6n + 1) {
+  margin: -100px 50px 0 180px;
   position: relative;
-  width: 300px;
-  height: 144px;
-  border-radius: 20px;
-  background-color: #9b9b9b9b;
+  width: 144px;
+  height: 230px;
+  border-radius: 3px;
+  background-color: var(--secondary-color);
+  rotate: 12deg;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.card:nth-child(6n + 2) {
+  margin: -100px 0 0 -120px;
+  position: relative;
+  width: 144px;
+  height: 230px;
+  border-radius: 3px;
+  background-color: var(--secondary-color);
+  rotate: -16deg;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.card:nth-child(6n + 3) {
+  margin: -80px 0 0 220px;
+  position: relative;
+  width: 144px;
+  height: 230px;
+  border-radius: 3px;
+  background-color: var(--secondary-color);
+  rotate: 6deg;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.card:nth-child(6n + 4) {
+  margin: -60px 0 0 -160px;
+  position: relative;
+  width: 144px;
+  height: 230px;
+  border-radius: 3px;
+  background-color: var(--secondary-color);
+  rotate: 5deg;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.card:nth-child(6n + 5) {
+  margin: -100px 0 0 200px;
+  position: relative;
+  width: 144px;
+  height: 230px;
+  border-radius: 3px;
+  background-color: var(--secondary-color);
   color: #ffffff;
+  rotate: -10deg;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.card:nth-child(6n + 6) {
+  margin: -100px 0 0 -160px;
+  position: relative;
+  width: 144px;
+  height: 230px;
+  border-radius: 3px;
+  background-color: var(--secondary-color);
+  rotate: -15deg;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.card_title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--primary-color);
+  background: linear-gradient(transparent 50%, #ffff00 50%);
+}
+
+.card_container {
+  padding: 6px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.card_image {
+  position: relative;
+  width: 126px;
+  height: 158px;
+  margin: 0 auto;
   background-size: cover;
   background-repeat: none;
   background-position: center;
 }
 
-.card::before {
+.card_image::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   display: block;
-  width: 100%;
-  height: 100%;
-  background: rgba(226, 174, 168, 0.6);
+  width: 126px;
+  height: 158px;
+  background: var(--primary-color);
+  opacity: 0.2;
   filter: blur(10px);
 }
 
-.card_title {
+.prefecture {
   position: absolute;
-  bottom: 40px;
-  left: 20px;
-  font-size: 16px;
-  font-weight: 700;
-  color: #ffffff;
+  bottom: 6px;
+  width: 64px;
+  height: 24px;
+  padding: 2px;
+  border-radius: 20px;
+  display: flex;
+  gap: 2px;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--secondary-color);
+  color: var(--deep-black-color);
+  font-size: 11px;
 }
 
-.heart {
+.card_content {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-family: 'AsagoHonmaruGothic-R';
+  color: var(--primary-color);
+}
+
+.card_date {
+  font-size: 4px;
+  font-weight: 400;
+}
+
+.text1 {
   position: absolute;
-  top: 20px;
-  left: 20px;
-  width: 24px;
-  height: 24px;
-  cursor: pointer;
+  top: -50px;
+  left: 110px;
+  z-index: 10;
+  rotate: 12deg;
+}
+
+.text2 {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  z-index: 10;
+  rotate: -6deg;
+}
+
+.text3 {
+  position: absolute;
+  top: -130px;
+  right: -250px;
+  z-index: 10;
+  rotate: 10deg;
+}
+
+.no_favorite {
+  margin-top: 200px;
+  font-size: large;
+  font-weight: 700;
+  color: var(--primary-color);
 }
