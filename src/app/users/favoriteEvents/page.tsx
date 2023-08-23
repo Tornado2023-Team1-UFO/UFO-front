@@ -6,7 +6,7 @@ import toast from 'react-hot-toast'
 import { FiMapPin } from 'react-icons/fi'
 import dayjs from 'dayjs'
 import 'dayjs/locale/ja'
-import 'animate.css'
+import { motion } from 'framer-motion'
 
 export default function Page() {
   const { userId } = useAuth()
@@ -37,8 +37,20 @@ export default function Page() {
         <div className={styles.cards}>
           {favoriteEvents.map((event, i) => (
             <div key={event.id} className={styles.card} onClick={() => clickFavoriteCard(event.id)}>
-              {(i - 1) % 6 === 0 && <img src='/images/favoriteText1.svg' alt='笑う' className={styles.text1} />}
-              {(i - 1) % 6 === 2 && <img src='/images/favoriteText2.svg' alt='キュン' className={styles.text2} />}
+              {(i - 1) % 6 === 0 && (
+                <motion.div
+                  animate={{
+                    scale: [1, 2, 2, 1, 1],
+                  }}
+                >
+                  <img src='/images/favoriteText1.svg' alt='笑う' className={styles.text1} />
+                </motion.div>
+              )}
+              {(i - 1) % 6 === 2 && (
+                <motion.div animate={{ x: [5, 0, -5, 0] }} transition={{ ease: 'easeOut', duration: 1 }}>
+                  <img src='/images/favoriteText2.svg' alt='キュン' className={styles.text2} />
+                </motion.div>
+              )}
               {(i - 1) % 6 === 4 && <img src='/images/favoriteText3.svg' alt='カメラ' className={styles.text3} />}
               <div className={styles.card_container}>
                 <div className={styles.card_image} style={{ backgroundImage: `url(${event.imageUrls[0]})` }}>

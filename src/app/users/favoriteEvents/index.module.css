@@ -212,3 +212,10 @@
   z-index: 10;
   rotate: 10deg;
 }
+
+.no_favorite {
+  margin-top: 200px;
+  font-size: large;
+  font-weight: 700;
+  color: var(--primary-color);
+}
