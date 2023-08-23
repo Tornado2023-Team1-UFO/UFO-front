@@ -8,6 +8,7 @@ import { NavigationHeader } from '@/components/navigationHeader'
 import styles from './index.module.css'
 // These styles apply to every route in the application
 import './global.css'
+
 const inter = Inter({ subsets: ['latin'] })
 const clerkKey: string = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || ''
 

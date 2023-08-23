@@ -2,8 +2,8 @@
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  color: #9b9b9b;
-  border: #9b9b9b 1px solid;
+  color: var(--primary-color);
+  border: var(--primary-color) 1px solid;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,7 +20,7 @@
 }
 
 .title {
-  color: #13519a;
+  color: var(--primary-color);
   font-family: Noto Sans JP;
   font-size: 1.125rem;
   font-style: normal;

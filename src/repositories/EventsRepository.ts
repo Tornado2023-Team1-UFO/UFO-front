@@ -31,6 +31,7 @@ export const EventsRepository = {
         attendeeCounts: attendeesCounts,
         recruitPeopleCounts: data.recruitPeopleCounts,
         deadline: deadLine,
+        eventFee: data.eventFee,
       })
       results.push(item)
     }
