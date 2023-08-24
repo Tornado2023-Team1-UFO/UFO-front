@@ -12,6 +12,7 @@ export default function EventCard(event: any) {
   const router = useRouter()
   const handleClick = () => {
     // redirect to the event details page
+    console.log('Clicked')
     router.push(`${Path.EVENT_DETAIL}/${event.id}`)
   }
   const startDate = dayjs(event.startAt).format('YYYY/MM/DD(ddd)')

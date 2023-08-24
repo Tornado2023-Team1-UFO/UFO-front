@@ -20,9 +20,10 @@
   min-height: 100px;
   width: 90%;
 }
-.cardimage:after {
+.cardimage::after {
   position: absolute;
   content: '';
+  pointer-events: none;
   left: 0;
   top: 0;
   width: 100%;
