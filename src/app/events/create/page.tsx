@@ -253,11 +253,9 @@ const Page = () => {
   }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.content}>
-        {isLoading && <Loading />}
-        {!isLoading && renderComponent()}
-      </div>
+    <div className={styles.content}>
+      {isLoading && <Loading />}
+      {!isLoading && renderComponent()}
     </div>
   )
 }

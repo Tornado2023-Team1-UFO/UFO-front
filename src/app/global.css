@@ -8,4 +8,6 @@
 @font-face {
   font-family: 'AsagoHonmaruGothic-R';
   src: url('/fonts/asago-mini.otf');
+  font-family: 'PankijiKana';
+  src: url('/fonts/PANKIJI_KANA-Line.otf');
 }
