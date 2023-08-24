@@ -41,7 +41,11 @@
 /* media query */
 @media (min-width: 768px) {
   .container {
-    width: 50%;
     margin: 0 auto;
+  }
+  .image {
+    position: relative;
+    width: 15rem;
+    height: 6rem;
   }
 }

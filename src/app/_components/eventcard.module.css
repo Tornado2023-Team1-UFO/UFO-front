@@ -95,23 +95,10 @@
   /* 80% */
   letter-spacing: -0.03125rem;
 }
-/* .cardAttendees {
-  color: #4a4a4a;
-  font-family: Noto Sans JP;
-  font-size: 0.8rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 0.5rem;
-  letter-spacing: -0.03125rem;
-}
 
-.cardAttendeesCount {
-  color: #4a4a4a;
-  font-family: Noto Sans JP;
-  font-size: 0.625rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 0.5rem;
-  letter-spacing: -0.03125rem;
-  margin: auto 0.25rem;
-} */
+/* media query */
+@media (min-width: 768px) {
+  .card {
+    margin: 0 1.5rem;
+  }
+}

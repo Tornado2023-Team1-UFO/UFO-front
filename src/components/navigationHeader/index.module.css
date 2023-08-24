@@ -27,4 +27,7 @@
   .navigation {
     border: none;
   }
+  .navigation > p {
+    font-size: 0.75rem;
+  }
 }
