@@ -19,6 +19,7 @@
   flex-basis: 70%;
   min-height: 100px;
   width: 90%;
+  margin-top: 0.5rem;
 }
 .cardimage::after {
   position: absolute;
@@ -56,6 +57,7 @@
   line-height: 0.5rem;
   /* 72.727% */
   letter-spacing: -0.03125rem;
+  margin-left: -0.625rem;
 }
 .firstContent,
 .secondContent {
@@ -67,6 +69,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  margin-bottom: 0.5rem;
 }
 
 .attendees {
