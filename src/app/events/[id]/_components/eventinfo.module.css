@@ -1,14 +1,12 @@
 /* --- info container --- */
 .eventinfocontainer {
-  background-color: #f1f1f1;
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
+  align-items: flex-start;
+  padding: 2rem;
 }
 .eventinfocontainer > div {
-  background-color: #fff;
-  width: 80%;
-  margin: 0.625rem auto;
+  margin: 0.625rem 0;
 }
 /* ----- start of specific styling -----   */
 /* --- main event image ---  */
@@ -35,23 +33,19 @@
   cursor: pointer;
 }
 /* --- end of event image --- */
-.eventtitle {
-  background-color: #f1f1f1 !important; /*override background-color:*/
-  height: 3.375rem;
-  line-height: 3.375rem;
-}
 .eventtitle h1 {
-  color: #4a4a4a;
-  font-family: Noto sans-serif;
-  font-size: 2rem;
+  color: #13519a;
+  font-family: Noto Sans JP;
+  font-size: 1.5rem;
   font-style: normal;
-  font-weight: 700;
-  text-align: center;
+  font-weight: 900;
+  line-height: 0.5rem;
+  /* 33.333% */
+  letter-spacing: -0.03125rem;
 }
 
 /*  --- eventhost styling ---  */
 .eventhost {
-  background-color: #f1f1f1 !important; /*override background-color:*/
   display: flex;
   height: 3rem;
   line-height: 3rem;
@@ -63,14 +57,16 @@
   border-radius: 50%;
   overflow: hidden;
 }
-.eventhostname {
-  background: white;
-  line-height: auto;
-  margin-left: 1rem;
-}
 .eventhostname p {
   text-align: center;
   padding: 0 1rem;
+  color: #13519a;
+  font-family: Noto Sans JP;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 500;
+  /* 66.667% */
+  letter-spacing: 0.09375rem;
 }
 
 /* --- start of eventdate ---  */
@@ -78,37 +74,33 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: flex-start;
   height: 4.375rem;
 }
-.eventDate p {
-  text-align: center;
-}
 .eventDateTitle {
-  color: #4a4a4a;
+  color: #13519a;
+  text-align: center;
   font-family: Noto Sans JP;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 500; /* 57.143% */
+  letter-spacing: -0.03125rem;
+}
+.eventDateSE {
+  color: #13519a;
+  font-family: Helvetica;
   font-size: 1rem;
   font-style: normal;
   font-weight: 700;
-  line-height: 8px;
-  letter-spacing: -0.5px;
-  margin-bottom: 1rem;
-}
-.eventDateSE {
-  color: #4a4a4a;
-  font-family: Noto Sans JP;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 8px;
   /* 50% */
-  letter-spacing: -0.5px;
+  letter-spacing: -0.03125rem;
 }
 
 /* --- event extra info ---  */
 .eventExtraInfo {
+  width: 100%;
   display: flex;
   justify-content: space-evenly;
-  height: 84px;
 }
 .eventExtraInfo > div {
   display: flex;
@@ -116,20 +108,19 @@
   justify-content: center;
   height: 4.375rem;
 }
+.eventExtraInfo > div > p {
+  color: #13519a;
+}
 .icon {
+  fill: #13519a;
   align-self: center;
 }
 .border {
   width: 2px;
-  background: #d3d3d3;
   height: 80%;
-  margin: auto 0;
+  background: #13519a;
 }
 
-/* --- event content ---  */
-.eventContentContainer {
-  background-color: #f1f1f1 !important; /*override background-color:*/
-}
 .eventContentTitle {
   color: #4a4a4a;
   font-family: Noto Sans JP;

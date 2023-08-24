@@ -13,14 +13,14 @@
 }
 
 .more p {
-  color: #4a4a4a;
+  color: #6093ce;
   font-family: Noto Sans JP;
   font-size: 0.875rem;
   font-style: normal;
   font-weight: 500;
   line-height: 0.5rem;
+  /* 57.143% */
   letter-spacing: -0.03125rem;
-  margin-right: 0.5rem;
 }
 
 .more:hover {

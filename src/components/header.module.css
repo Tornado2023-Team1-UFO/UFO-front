@@ -30,12 +30,17 @@
 /* --- media query --- */
 @media (min-width: 768px) {
   .header {
-    margin-top: 0.5rem;
+    margin-top: 1.5rem;
     border-bottom: 0.7px solid #d3d3d3;
+  }
+  .logo {
+    position: relative;
+    width: 8rem;
+    height: 3rem;
   }
   .navigationLarge {
     display: block;
-    flex-basis: 30%;
+    flex-basis: 45%;
   }
   .navigationSmall {
     display: none;

@@ -23,7 +23,7 @@ export default function SearchBar({ sendNewPrefecture, sendNewCategory }: search
     <>
       <div className={styles.searchbar}>
         <div className={styles.searchbytext}>
-          <input className={styles.keyword} type='text' placeholder='キーワードから探す' />
+          <input className={styles.keyword} type='text' placeholder='キーワードからさがす' />
           <button className={styles.button}>
             <img src='/images/search.svg' alt='search' />
           </button>

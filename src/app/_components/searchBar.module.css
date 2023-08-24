@@ -61,15 +61,16 @@
   height: 2rem;
   margin-right: 0.5rem;
   border-radius: 6.25rem;
-  border: 1px solid #d9d9d9;
+  border: 1px solid #9b9b9b;
   text-align: center;
   line-height: auto;
   padding: 0 0.5rem;
+  background-color: #fff;
 }
 .selectBox {
   color: #13519a;
   font-family: Noto Sans JP;
-  font-size: 1rem;
+  font-size: 0.75rem;
   font-style: normal;
   font-weight: 700;
   letter-spacing: -0.03125rem;

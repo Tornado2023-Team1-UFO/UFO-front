@@ -18,11 +18,12 @@
 .buttonContainer {
   width: 8.1875rem;
   height: 2.1875rem;
-  border-radius: 2.5rem;
-  border-width: 0.25rem;
-  border-image: linear-gradient(90deg, #21aaf8 100%, #62ffbd 57.29%, #58ebe8 80.23%, #3abdef 100%);
+  border-radius: 6.25rem;
+  border: 1px solid #9b9b9b;
+  /* border: 10px solid;
   border-image-slice: 1;
-  /* Ensures the entire border is filled with the gradient */
+  border-width: 5px;
+  border-image-source: linear-gradient(45deg, #0AFFDE 0%, #3ECAF6 46.88%, #587CFC 100%); */
 }
 
 .start {
@@ -40,7 +41,11 @@
 /* media query */
 @media (min-width: 768px) {
   .container {
-    width: 50%;
     margin: 0 auto;
+  }
+  .image {
+    position: relative;
+    width: 15rem;
+    height: 6rem;
   }
 }

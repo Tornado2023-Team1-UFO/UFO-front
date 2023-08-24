@@ -39,7 +39,8 @@ export default function EventInfo(props: any) {
     // if the data is loaded and it is a initial load
     if (loaded && initialLoad) {
       console.log(data)
-      userId = data.userId._key?.path?.segments[6]
+      console.log(data.userId)
+      userId = data.userId
       data.imageUrls.map((url: string) => {
         setImageURLs((imageURLs) => [...imageURLs, url])
       })
