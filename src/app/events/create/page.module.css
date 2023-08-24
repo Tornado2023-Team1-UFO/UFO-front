@@ -4,9 +4,10 @@
   justify-content: start;
   align-items: center;
   width: 100%;
-  padding: 36px 16px;
+  padding: 38px;
   min-height: 100vh;
   overflow-x: hidden;
+  position: relative;
 }
 
 .question {
@@ -15,7 +16,18 @@
 }
 
 .navigation {
-  margin-top: 40px;
+  position: absolute;
+  top: 650px;
+
+  display: flex;
+  margin: 0 auto;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+}
+
+.navigation2 {
+  margin-top: 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;

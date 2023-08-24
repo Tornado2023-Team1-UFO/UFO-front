@@ -16,32 +16,32 @@ type Section = {
 }
 
 export const TITLE_SECTION: Section = {
-  progress: 0,
+  progress: 10,
   value: 'イベントタイトルは？',
 }
 
 export const CATEGORY_SECTION: Section = {
-  progress: 10,
+  progress: 20,
   value: '当てはまるカテゴリーはどれ？',
 }
 
 export const EVENT_FEE_SECTION: Section = {
-  progress: 20,
+  progress: 30,
   value: '1人あたりの参加費は？',
 }
 
 export const PEOPLE_COUNT_SECTION: Section = {
-  progress: 30,
+  progress: 40,
   value: '目標参加人数は？',
 }
 
 export const EVENT_DATE_SECTION: Section = {
-  progress: 40,
+  progress: 50,
   value: '開催日はいつ？',
 }
 
 export const EVENT_REGION_SECTION: Section = {
-  progress: 50,
+  progress: 60,
   value: '開催地域はどこ？',
 }
 

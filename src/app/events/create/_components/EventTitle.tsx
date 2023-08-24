@@ -8,12 +8,19 @@ type Props = {
 
 export const EventTitle: FC<Props> = ({ title, onChangeTitle }) => (
   <div className={styles.input_container}>
-    <input
+    <div
       className={styles.input_box}
-      type='text'
-      value={title}
-      onChange={(e) => onChangeTitle(e.target.value)}
-      placeholder='例）バスケしよう、Hack Tokyo'
-    />
+      style={{
+        backgroundImage: 'url(/images/hukidashi.svg)',
+      }}
+    >
+      <input
+        className={styles.input}
+        type='text'
+        value={title}
+        onChange={(e) => onChangeTitle(e.target.value)}
+        placeholder='例）バスケしよう!'
+      />
+    </div>
   </div>
 )

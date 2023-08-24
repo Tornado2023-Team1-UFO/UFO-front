@@ -1,13 +1,5 @@
-.container {
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
 .description {
+  margin-top: 30px;
   margin-bottom: 200px;
   display: flex;
   flex-direction: column;
