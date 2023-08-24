@@ -9,7 +9,7 @@
 }
 
 .keyword {
-  width: 85%;
+  width: 90%;
   height: 1.875rem;
   margin: 0 auto;
   border: 1px solid #9b9b9b;
@@ -36,7 +36,7 @@
 
 .button {
   height: 1.875rem;
-  width: 15%;
+  width: 10%;
   text-align: center;
   line-height: 1.875rem;
   border-radius: 0rem 1.25rem 1.25rem 0rem;
@@ -77,9 +77,8 @@
 }
 
 .arrowIcon {
-  width: 1rem;
-  height: 1rem;
-  line-height: 2rem;
+  width: 0.375rem;
+  height: 0.625rem;
 }
 
 /* media query */

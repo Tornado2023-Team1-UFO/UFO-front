@@ -47,7 +47,8 @@ export default function EventInfoFooter(props: any) {
     if (!user) {
       return // Early return to prevent further execution
     }
-    !liked ? setLiked(true) : setLiked(false)
+    console.log('liked setting: ' + liked)
+    !!liked ? setLiked(true) : null
     if (!liked) {
       toast.success('お気に入りに追加しました')
       addLike(eventId) // update firebase like counts
@@ -77,16 +78,18 @@ export default function EventInfoFooter(props: any) {
           <div onClick={handleClickLike}>
             <FaHeart />
           </div>
-          <p>{eventLikeCounts}</p>
+          {/* <p>{eventLikeCounts}</p> */}
         </div>
         <div className={styles.buttonContainer}>
           <button onClick={handleClickParticipate}>
-            <p>参加する</p>
+            <p className={styles.attend}>参加する</p>
           </button>
         </div>
         <div className={styles.buttonContainer}>
           <button>
-            <Link href={`/events/${eventId}/supports`}>応援する</Link>
+            <Link className={styles.support} href={`/events/${eventId}/supports`}>
+              応援する
+            </Link>
           </button>
         </div>
       </div>

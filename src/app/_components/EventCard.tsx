@@ -28,7 +28,7 @@ export default function EventCard(event: any) {
               alt='Placeholder image'
               fill
               style={{
-                objectPosition: 'center',
+                objectFit: 'cover',
               }}
               onClick={handleClick}
             />

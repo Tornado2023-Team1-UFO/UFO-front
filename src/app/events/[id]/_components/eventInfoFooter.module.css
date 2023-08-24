@@ -1,14 +1,27 @@
 .footerContainer {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: 100px;
-    background: #FFF;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100px;
+  background: #fff;
+  border-top: 1px solid #9b9b9b;
 }
 .buttonContainer {
-    width: 141px;
-    height: 38px;
-    background: #9B9B9B;
-    text-align: center;
-    line-height: 38px;
+  width: 8.1875rem;
+  height: 2.1875rem;
+  border-radius: 2.5rem;
+  border: solid 1px black;
+  text-align: center;
+}
+.attend,
+.support {
+  text-decoration: none;
+  color: #13519a;
+  font-family: Noto Sans JP;
+  font-size: 0.8125rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 2.1875rem;
+  /* 61.538% */
+  letter-spacing: -0.03125rem;
 }

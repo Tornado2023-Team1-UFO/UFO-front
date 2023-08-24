@@ -18,8 +18,8 @@
 .buttonContainer {
   width: 8.1875rem;
   height: 2.1875rem;
-  border-radius: 6.25rem;
-  border: 1px solid #9b9b9b;
+  border-radius: 2.5rem;
+  background: linear-gradient(90deg, #5bead2 0%, #5fdae7 24.67%, #3ec1ee 62.5%, #25adf6 100%), #fff;
   /* border: 10px solid;
   border-image-slice: 1;
   border-width: 5px;
