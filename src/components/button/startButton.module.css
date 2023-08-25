@@ -1,16 +1,36 @@
 .button {
+  position: relative;
   width: 200px;
-  height: 50px;
-  background: #9b9b9b;
+  height: 55px;
+  background: linear-gradient(87.18deg, #1feae8 0.68%, #40c3f7 52.89%, #5489fb 94.35%);
+  color: var(--secondary-color);
   border-radius: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+/* .button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 40px;
+  border: 2px solid transparent;
+  background: linear-gradient(#62ffbd 58%, #58ebeb 80%, #3abdef 100%, #21aaf8 100%);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0) border-box;
+  -webkit-mask-composite: destination-out;
+  mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0) border-box;
+  mask-composite: exclude;
+} */
+
 .button_text {
   font-size: 20px;
-  /* FIX ME */
-  color: white;
   font-weight: 700;
 }

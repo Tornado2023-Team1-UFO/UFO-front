@@ -181,7 +181,7 @@ const Page = () => {
               onChangePrefecture={clickPrefecture}
               selectedPrefecture={event.prefecture}
             />
-            <div className={styles.navigation}>
+            <div className={styles.navigation2}>
               <PrevButton onClickButton={clickPrevByEventPrefecture} />
               <NextButton onClickButton={clickNextByEventPrefecture} />
             </div>
@@ -224,7 +224,7 @@ const Page = () => {
               onChangeReturnName={changeReturnName}
               addNewReturn={addNewRuturn}
             />
-            <div className={styles.navigation}>
+            <div className={styles.navigation2}>
               <PrevButton onClickButton={clickPrevByReturn} />
               <NextButton onClickButton={clickNextByReturn} />
             </div>
@@ -253,11 +253,9 @@ const Page = () => {
   }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.content}>
-        {isLoading && <Loading />}
-        {!isLoading && renderComponent()}
-      </div>
+    <div className={styles.content}>
+      {isLoading && <Loading />}
+      {!isLoading && renderComponent()}
     </div>
   )
 }
