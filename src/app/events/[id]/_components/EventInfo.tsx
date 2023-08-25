@@ -25,6 +25,7 @@ export default function EventInfo(props: any) {
   const [endDate, setEndDate] = useState<string>()
   const [imageIndex, setImageIndex] = useState<number>(0) // keep track of image index for the main image
   const pathname = usePathname()
+  console.log(pathname)
   // wait for the prop to load. It takes a little bit of time for the data(prop) to load so wait
   useEffect(() => {
     // if data is not empty then =>

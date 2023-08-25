@@ -1,4 +1,5 @@
 export const EVENT_CATEGORY_MASTER = [
+  '全カテゴリー',
   'IT・開発',
   'スポーツ',
   '音楽',

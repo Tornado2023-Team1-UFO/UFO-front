@@ -3,7 +3,7 @@ import { useParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 // --- import firebase ---
 import { db } from '@/libs/firebase'
-import { collection, getDoc, doc } from 'firebase/firestore'
+import { getDoc, doc } from 'firebase/firestore'
 // --- import components ---
 import EventInfo from './_components/EventInfo'
 // -----  end of imports -- ---

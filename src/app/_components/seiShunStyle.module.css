@@ -27,15 +27,15 @@
 }
 
 .start {
-  color: #4a4a4a;
-  font-family: Sahitya;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 8px;
-  /* 57.143% */
-  letter-spacing: -0.5px;
   text-decoration: none;
+  color: #fff;
+  font-family: Noto Sans JP;
+  font-size: 0.8125rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 0.5rem;
+  /* 61.538% */
+  letter-spacing: -0.03125rem;
 }
 
 /* media query */

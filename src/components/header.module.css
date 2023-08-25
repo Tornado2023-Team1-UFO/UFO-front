@@ -15,8 +15,13 @@
 }
 
 .logo {
-  position: relative;
+  display: flex;
+  justify-content: center;
   width: 50%;
+}
+.logoImage {
+  position: relative;
+  width: 6.4375rem;
   height: 2.375rem;
   margin: 0 auto;
 }
@@ -25,7 +30,8 @@
 }
 .userButton {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
+  padding-right: 1.5rem;
   width: 50%;
 }
 

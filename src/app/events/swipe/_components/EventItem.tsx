@@ -1,6 +1,6 @@
 'use client'
 
-import { FC } from 'react'
+import { FC, useRef } from 'react'
 import styles from './eventItem.module.css'
 import dayjs from 'dayjs'
 import 'dayjs/locale/ja'
@@ -46,7 +46,6 @@ export const EventItem: FC<Props> = ({
   if (!title) {
     return <EventModal />
   }
-
   return (
     <div className={styles.container}>
       <div
