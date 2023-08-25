@@ -27,7 +27,9 @@ export default function Header() {
           <NavigationHeader />
         </div>
         <SignedIn>
-          <UserButton afterSignOutUrl={Path.EVENT_LIST} />
+          <div className={styles.userButton}>
+            <UserButton afterSignOutUrl={Path.EVENT_LIST} />
+          </div>
         </SignedIn>
         <SignedOut>
           <Login />

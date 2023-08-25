@@ -25,7 +25,8 @@
 }
 .userButton {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  width: 50%;
 }
 
 /* --- media query --- */
@@ -35,9 +36,12 @@
     border-bottom: 0.7px solid #d3d3d3;
   }
   .logo {
+    display: flex;
+    justify-content: center;
     position: relative;
-    width: 8rem;
+    width: 25%;
     height: 3rem;
+    margin: 0;
   }
   .navigationLarge {
     display: block;
@@ -45,5 +49,8 @@
   }
   .navigationSmall {
     display: none;
+  }
+  .userButton {
+    width: 25%;
   }
 }
