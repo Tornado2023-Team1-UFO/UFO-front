@@ -99,7 +99,8 @@ export default function EventInfo(props: any) {
                 alt='event image'
                 fill
                 style={{
-                  display: index === imageIndex ? 'block' : 'none',
+                  objectFit: 'cover',
+                  // display: index === imageIndex ? 'block' : 'none',
                 }}
               />
               <WebShareButton {...{ ...shareData }} />

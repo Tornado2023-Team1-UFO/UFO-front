@@ -121,6 +121,7 @@
   background: #13519a;
 }
 .eventContentContainer {
+  align-self: center;
   width: 20.1875rem;
   height: 24.125rem;
   border-radius: 1.6875rem;

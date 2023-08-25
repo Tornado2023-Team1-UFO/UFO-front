@@ -25,7 +25,7 @@ type Props = {
   onTapEvent: (backgroundImages: string[]) => void
 }
 
-export const EvetntItem: FC<Props> = ({
+export const EventItem: FC<Props> = ({
   id,
   title,
   prefecture,

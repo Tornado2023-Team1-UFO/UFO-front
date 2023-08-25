@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { useSpringCarousel } from 'react-spring-carousel'
-import { EvetntItem } from './EventItem'
+import { EventItem } from './EventItem'
 import { NavigationMenu } from './NavigationMenu'
 import { useSwipeEvent } from '../_hooks/useSwipeEvent'
 import { EventTag } from '@/components/EventTag'
@@ -15,7 +15,7 @@ export const EventItems: FC = () => {
       initialActiveItem: 1,
       id: event.id,
       renderItem: (
-        <EvetntItem
+        <EventItem
           id={event.id}
           title={event.title}
           prefecture={event.prefecture}
