@@ -1,5 +1,5 @@
 .container {
-  padding-top: 230px;
+  padding-top: 260px;
   width: 100%;
   min-height: 100vh;
   display: flex;
@@ -7,17 +7,17 @@
   justify-content: start;
   align-items: center;
   overflow-x: hidden;
-  gap: 200px;
+  gap: 280px;
 }
 
 .description {
   position: relative;
-  margin-bottom: 200px;
+  margin-bottom: 220px;
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  gap: 32px;
+  gap: 26px;
 }
 
 .title {
@@ -35,13 +35,13 @@
 
 .star {
   position: absolute;
-  top: 250px;
+  top: 260px;
   right: 30px;
 }
 
 .star2 {
   position: absolute;
-  top: 420px;
+  top: 440px;
   left: 35px;
 }
 

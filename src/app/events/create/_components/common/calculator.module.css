@@ -1,12 +1,20 @@
 .box {
-  margin-top: 40px;
-  width: 320px;
-  height: 460px;
-  background-color: #ffffffff;
+  position: relative;
+  margin-top: 56px;
+  width: 265px;
+  height: 365px;
+  border-radius: 20px;
+  background-color: var(--secondary-color);
+  border: 1px solid var(--primary-color);
+  background-image: linear-gradient(0deg, transparent 21px, #e7e7e7 22px),
+    linear-gradient(90deg, transparent 21px, #e7e7e7 22px);
+  background-size: 22px 22px;
+  background-repeat: repeat;
 }
 
 .display {
-  height: 40%;
+  height: 36%;
+  margin-top: 10px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -14,32 +22,27 @@
 }
 
 .display_text {
+  position: relative;
   font-size: 48px;
   font-weight: 700;
-  color: #4a4a4a;
-}
-
-.unit {
-  font-size: 20px;
-  font-weight: 700;
-  color: #4a4a4a;
+  color: var(--primary-color);
 }
 
 .choice_box {
-  height: 50px;
+  height: 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 0 auto;
   width: 80%;
-  border-top: 1px solid #4a4a4a;
-  border-bottom: 1px solid #4a4a4a;
+  border-top: 1px solid var(--primary-color);
+  border-bottom: 1px solid var(--primary-color);
 }
 
 .choice_text {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 700;
-  color: #4a4a4a;
+  color: var(--primary-color);
 }
 
 .grid {
@@ -53,9 +56,9 @@
 
 .number {
   text-align: center;
-  font-size: 32px;
+  font-size: 24px;
   font-weight: 700;
-  color: #4a4a4a;
+  color: var(--primary-color);
 }
 
 .delete {
@@ -63,10 +66,41 @@
 }
 
 .flex {
-  margin-top: 4px;
+  margin-top: 8px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 14px 2px;
   justify-content: center;
   align-items: center;
+}
+
+.note_pin_left {
+  position: absolute;
+  top: -10px;
+  left: 22px;
+}
+
+.note_pin_right {
+  position: absolute;
+  top: -10px;
+  right: 22px;
+}
+
+.unit {
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.unit_people {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.unit_yen {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--primary-color);
+  position: absolute;
+  left: -24px;
 }

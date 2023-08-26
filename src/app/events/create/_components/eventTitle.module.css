@@ -13,6 +13,7 @@
   height: 90%;
   padding: 6px;
   text-align: center;
+  color: var(--primary-color);
 }
 
 .input::placeholder {

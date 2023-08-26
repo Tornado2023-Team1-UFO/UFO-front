@@ -6,6 +6,7 @@
   --light-primary-color: #5192fa;
   --light-primary-color-2: #aef4f8;
   --light-primary-color-3: #3abdef;
+  font-family: 'Notosans';
 }
 
 @font-face {
@@ -13,4 +14,6 @@
   src: url('/fonts/asago-mini.otf');
   font-family: 'PankijiKana';
   src: url('/fonts/PANKIJI_KANA-Line.otf');
+  font-family: 'Notosans';
+  src: url('/fonts/NotoSansJP-Regular.ttf');
 }

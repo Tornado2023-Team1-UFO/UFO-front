@@ -82,6 +82,7 @@ const Page = () => {
     clickPrevByReturn,
     publishEvent,
     clickPrevByComplete,
+    loadingText,
   } = useEventCreate()
 
   const { userId } = useAuth()
@@ -181,7 +182,7 @@ const Page = () => {
               onChangePrefecture={clickPrefecture}
               selectedPrefecture={event.prefecture}
             />
-            <div className={styles.navigation2}>
+            <div className={styles.navigation}>
               <PrevButton onClickButton={clickPrevByEventPrefecture} />
               <NextButton onClickButton={clickNextByEventPrefecture} />
             </div>
@@ -254,7 +255,7 @@ const Page = () => {
 
   return (
     <div className={styles.content}>
-      {isLoading && <Loading />}
+      {isLoading && <Loading text={loadingText} />}
       {!isLoading && renderComponent()}
     </div>
   )

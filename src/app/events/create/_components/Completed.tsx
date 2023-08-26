@@ -10,16 +10,34 @@ type Props = {
 export const Completed: FC<Props> = ({ onClickSubmit }) => {
   return (
     <div className={styles.container}>
-      <div className={styles.description}>
-        <h1 className={styles.title}>お疲れ様でした🎉</h1>
-        <div>
-          <h3 className={styles.subtitle}>以下のボタンから公開してください</h3>
-          <h3 className={styles.subtitle}>イベントの公開には少し時間がかかります</h3>
+      <div
+        className={styles.title_image}
+        style={{
+          backgroundImage: 'url(/images/hukidashi2.svg)',
+        }}
+      >
+        <div className={styles.content}>
+          <h1>お疲れ様でした 🎉</h1>
         </div>
       </div>
-      <button className={styles.button} onClick={onClickSubmit}>
-        公開する
-      </button>
+
+      <div className={styles.description}>
+        <h3 className={styles.subtitle}>以下のボタンから公開してください</h3>
+        <div className={styles.button_container}>
+          <h3 className={styles.subtitle}>（少し時間がかかります）</h3>
+          <img src='/images/barRight.svg' className={styles.bar_right} alt='わあ' />
+          <img src='/images/barLeft.svg' className={styles.bar_left} alt='わあ' />
+        </div>
+        <button
+          style={{
+            marginTop: '38px',
+          }}
+          className={styles.button}
+          onClick={() => onClickSubmit()}
+        >
+          はじめる
+        </button>
+      </div>
     </div>
   )
 }

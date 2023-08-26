@@ -15,7 +15,15 @@ export const EventImage: FC<Props> = ({ imageUrls, onClickFileUpload }) => (
       <div className={styles.image}>
         <label htmlFor='new'>
           <img src='/images/camera.svg' alt='camera' className={styles.camera} />
-          <input id='new' className={styles.input} type='file' onChange={(e) => onClickFileUpload(e)} />
+          <input
+            id='new'
+            className={styles.input}
+            type='file'
+            onClick={(e) => {
+              e.currentTarget.value = ''
+            }}
+            onChange={(e) => onClickFileUpload(e)}
+          />
         </label>
       </div>
     )}

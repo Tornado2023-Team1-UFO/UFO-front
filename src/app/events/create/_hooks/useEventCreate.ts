@@ -52,7 +52,7 @@ export const EVENT_PREFECTURE_SECTION: Section = {
 
 export const EVENT_IMAGE_SECTION: Section = {
   progress: 70,
-  value: 'イベントの画像をアップロードしよう（任意）',
+  value: '画像をアップロードしよう（任意）',
 }
 
 export const DESCRIPTION_SECTION: Section = {
@@ -62,7 +62,7 @@ export const DESCRIPTION_SECTION: Section = {
 
 export const RETURN_SECTION: Section = {
   progress: 90,
-  value: 'リターンを設定しよう(任意)',
+  value: 'リターンを追加しよう(任意)',
 }
 
 export const PUBLISH_SECTION: Section = {
@@ -119,8 +119,10 @@ export const useEventCreate = () => {
   })
 
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [loadingText, setLoadingText] = useState<string>('処理中...')
 
   const clickRegion = (region: string) => {
+    setLoadingText('AIが説明を生成中...')
     setRegion(region)
     switch (region) {
       case '北海道 東北':
@@ -221,7 +223,6 @@ export const useEventCreate = () => {
     if (isLoading) return
 
     setIsLoading(true)
-
     const message = `あなたは、イベントの主催者です。以下のイベントに参加したくなるような文章を300文字で書いてください。
     イベントのタイトル ${event.title}
     カテゴリー ${event.category}
@@ -277,12 +278,18 @@ export const useEventCreate = () => {
     }
 
     const files = e.target.files
+
     if (!files) return
     const file = files[0]
     const storageRef = ref(storage, `events/${event.title}/${file.name}`)
 
     await uploadBytes(storageRef, file)
-    const url = await getDownloadURL(storageRef)
+    let url = ''
+    try {
+      url = await getDownloadURL(storageRef)
+    } catch (e) {
+      toast.error('画像のアップロードに失敗しました')
+    }
 
     setEvent({ ...event, imageUrls: [...event.imageUrls, url] })
   }
@@ -595,6 +602,8 @@ export const useEventCreate = () => {
   }
 
   const clickNextByReturn = () => {
+    setLoadingText('イベントを作成中...')
+
     const filteredReturns = returns.filter((r) => r.name !== '' && r.amount !== 0 && r.content !== '')
     setReturns(filteredReturns)
     setCurrentSection(PUBLISH_SECTION)
@@ -667,5 +676,6 @@ export const useEventCreate = () => {
     // Publish
     publishEvent: publishEvent,
     clickPrevByComplete: clickPrevByComplete,
+    loadingText,
   }
 }

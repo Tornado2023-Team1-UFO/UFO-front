@@ -10,14 +10,37 @@ type Props = {
 
 export const EventDate: FC<Props> = ({ startAt, endAt, onChangeStartAt, onChangeEndAt }) => (
   <div className={styles.container}>
-    <input
-      className={styles.input_date}
-      type='date'
-      value={startAt}
-      onChange={(e) => onChangeStartAt(e.target.value)}
-    />
-    <p className={styles.text}>から</p>
-    <input className={styles.input_date} type='date' value={endAt} onChange={(e) => onChangeEndAt(e.target.value)} />
-    <p className={styles.text}>まで</p>
+    <div className={styles.input_container}>
+      <img src='/images/start.svg' alt='start' />
+      <div className={styles.date_container}>
+        <input
+          className={styles.input_date}
+          type='date'
+          value={startAt}
+          onChange={(e) => onChangeStartAt(e.target.value)}
+        />
+      </div>
+    </div>
+    <div>
+      <img src='/images/nextDate.svg' alt='next' />
+    </div>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'end',
+      }}
+      className={styles.input_container}
+    >
+      <div className={styles.date_container}>
+        <input
+          className={styles.input_date}
+          type='date'
+          value={endAt}
+          onChange={(e) => onChangeEndAt(e.target.value)}
+        />
+      </div>
+      <img src='/images/goal.svg' alt='goal' />
+    </div>
   </div>
 )
