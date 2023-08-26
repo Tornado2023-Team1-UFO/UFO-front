@@ -1,57 +1,49 @@
 import { FC } from 'react'
-import { useSpringCarousel } from 'react-spring-carousel'
-import { EvetntItem } from './EventItem'
 import { NavigationMenu } from './NavigationMenu'
 import { useSwipeEvent } from '../_hooks/useSwipeEvent'
 import { EventTag } from '@/components/EventTag'
 import styles from './eventItems.module.css'
+import { AnimatePresence } from 'framer-motion'
+import { EventItem } from './EventItem'
+import { Loading } from '../../create/_components/Loading'
 
 export const EventItems: FC = () => {
-  const { backGroundImageIndex, events, swipeToLike, swipeToBad, tapEventItem, category } = useSwipeEvent()
+  const {
+    backGroundImageIndex,
+    events,
+    swipeToLike,
+    swipeToBad,
+    tapEventItem,
+    category,
+    currentEventId,
+    leaveX,
+    onDragStart,
+    onDragEnd,
+    isLoading,
+  } = useSwipeEvent()
 
-  const { carouselFragment, useListenToCustomEvent, slideToNextItem, slideToPrevItem } = useSpringCarousel({
-    withLoop: true,
-    items: events.map((event) => ({
-      initialActiveItem: 1,
-      id: event.id,
-      renderItem: (
-        <EvetntItem
-          id={event.id}
-          title={event.title}
-          prefecture={event.prefecture}
-          attendeeCounts={event.attendeeCounts}
-          recruitPeopleCounts={event.recruitPeopleCounts}
-          startAt={event.startAt}
-          endAt={event.endAt}
-          backgroundImages={event.imageUrls}
-          currentIndex={backGroundImageIndex}
-          onTapEvent={tapEventItem}
-          eventFee={event.eventFee}
-        />
-      ),
-    })),
-  })
-
-  useListenToCustomEvent(async (event) => {
-    if (event.eventName === 'onSlideStartChange') {
-      switch (event.slideActionType) {
-        case 'next':
-          await swipeToBad(event.nextItem.id)
-          break
-        case 'prev':
-          await swipeToLike(event.nextItem.id)
-          break
-        default:
-          break
-      }
-    }
-  })
+  if (isLoading) {
+    return null
+  }
 
   return (
     <div className={styles.container}>
       <EventTag title={category} />
-      {carouselFragment}
-      <NavigationMenu onClickBack={slideToNextItem} onClickHeart={slideToPrevItem} />
+      <AnimatePresence>
+        {events.map((event, index) => (
+          <EventItem
+            isActive={currentEventId === event.id}
+            key={event.id}
+            event={event}
+            currentIndex={backGroundImageIndex}
+            onTapEvent={tapEventItem}
+            onDragEnd={onDragEnd}
+            onDragStart={onDragStart}
+            leaveX={leaveX}
+          />
+        ))}
+      </AnimatePresence>
+      <NavigationMenu onClickBack={swipeToBad} onClickHeart={swipeToLike} />
     </div>
   )
 }

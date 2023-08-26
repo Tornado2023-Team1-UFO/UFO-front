@@ -28,7 +28,14 @@
   justify-content: center;
   align-items: center;
   color: white;
-  background-color: var(--primary-color);
+  background: linear-gradient(269.59deg, #23acf7 0.36%, #5dc2f9 26.76%, #6aeaec 68.68%, #74fbcf 99.73%),
+    linear-gradient(
+      90deg,
+      rgba(98, 255, 189, 0.572917) 0%,
+      rgba(88, 235, 232, 0.802346) 15.62%,
+      #3abdef 59.9%,
+      #21aaf8 100%
+    );
   border-radius: 6px;
   cursor: pointer;
   text-decoration: none;
