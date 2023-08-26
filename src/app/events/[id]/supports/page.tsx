@@ -6,13 +6,12 @@ import { useSupportProducts } from './_hooks/useSupportProducts'
 
 const SupportsPage = () => {
   const { clickCheckBox, changeQuantity, clickBuyButton, selectedProducts, supportProducts } = useSupportProducts()
-  const disabled = selectedProducts.length === 0
 
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <img src='/images/present.svg' alt='present' />
-        <p className={styles.heder_title}>リターン選択</p>
+        <p className={styles.header_title}>リターン選択</p>
         <span className={styles.header_tag}>必須</span>
       </div>
       <div className={styles.cards}>
@@ -30,15 +29,8 @@ const SupportsPage = () => {
             onChangeQuantity={changeQuantity}
           />
         ))}
-        <button
-          className={styles.button}
-          style={{
-            backgroundColor: disabled ? '#9b9b9b' : '#ADCDEC',
-          }}
-          disabled={disabled}
-          onClick={clickBuyButton}
-        >
-          購入する
+        <button className={styles.button} onClick={clickBuyButton}>
+          応援する
         </button>
       </div>
     </div>
