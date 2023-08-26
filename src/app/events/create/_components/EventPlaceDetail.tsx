@@ -15,10 +15,17 @@ export const EventPlaceDetail: FC<Props> = ({ prefectures, selectedPrefecture, o
         className={styles.card}
         onClick={() => onChangePrefecture(prefecture)}
         style={{
-          backgroundColor: selectedPrefecture === prefecture ? 'skyblue' : '#ffffff',
+          backgroundColor: selectedPrefecture === prefecture ? 'var(--primary-color)' : 'var(--secondary-color)',
         }}
       >
-        <h1 className={styles.card_text}>{prefecture}</h1>
+        <h1
+          style={{
+            color: selectedPrefecture === prefecture ? 'var(--secondary-color)' : 'var(--primary-color)',
+          }}
+          className={styles.card_text}
+        >
+          {prefecture}
+        </h1>
       </div>
     ))}
   </div>

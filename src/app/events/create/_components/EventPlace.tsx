@@ -9,7 +9,7 @@ type Props = {
 const REGION_MASTER = [
   {
     region: '北海道 東北',
-    label: '北海道・',
+    label: '北海道',
     label2: '東北エリア',
   },
   {
@@ -46,12 +46,16 @@ export const EventPlace: FC<Props> = ({ region, onChangeRegion }) => {
         <div
           key={item.region}
           style={{
-            backgroundColor: region === item.region ? 'skyblue' : '#ffffff',
+            backgroundColor: region === item.region ? 'var(--primary-color)' : 'var(--secondary-color)',
           }}
           className={styles.card}
           onClick={() => onChangeRegion(item.region)}
         >
-          <div>
+          <div
+            style={{
+              color: region === item.region ? 'var(--secondary-color)' : 'var(--primary-color)',
+            }}
+          >
             <h1 className={styles.card_title}>{item.label}</h1>
             <h1 className={styles.card_title}>{item.label2}</h1>
           </div>

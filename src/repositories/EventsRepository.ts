@@ -17,10 +17,7 @@ export const EventsRepository = {
       const deadLine = data.deadLine.toDate()
       const startAt = data.startAt.toDate()
       const endAt = data.endAt.toDate()
-      // 締切が過ぎるとイベントが表示されないようにする
-      if (deadLine < new Date()) {
-        break
-      }
+
       const item = new EventSlideItem({
         id: doc.id,
         title: data.title,
