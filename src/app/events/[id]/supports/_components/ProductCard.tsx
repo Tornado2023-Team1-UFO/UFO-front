@@ -33,20 +33,28 @@ export const ProductCard: FC<Props> = ({
   quantity,
   isChecked,
 }) => {
+  const price = new Intl.NumberFormat().format(amount) + '円'
   return (
     <div className={styles.card}>
       <div className={styles.amount}>
-        <input type='checkbox' checked={isChecked} onChange={() => onClickCheckBox(id)} />
-        {amount}
-      </div>
-      <div className={styles.quantity}>
-        <p>数量</p>
-        <Select defaultValue={options[0]} options={options} onChange={(e) => onChangeQuantity(id, Number(e?.value))} />
+        <div>
+          <input className={styles.chkbox} type='checkbox' checked={isChecked} onChange={() => onClickCheckBox(id)} />
+          <label htmlFor='checkbox'> {price}</label>
+        </div>
+        <div className={styles.select_box}>
+          <select onChange={(e) => onChangeQuantity(id, Number(e.target.value))}>
+            {options.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
 
-      <img className={styles.image} src={imageUrl} alt={name} />
-      <div>
-        <h1 className={styles.title}>{name}</h1>
+      <div className={styles.content}>
+        <img className={styles.image} src={imageUrl} alt={name} />
+        <h1 className={styles.title}>【{name}】</h1>
         <p className={styles.content}>{content}</p>
       </div>
     </div>
