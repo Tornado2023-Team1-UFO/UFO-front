@@ -1,7 +1,7 @@
 .container {
   position: relative;
-  width: 350px;
-  height: 68vh;
+  width: 323px;
+  height: 539px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -9,7 +9,7 @@
   align-items: center;
   background-color: var(--secondary-color);
   border-radius: 3px;
-  padding: 34px 18px;
+  padding: 32px 18px;
   margin-top: 20px;
   border: 1px solid var(--black-color);
   box-shadow: 0px 4px 3px 0px rgba(0, 0, 0, 0.1);
