@@ -132,10 +132,16 @@ export const useSwipeEvent = (): ReturnType => {
     }
     setIsLoading(true)
     try {
-      const results = await EventsRepository.getEventSlideItems(category ?? '')
+      let results: EventSlideItem[] = []
+      if (category === '人気上昇中のイベント') {
+        results = await EventsRepository.getEventByOrderFavorite()
+      } else {
+        results = await EventsRepository.getEventSlideItems(category ?? '')
+      }
       results && setEvents(results)
       setCurrentEventId(results[0].id)
     } catch (e) {
+      console.error(e)
       toast.error('イベントの取得に失敗しました')
     } finally {
       setIsLoading(false)

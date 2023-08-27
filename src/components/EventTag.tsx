@@ -9,9 +9,11 @@ export const EventTag: FC<Props> = ({ title }) => {
 
   return (
     <div className={styles.event_tag}>
-      <span className={styles.hash_tag}>
-        <img src='/images/hash.svg' alt='hash' />
-      </span>
+      {title !== '人気上昇中のイベント' && (
+        <span className={styles.hash_tag}>
+          <img src='/images/hash.svg' alt='hash' />
+        </span>
+      )}
       <h1 className={styles.title}>{title}</h1>
     </div>
   )

@@ -15,4 +15,5 @@ export type FirebaseEventType = {
   recruitPeopleCounts: number
   updatedAt: Timestamp
   category: string
+  categories: string[]
 }

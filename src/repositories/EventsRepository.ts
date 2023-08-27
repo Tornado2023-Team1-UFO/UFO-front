@@ -1,9 +1,39 @@
 import { EventSlideItem } from '@/app/events/swipe/_components/_models/EventSlideItem'
 import { db } from '@/libs/firebase'
-import { doc, addDoc, collection, getCountFromServer, getDocs, query, setDoc, where } from 'firebase/firestore'
+import { doc, addDoc, collection, getCountFromServer, getDocs, query, setDoc, where, orderBy } from 'firebase/firestore'
 import { FirebaseEventType } from './type'
 
 export const EventsRepository = {
+  // いいね順にイベントを取得する
+  async getEventByOrderFavorite(): Promise<EventSlideItem[]> {
+    const results: EventSlideItem[] = []
+    const ref = query(collection(db, 'events'), where('status', '==', 1), orderBy('likeCounts', 'desc'))
+    const docSnap = await getDocs(ref)
+
+    for (const doc of docSnap.docs) {
+      const data = doc.data()
+      const attendeesCounts = await this.getAttendeeCount(doc.id)
+      const deadLine = data.deadLine.toDate()
+      const startAt = data.startAt.toDate()
+      const endAt = data.endAt.toDate()
+
+      const item = new EventSlideItem({
+        id: doc.id,
+        title: data.title,
+        prefecture: data.prefecture,
+        startAt: startAt,
+        endAt: endAt,
+        imageUrls: data.imageUrls,
+        attendeeCounts: attendeesCounts,
+        recruitPeopleCounts: data.recruitPeopleCounts,
+        deadline: deadLine,
+        eventFee: data.eventFee,
+      })
+      results.push(item)
+    }
+    return results
+  },
+
   async getEventSlideItems(category: string): Promise<EventSlideItem[]> {
     const results: EventSlideItem[] = []
     // 開催中のイベントを取得する　０：開催前　１：開催中
