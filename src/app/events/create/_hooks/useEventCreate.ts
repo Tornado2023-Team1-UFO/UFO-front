@@ -358,6 +358,7 @@ export const useEventCreate = () => {
         recruitPeopleCounts: event.recruitPeopleCount,
         updatedAt: Timestamp.fromDate(new Date()),
         category: category ?? '新しい自分に出会う',
+        categories: event.category,
       })
 
       await ReturnRepository.postReturn(eventId, returns)
