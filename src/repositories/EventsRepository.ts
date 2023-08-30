@@ -11,6 +11,7 @@ import {
   where,
   orderBy,
   getDoc,
+  limit,
 } from 'firebase/firestore'
 import { FirebaseEventType } from './type'
 import { EventItem } from '@/app/events/[id]/_model/event'
@@ -29,6 +30,7 @@ export const EventsRepository = {
         where('prefecture', '==', prefecture),
         where('title', '==', keyword),
         orderBy('likeCounts', 'desc'),
+        limit(30),
       )
     } else if (prefecture) {
       ref = query(
@@ -36,6 +38,7 @@ export const EventsRepository = {
         where('status', '==', 1),
         where('prefecture', '==', prefecture),
         orderBy('likeCounts', 'desc'),
+        limit(30),
       )
     } else if (keyword) {
       ref = query(
@@ -43,6 +46,7 @@ export const EventsRepository = {
         where('status', '==', 1),
         where('title', '==', keyword),
         orderBy('likeCounts', 'desc'),
+        limit(30),
       )
     }
 
