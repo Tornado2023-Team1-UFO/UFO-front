@@ -1,21 +1,28 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: start;
+.input_box {
+  position: relative;
+  border-radius: 50px;
   width: 100%;
+  height: 150px;
+  display: flex;
+  padding: 6px;
+  background-position: center;
 }
 
-.input_box {
-  background-color: #ffffffff;
+.input {
   width: 100%;
-  height: 84px;
+  height: 90%;
   padding: 6px;
+  text-align: center;
+  color: var(--primary-color);
+}
+
+.input::placeholder {
+  color: var(--primary-color);
 }
 
 .input_container {
   width: 100%;
-  height: 400px;
+  margin-top: 44px;
   display: flex;
   justify-content: center;
   align-items: center;

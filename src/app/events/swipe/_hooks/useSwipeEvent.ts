@@ -7,6 +7,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { useAuth } from '@clerk/nextjs'
 import { toast } from 'react-hot-toast'
 import { Path } from '@/constants/path'
+import { PanInfo } from 'framer-motion'
 
 type ReturnType = {
   /*
@@ -20,12 +21,12 @@ type ReturnType = {
   /*
    * いいね側にスワイプしたときの処理
    */
-  swipeToLike: (id: string) => void
+  swipeToLike: () => void
 
   /*
    * Bad側にスワイプしたときの処理
    */
-  swipeToBad: (id: string) => void
+  swipeToBad: () => void
 
   /*
    * Tapしたときの処理
@@ -33,12 +34,20 @@ type ReturnType = {
   tapEventItem: (backgroundImages: string[]) => void
 
   category: string
+  currentEventId: string
+  leaveX: number
+  onDragEnd: (_e: any, info: PanInfo) => void
+  onDragStart: (_e: any, info: PanInfo) => void
+  isLoading: boolean
 }
 
 export const useSwipeEvent = (): ReturnType => {
   const [events, setEvents] = useState<EventSlideItem[]>([])
   const [currentEventId, setCurrentEventId] = useState('')
   const [backGroundImageIndex, setBackGroundImageIndex] = useState(0)
+  const [leaveX, setLeaveX] = useState(0)
+  const [isLoading, setIsLoading] = useState(false)
+
   const param = useSearchParams()
   let category = param.get('category')
   const type = param.get('type')
@@ -46,27 +55,34 @@ export const useSwipeEvent = (): ReturnType => {
   const deleteEvent = (eventId: string) => {
     const newEvents = events.filter((event) => event.id !== eventId)
     setEvents(newEvents)
+    return newEvents
   }
 
   const { userId } = useAuth()
   const router = useRouter()
 
-  const swipeToLike = async (id: string) => {
+  const swipeToLike = async () => {
     if (!userId) {
       toast.error('いいねをするにはログインが必要です')
       router.push(Path.SIGNIN)
       return
     }
-    deleteEvent(currentEventId)
+    const newEvents = deleteEvent(currentEventId)
     await LikeRepository.addLike(currentEventId)
     await UserRepository.addFavoriteEvent(currentEventId, userId || '')
-    setCurrentEventId(id)
+    if (newEvents.length === 0) {
+      return
+    }
+    setCurrentEventId(newEvents[0].id)
     setBackGroundImageIndex(0)
   }
 
-  const swipeToBad = (id: string) => {
-    deleteEvent(currentEventId)
-    setCurrentEventId(id)
+  const swipeToBad = () => {
+    const newEvents = deleteEvent(currentEventId)
+    if (newEvents.length === 0) {
+      return
+    }
+    setCurrentEventId(newEvents[0].id)
     setBackGroundImageIndex(0)
   }
 
@@ -77,6 +93,24 @@ export const useSwipeEvent = (): ReturnType => {
       return
     }
     setBackGroundImageIndex(nextIndex)
+  }
+
+  const onDragEnd = (_e: any, info: PanInfo) => {
+    if (info.offset.x > 100) {
+      swipeToLike()
+    } else if (info.offset.x < -100) {
+      swipeToBad()
+    }
+
+    setLeaveX(0)
+  }
+
+  const onDragStart = (_e: any, info: PanInfo) => {
+    if (info.offset.x > 0) {
+      setLeaveX(1000)
+    } else {
+      setLeaveX(-1000)
+    }
   }
 
   const fetchEvents = async () => {
@@ -96,10 +130,21 @@ export const useSwipeEvent = (): ReturnType => {
           break
       }
     }
-    const results = await EventsRepository.getEventSlideItems(category ?? '')
-    {
+    setIsLoading(true)
+    try {
+      let results: EventSlideItem[] = []
+      if (category === '人気上昇中のイベント') {
+        results = await EventsRepository.getEventByOrderFavorite()
+      } else {
+        results = await EventsRepository.getEventSlideItems(category ?? '')
+      }
       results && setEvents(results)
       setCurrentEventId(results[0].id)
+    } catch (e) {
+      console.error(e)
+      toast.error('イベントの取得に失敗しました')
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -130,5 +175,10 @@ export const useSwipeEvent = (): ReturnType => {
     swipeToBad,
     tapEventItem,
     category: category ?? '',
+    currentEventId,
+    leaveX,
+    onDragEnd,
+    onDragStart,
+    isLoading,
   }
 }

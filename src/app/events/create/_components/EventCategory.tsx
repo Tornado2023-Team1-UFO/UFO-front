@@ -13,7 +13,11 @@ export const EventCategory: FC<Props> = ({ selectedCategory, onClickCategory }) 
       <div
         key={category}
         style={{
-          backgroundColor: selectedCategory.includes(category) ? 'skyblue' : '#ffffff',
+          backgroundColor: selectedCategory.includes(category)
+            ? 'var(--light-primary-color-3)'
+            : 'var(--secondary-color)',
+
+          color: selectedCategory.includes(category) ? 'var(--secondary-color)' : 'var(--light-primary-color)',
         }}
         className={styles.card}
         onClick={() => onClickCategory(category)}

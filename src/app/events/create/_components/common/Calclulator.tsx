@@ -13,18 +13,23 @@ const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
 
 export const Calculator: FC<Props> = ({ value, unit, onClickNumber, choices, onClickDelete, onClickChoice }) => (
   <div className={styles.box}>
+    <img className={styles.note_pin_left} src='/images/notePin.svg' alt='留め具' />
+    <img className={styles.note_pin_right} src='/images/notePin.svg' alt='留め具' />
     <div className={styles.display}>
       <p className={styles.display_text}>
+        {unit === '円' && <span className={styles.unit_yen}>￥</span>}
         {value}
-        {unit}
+        {unit === '人' && <span className={styles.unit_people}>{unit}</span>}
       </p>
     </div>
 
     <div className={styles.choice_box}>
       {choices.map((choice) => (
         <p key={choice} className={styles.choice_text} onClick={() => onClickChoice(choice)}>
+          {unit === '円' && <span className={styles.unit}>￥</span>}
+
           {choice}
-          {unit}
+          {unit === '人' && <span className={styles.unit}>{unit}</span>}
         </p>
       ))}
     </div>

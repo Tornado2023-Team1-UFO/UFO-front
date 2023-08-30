@@ -11,37 +11,22 @@
   gap: 50px;
 }
 
-.title_button {
+.favorite {
   position: absolute;
-  top: 28px;
-  left: 13px;
-  background-color: var(--primary-color);
-  color: var(--secondary-color);
-  height: 42px;
-  width: 200px;
-  border-radius: 20px;
-  text-align: center;
-  padding: 5px;
-  z-index: 1;
+  top: 27px;
+  left: 20px;
 }
 
-.title_button2 {
+.star {
   position: absolute;
-  top: 82px;
-  left: -16px;
-  background-color: var(--primary-color);
-  color: var(--secondary-color);
-  height: 42px;
-  width: 200px;
-  border-radius: 20px;
-  text-align: center;
-  padding: 5px;
-  z-index: 1;
+  top: 38px;
+  right: 34px;
 }
 
-.title {
-  font-size: 22px;
-  font-weight: 700;
+.star2 {
+  position: absolute;
+  top: 186px;
+  left: 31px;
 }
 
 .cards {

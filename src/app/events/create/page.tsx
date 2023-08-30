@@ -82,6 +82,7 @@ const Page = () => {
     clickPrevByReturn,
     publishEvent,
     clickPrevByComplete,
+    loadingText,
   } = useEventCreate()
 
   const { userId } = useAuth()
@@ -224,7 +225,7 @@ const Page = () => {
               onChangeReturnName={changeReturnName}
               addNewReturn={addNewRuturn}
             />
-            <div className={styles.navigation}>
+            <div className={styles.navigation2}>
               <PrevButton onClickButton={clickPrevByReturn} />
               <NextButton onClickButton={clickNextByReturn} />
             </div>
@@ -253,11 +254,9 @@ const Page = () => {
   }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.content}>
-        {isLoading && <Loading />}
-        {!isLoading && renderComponent()}
-      </div>
+    <div className={styles.content}>
+      {isLoading && <Loading text={loadingText} />}
+      {!isLoading && renderComponent()}
     </div>
   )
 }

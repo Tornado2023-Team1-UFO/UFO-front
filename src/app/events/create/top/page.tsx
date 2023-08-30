@@ -13,14 +13,18 @@ export default function Page() {
 
   return (
     <div className={styles.container}>
+      <img className={styles.star} src='/images/star.svg' alt='キラキラ' />
+      <img className={styles.star2} src='/images/star2.svg' alt='キラキラ' />
+      <h1 className={styles.title}>イベントをつくろう</h1>
       <div className={styles.description}>
-        <h1 className={styles.title}>イベント作成TOP</h1>
         <div>
           <h3 className={styles.subtitle}>質問に答えていくと、ChatGPTが</h3>
           <h3 className={styles.subtitle}>イベント説明文を書いてくれるよ！</h3>
+          <img src='/images/barRight.svg' className={styles.bar_right} alt='わあ' />
+          <img src='/images/barLeft.svg' className={styles.bar_left} alt='わあ' />
         </div>
+        <StartButton onClick={clickEventCreateStart} />
       </div>
-      <StartButton onClick={clickEventCreateStart} />
     </div>
   )
 }

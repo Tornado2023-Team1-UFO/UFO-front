@@ -7,5 +7,11 @@ type Props = {
 }
 
 export const CustomProgressBar: FC<Props> = ({ progress }) => (
-  <ProgressBar height='12px' className={styles.progress_bar} bgColor='#4a4a4a4a' completed={progress} customLabel=' ' />
+  <ProgressBar
+    height='12px'
+    className={styles.progress_bar}
+    bgColor={'var(--light-primary-color)'}
+    completed={progress}
+    customLabel=' '
+  />
 )

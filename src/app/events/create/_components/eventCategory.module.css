@@ -1,6 +1,5 @@
 .card {
-  width: 120px;
-  height: 36px;
+  padding: 4px 12px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,12 +10,12 @@
 .card_title {
   font-size: 14px;
   font-weight: 700;
-  color: #9b9b9b;
+  color: var(--primary-color);
 }
 
 .container {
   margin-top: 60px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px 2px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 6px;
 }

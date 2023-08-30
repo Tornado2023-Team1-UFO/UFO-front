@@ -1,6 +1,7 @@
 .container {
-  width: 350px;
-  height: 68vh;
+  position: relative;
+  width: 323px;
+  height: 539px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -8,10 +9,19 @@
   align-items: center;
   background-color: var(--secondary-color);
   border-radius: 3px;
-  padding: 34px 18px;
+  padding: 32px 18px;
+  margin-top: 20px;
   border: 1px solid var(--black-color);
   box-shadow: 0px 4px 3px 0px rgba(0, 0, 0, 0.1);
   touch-action: pan-x;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .image {
@@ -20,6 +30,31 @@
   height: 80%;
   background-position: center;
   background-size: cover;
+}
+.status {
+  position: absolute;
+  top: 30%;
+  left: 38%;
+  z-index: 100;
+  gap: 5px;
+  margin: 0 auto;
+}
+
+.status_circle {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background-color: var(--secondary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.status_text {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--secondary-color);
 }
 
 .image::before {
@@ -30,9 +65,8 @@
   display: block;
   width: 100%;
   height: 100%;
-  background: var(--primary-color);
+  background: rgba(0, 0, 0, 0.5);
   opacity: 0.5;
-  filter: blur(10px);
 }
 
 .title_container {
@@ -102,7 +136,6 @@
   align-items: start;
   color: var(--primary-color);
   width: 100%;
-  gap: 10px;
 }
 
 .info {

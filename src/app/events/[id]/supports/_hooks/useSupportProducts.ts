@@ -81,6 +81,10 @@ export const useSupportProducts = (): ReturnType => {
   }
 
   const clickBuyButton = async () => {
+    if (selectedProducts.length === 0) {
+      toast.error('支援する商品を選択してください')
+      return
+    }
     const { data } = await nextApi.post('/payments', {
       products: selectedProducts,
       id: id,
