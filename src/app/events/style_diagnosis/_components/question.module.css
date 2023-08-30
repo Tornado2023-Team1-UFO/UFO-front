@@ -12,10 +12,10 @@
 
 .title_box {
   position: absolute;
-  top: -13px;
+  top: -14px;
   left: -5px;
   width: 265px;
-  height: 240px;
+  height: 250px;
   background-color: var(--secondary-color);
   border: 1px solid var(--primary-color);
   border-radius: 20px;
@@ -23,7 +23,7 @@
   flex-direction: column;
   align-items: center;
 
-  gap: 45px;
+  gap: 4px;
   padding: 20px 5px;
   background-image: linear-gradient(0deg, transparent 21px, #e7e7e7 22px),
     linear-gradient(90deg, transparent 21px, #e7e7e7 22px);
@@ -35,7 +35,7 @@
   margin-bottom: 13px;
   margin-left: 5px;
   width: 265px;
-  height: 240px;
+  height: 250px;
   border: 1px solid var(--primary-color);
   border-radius: 20px;
   position: relative;

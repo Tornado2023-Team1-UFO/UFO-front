@@ -9,11 +9,11 @@ export default function Page() {
   const router = useRouter()
   return (
     <div className={styles.container}>
-      <div className={styles.title_subtitle}>
-        <p className={styles.subtitle}>あなたはこの夏、どんな青春がしたい？</p>
-        <h1 className={styles.title}>青春スタイル診断</h1>
+      <img src='/images/styleTitle.svg' alt='style title' />
+      <img src='/images/styleImage.svg' alt='style ilast' />
+      <div className={styles.button_container}>
+        <StartButton onClick={() => router.push(Path.EVENT_STYLE_DIAGNOSIS)} />
       </div>
-      <StartButton onClick={() => router.push(Path.EVENT_STYLE_DIAGNOSIS)} />
     </div>
   )
 }

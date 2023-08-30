@@ -1,24 +1,14 @@
 .container {
+  padding: 36px 0;
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
   text-align: center;
+  gap: 18px;
 }
 
-.subtitle {
-  color: #4a4a4a;
-  font-family: Sahitya;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 700;
-}
-
-.title {
-  color: #4a4a4a;
-  font-family: Sahitya;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 700;
+.button_container {
+  margin-top: 46px;
 }

@@ -13,9 +13,8 @@ export default function Page() {
 
   return (
     <div className={styles.container}>
-      <img className={styles.star} src='/images/star.svg' alt='キラキラ' />
-      <img className={styles.star2} src='/images/star2.svg' alt='キラキラ' />
-      <h1 className={styles.title}>イベントをつくろう</h1>
+      <img src='/images/createTitle.svg' alt='event create title' />
+      <img src='/images/createImage.svg' alt='event create ilast' />
       <div className={styles.description}>
         <div>
           <h3 className={styles.subtitle}>質問に答えていくと、ChatGPTが</h3>
@@ -23,7 +22,9 @@ export default function Page() {
           <img src='/images/barRight.svg' className={styles.bar_right} alt='わあ' />
           <img src='/images/barLeft.svg' className={styles.bar_left} alt='わあ' />
         </div>
-        <StartButton onClick={clickEventCreateStart} />
+        <div className={styles.button_container}>
+          <StartButton onClick={clickEventCreateStart} />
+        </div>
       </div>
     </div>
   )
