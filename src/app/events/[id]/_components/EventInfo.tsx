@@ -123,6 +123,13 @@ export const EventInfo: FC<Props> = ({ event }) => {
           <img className={styles.note_pin_right} src='/images/notePin.svg' alt='留め具' />
           <p className={styles.eventContentTitle}>イベント概要</p>
           <p className={styles.eventContent}>{event.description}</p>
+          <div className={styles.categories}>
+            {event.categories.map((category) => (
+              <div className={styles.category} key={category}>
+                <span>{category}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       <EventInfoFooter
