@@ -18,9 +18,34 @@ import { UserRepository } from './UserRepository'
 
 export const EventsRepository = {
   // いいね順にイベントを取得する
-  async getEventByOrderFavorite(): Promise<EventSlideItem[]> {
+  async getEventByOrderFavorite(prefecture?: string, keyword?: string): Promise<EventSlideItem[]> {
     const results: EventSlideItem[] = []
-    const ref = query(collection(db, 'events'), where('status', '==', 1), orderBy('likeCounts', 'desc'))
+
+    let ref = query(collection(db, 'events'), where('status', '==', 1), orderBy('likeCounts', 'desc'))
+    if (prefecture && keyword) {
+      ref = query(
+        collection(db, 'events'),
+        where('status', '==', 1),
+        where('prefecture', '==', prefecture),
+        where('title', '==', keyword),
+        orderBy('likeCounts', 'desc'),
+      )
+    } else if (prefecture) {
+      ref = query(
+        collection(db, 'events'),
+        where('status', '==', 1),
+        where('prefecture', '==', prefecture),
+        orderBy('likeCounts', 'desc'),
+      )
+    } else if (keyword) {
+      ref = query(
+        collection(db, 'events'),
+        where('status', '==', 1),
+        where('title', '==', keyword),
+        orderBy('likeCounts', 'desc'),
+      )
+    }
+
     const docSnap = await getDocs(ref)
 
     for (const doc of docSnap.docs) {
