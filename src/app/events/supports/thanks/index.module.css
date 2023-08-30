@@ -18,8 +18,8 @@
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  padding-top: 24px;
-  gap: 160px;
+  padding-top: 130px;
+  gap: 24px;
 }
 
 .title_iamge {
@@ -39,7 +39,7 @@
   font-weight: 700;
   color: var(--primary-color);
   padding: 32px;
-  height: 200px;
+  height: 120px;
   width: 300px;
   text-align: center;
 }

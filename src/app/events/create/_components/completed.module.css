@@ -19,27 +19,15 @@
   justify-content: start;
   align-items: center;
   padding-top: 24px;
-  gap: 160px;
+  gap: 2px;
 }
 
-.title_iamge {
-  font-size: 24px;
-  font-weight: 700;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--secondary-color);
-  width: 300px;
-  min-height: 500px;
-  background-position: center;
-  background-size: auto;
-}
 .content {
   font-size: 10px;
   font-weight: 700;
   color: var(--primary-color);
   padding: 32px;
-  height: 200px;
+  height: 120px;
   width: 300px;
   text-align: center;
 }

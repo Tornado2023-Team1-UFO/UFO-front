@@ -3,6 +3,9 @@
 }
 .container {
   padding-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
 }
 .container > div {
   margin: 0 1.5rem;

@@ -11,6 +11,9 @@
   border: 1px solid #9b9b9b;
   background: #fff;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .cardimage {
@@ -82,10 +85,7 @@
   font-size: 1rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 0.5rem;
-  /* 66.667% */
-  letter-spacing: -0.03125rem;
-  background: rgba(250, 255, 26, 0.53);
+  background: linear-gradient(transparent 50%, rgb(250, 255, 26));
 }
 .cardDate {
   color: #13519a;

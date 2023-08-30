@@ -8,16 +8,29 @@ import { EventSlideItem } from '@/app/events/swipe/_components/_models/EventSlid
 import { queryEvents } from './queryEvents'
 
 export default function EventContainer(props: any) {
-  const { category, prefecture } = props
+  const { category, prefecture, clickKeyword, keyword } = props
   const [events, setEvents] = useState<EventSlideItem[]>([])
   const fetchEvents = async () => {
-    const results = await queryEvents(category, prefecture)
-    console.log(results)
+    let results: EventSlideItem[] = []
+    if (category === '人気上昇中のイベント') {
+      if (prefecture === '全地域') {
+        results = await EventsRepository.getEventByOrderFavorite()
+      } else {
+        console.log('prefecture', prefecture)
+        results = await EventsRepository.getEventByOrderFavorite(prefecture)
+      }
+    } else {
+      results = await queryEvents(category, prefecture)
+    }
+
+    if (keyword !== '') {
+      results = results.filter((event) => event.title.includes(keyword))
+    }
     setEvents(results)
   }
   useEffect(() => {
     fetchEvents()
-  }, [prefecture])
+  }, [prefecture, clickKeyword])
   //   let eventCategories = ['人気上昇中のイベント', '夏の成長体験', '仲間と弾ける', 'インドアオタク集合']
   return (
     <>

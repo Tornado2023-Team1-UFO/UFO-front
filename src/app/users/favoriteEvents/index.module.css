@@ -111,7 +111,7 @@
   font-size: 12px;
   font-weight: 700;
   color: var(--primary-color);
-  background: linear-gradient(transparent 50%, #ffff00 50%);
+  background: linear-gradient(transparent 50%, rgb(250, 255, 26));
 }
 
 .card_container {

@@ -1,39 +1,24 @@
 'use client'
-import Link from 'next/link'
 import { useUser } from '@clerk/nextjs'
-import { useEffect, useState } from 'react'
+import { FC } from 'react'
 import { toast } from 'react-hot-toast'
 import { LikeRepository } from '@/repositories/LikeRepository'
 import { UserRepository } from '@/repositories/UserRepository'
 import { EventsRepository } from '@/repositories/EventsRepository'
-import { FaHeart } from 'react-icons/fa6'
 import styles from './eventInfoFooter.module.css'
+import { useRouter } from 'next/navigation'
 
-export default function EventInfoFooter(props: any) {
-  const [liked, setLiked] = useState(false)
-  const [isAttendee, setIsAttendee] = useState(false)
-  const { eventId, likeCounts } = props
-  const [eventLikeCounts, setEventLikeCounts] = useState(likeCounts)
+type Props = {
+  isLiked: boolean
+  isSupported: boolean
+  isJoined: boolean
+  eventId: string
+}
+
+export const EventInfoFooter: FC<Props> = ({ isLiked, isSupported, eventId, isJoined }) => {
   const { isSignedIn, user } = useUser()
-  console.log(eventId)
-  useEffect(() => {
-    if (user) {
-      const fetchLikedEvents = async () => {
-        const likedEvents = await UserRepository.getFavoriteEvents(user.id)
-        const likedEventIds = likedEvents.map((event: any) => event.id)
-        if (likedEventIds.includes(eventId)) {
-          setLiked(true)
-        }
-      }
-      const fetchEventsAttendees = async () => {
-        const eventsAttendees = await EventsRepository.getAttendees(eventId)
-        if (eventsAttendees.includes(eventId)) {
-          setIsAttendee(true)
-        }
-      }
-      fetchLikedEvents()
-    }
-  }, [])
+  const router = useRouter()
+
   const addLike = async (id: string) => {
     await LikeRepository.addLike(id)
   }
@@ -47,38 +32,54 @@ export default function EventInfoFooter(props: any) {
     if (!user) {
       return // Early return to prevent further execution
     }
-    console.log('liked setting: ' + liked)
-    !!liked ? setLiked(true) : null
-    if (!liked) {
-      toast.success('お気に入りに追加しました')
-      addLike(eventId) // update firebase like counts
-      user && addToUserFavoriteList(eventId, user.id) // update user's favorite list
-      setEventLikeCounts(eventLikeCounts + 1)
-    } else {
-      toast.error('そのイベントはすでにお気に入りに登録しています')
+    if (isLiked) {
+      toast.error('すでにお気に入りに追加済みです')
+      return
     }
+
+    toast.success('お気に入りに追加しました')
+    addLike(eventId) // update firebase like counts
+    user && addToUserFavoriteList(eventId, user.id) // update user's favorite list
   }
   const handleClickParticipate = () => {
     if (!isSignedIn) {
       toast.error('参加登録をするにはログインが必要です')
+      return
     }
     if (!user) {
       return // Early return to prevent further execution
     }
-    if (!isAttendee) {
-      EventsRepository.addAttendee(eventId, user.id) // update user's favorite list
-      toast.success('イベント参加の登録をしました！')
+
+    if (isJoined) {
+      toast.error('すでに参加登録済みです')
+      return
     }
+
+    EventsRepository.addAttendee(eventId, user.id) // update user's favorite list
+    toast.success('イベント参加の登録をしました！')
+  }
+
+  const clickSupportButton = () => {
+    if (!isSignedIn) {
+      toast.error('応援をするにはログインが必要です')
+      return
+    }
+
+    if (!isSupported) {
+      toast.error('応援をこのイベントは受け付けていません')
+      return
+    }
+
+    router.push(`/events/${eventId}/supports`)
   }
 
   return (
     <>
       <div className={styles.footerContainer}>
         <div>
-          <div onClick={handleClickLike}>
-            <FaHeart />
+          <div className={styles.heart} onClick={handleClickLike}>
+            <img src='/images/heart.svg' alt='heart' />
           </div>
-          {/* <p>{eventLikeCounts}</p> */}
         </div>
         <div className={styles.buttonContainer}>
           <button onClick={handleClickParticipate}>
@@ -86,10 +87,8 @@ export default function EventInfoFooter(props: any) {
           </button>
         </div>
         <div className={styles.buttonContainer}>
-          <button>
-            <Link className={styles.support} href={`/events/${eventId}/supports`}>
-              応援する
-            </Link>
+          <button className={styles.support} onClick={() => clickSupportButton()}>
+            応援する
           </button>
         </div>
       </div>

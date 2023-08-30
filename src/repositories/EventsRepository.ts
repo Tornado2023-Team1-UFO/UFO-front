@@ -1,13 +1,55 @@
 import { EventSlideItem } from '@/app/events/swipe/_components/_models/EventSlideItem'
 import { db } from '@/libs/firebase'
-import { doc, addDoc, collection, getCountFromServer, getDocs, query, setDoc, where, orderBy } from 'firebase/firestore'
+import {
+  doc,
+  addDoc,
+  collection,
+  getCountFromServer,
+  getDocs,
+  query,
+  setDoc,
+  where,
+  orderBy,
+  getDoc,
+  limit,
+} from 'firebase/firestore'
 import { FirebaseEventType } from './type'
+import { EventItem } from '@/app/events/[id]/_model/event'
+import { UserRepository } from './UserRepository'
 
 export const EventsRepository = {
   // いいね順にイベントを取得する
-  async getEventByOrderFavorite(): Promise<EventSlideItem[]> {
+  async getEventByOrderFavorite(prefecture?: string, keyword?: string): Promise<EventSlideItem[]> {
     const results: EventSlideItem[] = []
-    const ref = query(collection(db, 'events'), where('status', '==', 1), orderBy('likeCounts', 'desc'))
+
+    let ref = query(collection(db, 'events'), where('status', '==', 1), orderBy('likeCounts', 'desc'))
+    if (prefecture && keyword) {
+      ref = query(
+        collection(db, 'events'),
+        where('status', '==', 1),
+        where('prefecture', '==', prefecture),
+        where('title', '==', keyword),
+        orderBy('likeCounts', 'desc'),
+        limit(30),
+      )
+    } else if (prefecture) {
+      ref = query(
+        collection(db, 'events'),
+        where('status', '==', 1),
+        where('prefecture', '==', prefecture),
+        orderBy('likeCounts', 'desc'),
+        limit(30),
+      )
+    } else if (keyword) {
+      ref = query(
+        collection(db, 'events'),
+        where('status', '==', 1),
+        where('title', '==', keyword),
+        orderBy('likeCounts', 'desc'),
+        limit(30),
+      )
+    }
+
     const docSnap = await getDocs(ref)
 
     for (const doc of docSnap.docs) {
@@ -32,6 +74,44 @@ export const EventsRepository = {
       results.push(item)
     }
     return results
+  },
+
+  async getEvent(eventId: string, userId: string): Promise<EventItem> {
+    const docRef = doc(db, 'events', eventId)
+    const docSnap = await getDoc(docRef)
+    const data = docSnap.data() as FirebaseEventType
+    const organizer = doc(db, 'users', data.userId)
+    const organizerSnap = await getDoc(organizer)
+    const organizerData = organizerSnap.data()
+
+    const favoriteItems = await UserRepository.getFavoriteEvents(userId)
+    const isLiked = favoriteItems.filter((item) => item.id === eventId).length > 0
+
+    const attendees = await this.getAttendees(eventId)
+    const isJoined = attendees.filter((item) => item === userId).length > 0
+    const event = new EventItem({
+      id: eventId,
+      title: data.title,
+      prefecture: data.prefecture,
+      startAt: data.startAt.toDate(),
+      endAt: data.endAt.toDate(),
+      imageUrls: data.imageUrls,
+      attendeeCounts: await this.getAttendeeCount(docSnap.id),
+      recruitPeopleCounts: data.recruitPeopleCounts,
+      deadline: data.deadLine.toDate(),
+      eventFee: data.eventFee,
+      description: data.content,
+      categories: data.categories,
+      isLiked: isLiked,
+      organizer: {
+        name: organizerData?.name,
+        iconUrl: organizerData?.photoURL,
+      },
+      isSupported: (await this.getReturnsCount(eventId)) > 0,
+      isJoined: isJoined,
+    })
+
+    return event
   },
 
   async getEventSlideItems(category: string): Promise<EventSlideItem[]> {
@@ -83,7 +163,6 @@ export const EventsRepository = {
     const querySnapshot = await getDocs(collection(db, 'events', eventId, 'attendees'))
     querySnapshot.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
-      console.log(doc.id, ' => ', doc.data())
       attendees.push(doc.id)
     })
     return attendees
@@ -91,6 +170,12 @@ export const EventsRepository = {
 
   async getAttendeeCount(eventId: string): Promise<number> {
     const ref = query(collection(db, 'events', eventId, 'attendees'))
+    const docSnap = await getCountFromServer(ref)
+    return docSnap.data().count
+  },
+
+  async getReturnsCount(eventId: string): Promise<number> {
+    const ref = query(collection(db, 'events', eventId, 'returns'))
     const docSnap = await getCountFromServer(ref)
     return docSnap.data().count
   },

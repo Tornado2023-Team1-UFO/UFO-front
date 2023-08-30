@@ -1,16 +1,21 @@
 .container {
-  padding-top: 260px;
+  padding-top: 60px;
   width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   overflow-x: hidden;
-  gap: 280px;
+  gap: 6px;
+}
+
+.button_container {
+  margin-top: 32px;
 }
 
 .description {
+  margin-top: 18px;
   position: relative;
   margin-bottom: 220px;
   display: flex;
