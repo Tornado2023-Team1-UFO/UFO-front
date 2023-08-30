@@ -1,6 +1,6 @@
 'use client'
 
-import { FC } from 'react'
+import { FC, useRef } from 'react'
 import styles from './eventItem.module.css'
 import dayjs from 'dayjs'
 import 'dayjs/locale/ja'
@@ -42,7 +42,6 @@ export const EventItem: FC<Props> = ({ event, currentIndex, onTapEvent, isActive
   if (!event.title) {
     return <EventModal />
   }
-
   return (
     <>
       {isActive && (

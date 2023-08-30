@@ -11,7 +11,12 @@
 .eventTag {
   margin-left: -16px !important;
 }
-
+.more {
+  flex-basis: 25%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .more p {
   color: #6093ce;
   font-family: Noto Sans JP;
@@ -29,4 +34,10 @@
 
 .more p:hover {
   font-weight: bold;
+}
+
+.logo {
+  width: 0.5rem;
+  height: 0.9375rem;
+  fill: #6093ce;
 }

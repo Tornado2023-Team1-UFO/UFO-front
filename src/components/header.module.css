@@ -15,8 +15,13 @@
 }
 
 .logo {
-  position: relative;
+  display: flex;
+  justify-content: center;
   width: 50%;
+}
+.logoImage {
+  position: relative;
+  width: 6.4375rem;
   height: 2.375rem;
   margin: 0 auto;
 }
@@ -26,6 +31,8 @@
 .userButton {
   display: flex;
   justify-content: flex-end;
+  padding-right: 1.5rem;
+  width: 50%;
 }
 
 /* --- media query --- */
@@ -35,9 +42,12 @@
     border-bottom: 0.7px solid #d3d3d3;
   }
   .logo {
+    display: flex;
+    justify-content: center;
     position: relative;
-    width: 8rem;
+    width: 25%;
     height: 3rem;
+    margin: 0;
   }
   .navigationLarge {
     display: block;
@@ -45,5 +55,8 @@
   }
   .navigationSmall {
     display: none;
+  }
+  .userButton {
+    width: 25%;
   }
 }

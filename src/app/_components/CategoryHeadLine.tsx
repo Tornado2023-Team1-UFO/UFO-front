@@ -18,7 +18,8 @@ export default function CategoryHeadLine(props: any) {
           <EventTag title={title} />
         </div>
         <div className={styles.more}>
-          <p onClick={handleClick}>もっと見る {'>'}</p>
+          <p onClick={handleClick}>すべて見る</p>
+          <img className={styles.logo} src='/images/arrow.svg' />
         </div>
       </div>
     </>
