@@ -2,17 +2,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
-  min-height: 10.5rem;
-  border-radius: 0.1875rem;
+  justify-content: flex-end;
+  min-height: 12rem;
+  border-radius: 20px;
+  border: 1px solid var(--primary-color);
+  padding: 10px 5px;
   background: #fff;
   margin-top: 0.5rem !important;
-}
-
-.image {
-  position: relative;
-  width: 13.25rem;
-  height: 4.8125rem;
+  background-repeat: no-repeat;
+  background-position: center;
+  box-shadow: 5px 10px 5px #41c1f7;
 }
 
 .buttonContainer {
@@ -29,7 +28,6 @@
 .start {
   text-decoration: none;
   color: #fff;
-  font-family: Noto Sans JP;
   font-size: 0.8125rem;
   font-style: normal;
   font-weight: 900;

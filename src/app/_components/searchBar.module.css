@@ -1,6 +1,7 @@
 .searchbar {
   display: flex;
   flex-direction: column;
+  gap: 12px;
 }
 
 .searchbytext {
@@ -10,23 +11,21 @@
 
 .keyword {
   width: 90%;
-  height: 1.875rem;
+  height: 2rem;
   margin: 0 auto;
   border: 1px solid #9b9b9b;
   border-radius: 1.25rem 0rem 0rem 1.25rem;
   background: #fff;
-  padding-left: 0.7rem;
   color: #a1bbda;
-  font-family: Noto Sans JP;
   font-size: 0.75rem;
   font-style: normal;
   font-weight: 700;
   line-height: 0.5rem;
   letter-spacing: -0.03125rem;
+  padding: 12px;
 }
 .keyword::placeholder {
   color: #a1bbda;
-  font-family: Noto Sans JP;
   font-size: 0.75rem;
   font-style: normal;
   font-weight: 700;
@@ -35,7 +34,7 @@
 }
 
 .button {
-  height: 1.875rem;
+  height: 2rem;
   width: 10%;
   text-align: center;
   line-height: 1.875rem;
@@ -69,7 +68,6 @@
 }
 .selectBox {
   color: #13519a;
-  font-family: Noto Sans JP;
   font-size: 0.75rem;
   font-style: normal;
   font-weight: 700;

@@ -2,11 +2,23 @@
 .eventinfocontainer {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   padding: 2rem;
 }
 .eventinfocontainer > div {
   margin: 0.625rem 0;
+}
+.eventimagecontainer {
+  position: relative;
+}
+
+.shareButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 32px;
+  height: 32px;
+  z-index: 10;
 }
 /* ----- start of specific styling -----   */
 /* --- main event image ---  */
@@ -35,7 +47,6 @@
 /* --- end of event image --- */
 .eventtitle h1 {
   color: #13519a;
-  font-family: Noto Sans JP;
   font-size: 1.5rem;
   font-style: normal;
   font-weight: 900;
@@ -61,7 +72,6 @@
   text-align: center;
   padding: 0 1rem;
   color: #13519a;
-  font-family: Noto Sans JP;
   font-size: 0.75rem;
   font-style: normal;
   font-weight: 500;
@@ -76,19 +86,18 @@
   justify-content: center;
   align-items: flex-start;
   height: 4.375rem;
+  gap: 12px;
 }
 .eventDateTitle {
   color: #13519a;
   text-align: center;
-  font-family: Noto Sans JP;
   font-size: 0.875rem;
   font-style: normal;
-  font-weight: 500; /* 57.143% */
+  font-weight: 500;
   letter-spacing: -0.03125rem;
 }
 .eventDateSE {
   color: #13519a;
-  font-family: Helvetica;
   font-size: 1rem;
   font-style: normal;
   font-weight: 700;
@@ -114,27 +123,32 @@
 .icon {
   fill: #13519a;
   align-self: center;
+  width: 32px;
+  height: 16px;
 }
 .border {
   width: 2px;
-  height: 80%;
   background: #13519a;
 }
 .eventContentContainer {
+  position: relative;
   align-self: center;
   width: 20.1875rem;
   height: 24.125rem;
   border-radius: 1.6875rem;
-  border: 1px solid #9b9b9b;
+  border: 1px solid var(--primary-color);
   background: #fff;
   box-shadow: 0px 4px 3px 0px rgba(0, 0, 0, 0.1);
+  background-image: linear-gradient(0deg, transparent 21px, #e7e7e7 22px),
+    linear-gradient(90deg, transparent 21px, #e7e7e7 22px);
+  background-size: 22px 22px;
+  background-repeat: repeat;
 }
 .eventContentTitle {
   text-align: center;
   margin-top: 2.62rem;
   margin-bottom: 2rem;
   color: #13519a;
-  font-family: Noto Sans JP;
   font-size: 0.875rem;
   font-style: normal;
   font-weight: 700;
@@ -145,11 +159,53 @@
 .eventContent {
   margin: 0 1rem;
   color: #13519a;
-  font-family: Noto Sans JP;
-  font-size: 0.6875rem;
+  font-size: 12px;
   font-style: normal;
   font-weight: 400;
   line-height: 0.9375rem;
   /* 136.364% */
   letter-spacing: -0.03125rem;
+}
+
+.note_pin_left {
+  position: absolute;
+  top: -10px;
+  left: 22px;
+}
+
+.note_pin_right {
+  position: absolute;
+  top: -10px;
+  right: 22px;
+}
+
+.icon_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.circles {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 18px;
+  gap: 6px;
+}
+
+.circle {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.event_content {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  justify-content: center;
+  align-items: flex-start;
+  padding-right: 30px;
 }
