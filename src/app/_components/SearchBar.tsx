@@ -56,7 +56,7 @@ export default function SearchBar({
             </select>
             <img className={styles.arrowIcon} src='/images/downarrow.svg' alt='downarrwow' />
           </div>
-          <div className={styles.searchotherschild}>
+          {/* <div className={styles.searchotherschild}>
             <select className={styles.selectBox} name='category' onChange={(e) => handleCategorySearch(e.target.value)}>
               {EVENT_CATEGORY_MASTER.map((category: any) => (
                 <option className={styles.prefectureName} key={category} value={category}>
@@ -65,7 +65,7 @@ export default function SearchBar({
               ))}
             </select>
             <img className={styles.arrowIcon} src='/images/downarrow.svg' alt='downarrwow' />
-          </div>
+          </div> */}
         </div>
       </div>
     </>
