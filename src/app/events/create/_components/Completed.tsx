@@ -36,7 +36,7 @@ export const Completed: FC<Props> = ({ onClickSubmit }) => {
           className={styles.button}
           onClick={() => onClickSubmit()}
         >
-          はじめる
+          公開する
         </button>
       </div>
     </div>

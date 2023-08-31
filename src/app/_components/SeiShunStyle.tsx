@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation'
 export default function SeiShunStyle() {
   const router = useRouter()
   return (
-    <>
+    <div className={styles.containerBackground}>
       <div
         className={styles.container}
         style={{
@@ -19,6 +19,6 @@ export default function SeiShunStyle() {
           <p className={styles.start}>はじめる</p>
         </button>
       </div>
-    </>
+    </div>
   )
 }

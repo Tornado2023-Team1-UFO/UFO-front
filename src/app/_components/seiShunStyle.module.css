@@ -1,9 +1,21 @@
+.containerBackground {
+  border-radius: 1.25rem;
+  position: relative;
+  background-color: #41c1f7;
+  min-height: 12rem;
+  width: auto;
+}
+
 .container {
+  width: 100%;
+  min-height: 12rem;
+  position: absolute;
+  top: -15px;
+  left: -5px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  min-height: 12rem;
   border-radius: 20px;
   border: 1px solid var(--primary-color);
   padding: 10px 5px;
@@ -11,7 +23,7 @@
   margin-top: 0.5rem !important;
   background-repeat: no-repeat;
   background-position: center;
-  box-shadow: 5px 10px 5px #41c1f7;
+  /* box-shadow: 5px 10px 5px #41c1f7; */
 }
 
 .buttonContainer {
@@ -19,6 +31,7 @@
   height: 2.1875rem;
   border-radius: 2.5rem;
   background: linear-gradient(90deg, #5bead2 0%, #5fdae7 24.67%, #3ec1ee 62.5%, #25adf6 100%), #fff;
+  margin-bottom: 0.9rem;
   /* border: 10px solid;
   border-image-slice: 1;
   border-width: 5px;

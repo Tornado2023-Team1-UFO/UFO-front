@@ -31,7 +31,6 @@ export default function EventContainer(props: any) {
   useEffect(() => {
     fetchEvents()
   }, [prefecture, clickKeyword])
-  //   let eventCategories = ['人気上昇中のイベント', '夏の成長体験', '仲間と弾ける', 'インドアオタク集合']
   return (
     <>
       <div className='eventcontainer'>
