@@ -33,7 +33,7 @@ export const question3: Question = {
   question: 'どっちの気分？',
   choices: {
     choice1: '遊び倒したい！',
-    choice2: '何かにコツコツ取り組みたい',
+    choice2: 'コツコツ取り組みたい',
   },
   point: 0,
 }
