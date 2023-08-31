@@ -162,7 +162,6 @@ export const EventsRepository = {
     const attendees: string[] = []
     const querySnapshot = await getDocs(collection(db, 'events', eventId, 'attendees'))
     querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
       attendees.push(doc.id)
     })
     return attendees
