@@ -146,6 +146,6 @@
   align-items: center;
   flex-direction: column;
   gap: 4px;
-  border-right: 1px solid var(--primary-color);
+  /* border-right: 1px solid var(--primary-color); */
   padding-right: 0 10px;
 }

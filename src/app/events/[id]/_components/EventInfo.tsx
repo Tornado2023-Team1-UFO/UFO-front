@@ -9,6 +9,9 @@ import { FaLocationDot, FaPeopleGroup, FaYenSign } from 'react-icons/fa6'
 import dayjs from 'dayjs'
 import 'dayjs/locale/ja'
 import { EventItem } from '../_model/event'
+import { BsFillPeopleFill } from 'react-icons/bs'
+import { FiMapPin } from 'react-icons/fi'
+import { BiYen } from 'react-icons/bi'
 
 type Props = {
   event?: EventItem
@@ -90,7 +93,7 @@ export const EventInfo: FC<Props> = ({ event }) => {
               />
             </div>
             <div className={styles.eventhostname}>
-              <p>主催者名: {event.organizer.name}</p>
+              <p>{event.organizer.name}</p>
             </div>
           </div>
           <div className={styles.eventDate}>
@@ -102,19 +105,22 @@ export const EventInfo: FC<Props> = ({ event }) => {
         </div>
         <div className={styles.eventExtraInfo}>
           <div className={styles.icon_container}>
-            <FaPeopleGroup className={styles.icon} />
+            {/* <FaPeopleGroup className={styles.icon} /> */}
+            <BsFillPeopleFill className={styles.icon} />
             <p>
               {event.attendeeCounts}/{event.recruitPeopleCounts}人
             </p>
           </div>
-          <div className={styles.border}></div>
+          {/* <div className={styles.border}></div> */}
           <div className={styles.icon_container}>
+            {/* <FiMapPin className={styles.icon} /> */}
             <FaLocationDot className={styles.icon} />
             <p>{event.prefecture}</p>
           </div>
-          <div className={styles.border}></div>
+          {/* <div className={styles.border}></div> */}
           <div className={styles.icon_container}>
-            <FaYenSign className={styles.icon} />
+            <BiYen className={styles.icon} />
+            {/* <FaYenSign className={styles.icon} /> */}
             <p>{event.eventFee}円</p>
           </div>
         </div>
