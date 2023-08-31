@@ -11,7 +11,8 @@ export default function SeiShunStyle() {
       <div
         className={styles.container}
         style={{
-          backgroundImage: 'url(/images/seisyun.svg)',
+          backgroundImage: 'url(/images/seisyun.png)',
+          backgroundSize: 'cover',
         }}
       >
         <button className={styles.buttonContainer} onClick={() => router.push(Path.EVENT_STYLE_DIAGNOSIS_TOP)}>
