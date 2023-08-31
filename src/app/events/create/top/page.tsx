@@ -13,8 +13,8 @@ export default function Page() {
 
   return (
     <div className={styles.container}>
-      <img src='/images/createTitle.svg' alt='event create title' />
-      <img src='/images/createImage.svg' alt='event create ilast' />
+      <img width={326} height={78} src='/images/createTitle.png' alt='event create title' />
+      <img width={300} height={367} src='/images/createImage.png' alt='event create ilast' />
       <div className={styles.description}>
         <div>
           <h3 className={styles.subtitle}>質問に答えていくと、ChatGPTが</h3>

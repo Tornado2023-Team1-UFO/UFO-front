@@ -13,9 +13,10 @@ type Props = {
   isSupported: boolean
   isJoined: boolean
   eventId: string
+  applyLink?: string
 }
 
-export const EventInfoFooter: FC<Props> = ({ isLiked, isSupported, eventId, isJoined }) => {
+export const EventInfoFooter: FC<Props> = ({ isLiked, isSupported, eventId, isJoined, applyLink }) => {
   const { isSignedIn, user } = useUser()
   const router = useRouter()
 
@@ -48,6 +49,11 @@ export const EventInfoFooter: FC<Props> = ({ isLiked, isSupported, eventId, isJo
     }
     if (!user) {
       return // Early return to prevent further execution
+    }
+
+    if (applyLink) {
+      window.open(applyLink, '_blank')
+      return
     }
 
     if (isJoined) {

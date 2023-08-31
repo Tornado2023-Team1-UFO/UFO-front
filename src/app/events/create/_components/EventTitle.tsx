@@ -22,6 +22,6 @@ export const EventTitle: FC<Props> = ({ title, onChangeTitle }) => (
         placeholder='例）バスケしよう!'
       />
     </div>
-    <img src='/images/createSub1.svg' alt='イラスト' />
+    <img width={270} height={180} src='/images/createSub1.png' alt='イラスト' />
   </div>
 )

@@ -7,19 +7,18 @@ import { useRouter } from 'next/navigation'
 export default function SeiShunStyle() {
   const router = useRouter()
   return (
-    <>
-      <div className={styles.containerBackground}>
-        <div
-          className={styles.container}
-          style={{
-            backgroundImage: 'url(/images/seisyun.svg)',
-          }}
-        >
-          <button className={styles.buttonContainer} onClick={() => router.push(Path.EVENT_STYLE_DIAGNOSIS_TOP)}>
-            <p className={styles.start}>はじめる</p>
-          </button>
-        </div>
+    <div className={styles.containerBackground}>
+      <div
+        className={styles.container}
+        style={{
+          backgroundImage: 'url(/images/seisyun.png)',
+          backgroundSize: 'cover',
+        }}
+      >
+        <button className={styles.buttonContainer} onClick={() => router.push(Path.EVENT_STYLE_DIAGNOSIS_TOP)}>
+          <p className={styles.start}>はじめる</p>
+        </button>
       </div>
-    </>
+    </div>
   )
 }

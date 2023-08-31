@@ -60,8 +60,13 @@ export const DESCRIPTION_SECTION: Section = {
   value: 'イベントの説明を書こう！',
 }
 
-export const RETURN_SECTION: Section = {
+export const LINK_SECTION: Section = {
   progress: 90,
+  value: '外部リンクを追加しよう(任意)',
+}
+
+export const RETURN_SECTION: Section = {
+  progress: 100,
   value: 'リターンを追加しよう(任意)',
 }
 
@@ -80,6 +85,9 @@ export type Event = {
   prefecture: string
   imageUrls: string[]
   description: string
+  twitterLink?: string
+  instagramLink?: string
+  applyLink?: string
 }
 
 export type Return = {
@@ -223,7 +231,7 @@ export const useEventCreate = () => {
     if (isLoading) return
 
     setIsLoading(true)
-    const message = `あなたは、イベントの主催者です。以下のイベントに参加したくなるような文章を300文字で書いてください。
+    const message = `あなたは、イベントの主催者です。以下のイベントに参加したくなるような文章を250文字で書いてください。
     イベントのタイトル ${event.title}
     カテゴリー ${event.category}
     一人当たりの参加費 ${event.eventFee}円
@@ -257,18 +265,24 @@ export const useEventCreate = () => {
     活動を通して、最高の成長体験をつかみましょう！`
 
     // ここでchatgptに投げ,返ってきた文章をevent.contentに入れる
-    const { data } = await nextApi.post('/chatgpts/events/descriptions', {
-      message: message,
-    })
+    try {
+      const { data } = await nextApi.post('/chatgpts/events/descriptions', {
+        message: message,
+      })
 
-    if (event.imageUrls.length === 0) {
-      setEvent({ ...event, description: data.content, imageUrls: [defaultImageUrl] })
-    } else {
-      setEvent({ ...event, description: data.content })
+      if (event.imageUrls.length === 0) {
+        setEvent({ ...event, description: data.content, imageUrls: [defaultImageUrl] })
+      } else {
+        setEvent({ ...event, description: data.content })
+      }
+      setCurrentSection(DESCRIPTION_SECTION)
+    } catch (e) {
+      console.log(e)
+      toast.error('Timeoutしました。もう一度お試しください')
+      setCurrentSection(EVENT_IMAGE_SECTION)
+    } finally {
+      setIsLoading(false)
     }
-    setCurrentSection(DESCRIPTION_SECTION)
-
-    setIsLoading(false)
   }
 
   const clickUploadImage = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -359,6 +373,9 @@ export const useEventCreate = () => {
         updatedAt: Timestamp.fromDate(new Date()),
         category: category ?? '新しい自分に出会う',
         categories: event.category,
+        twitterLink: event.twitterLink ?? '',
+        instagramLink: event.instagramLink ?? '',
+        applyLink: event.applyLink ?? '',
       })
 
       await ReturnRepository.postReturn(eventId, returns)
@@ -366,7 +383,8 @@ export const useEventCreate = () => {
       router.push(Path.EVENT_LIST)
     } catch (error) {
       console.log(error)
-      toast.error('予期しないエラーが発生しました')
+      toast.error('予期しないエラーが発生しました。もう一度お試しください')
+      return
     } finally {
       setIsLoading(false)
     }
@@ -599,7 +617,7 @@ export const useEventCreate = () => {
   }
 
   const clickNextByDescription = () => {
-    setCurrentSection(RETURN_SECTION)
+    setCurrentSection(LINK_SECTION)
   }
 
   const clickNextByReturn = () => {
@@ -611,11 +629,36 @@ export const useEventCreate = () => {
   }
 
   const clickPrevByReturn = () => {
-    setCurrentSection(DESCRIPTION_SECTION)
+    setCurrentSection(LINK_SECTION)
   }
 
   const clickPrevByComplete = () => {
     setCurrentSection(RETURN_SECTION)
+  }
+
+  const clickPrevByLink = () => {
+    setCurrentSection(DESCRIPTION_SECTION)
+  }
+
+  const clickNextByLink = () => {
+    setCurrentSection(RETURN_SECTION)
+  }
+
+  const changeLinks = (link: string, type: string) => {
+    console.log(link)
+    switch (type) {
+      case 'twitter':
+        setEvent({ ...event, twitterLink: link })
+        break
+      case 'instagram':
+        setEvent({ ...event, instagramLink: link })
+        break
+      case 'apply':
+        setEvent({ ...event, applyLink: link })
+        break
+      default:
+        break
+    }
   }
 
   return {
@@ -665,6 +708,10 @@ export const useEventCreate = () => {
     changeDescription: changeDescription,
     clickNextByDescription: clickNextByDescription,
     clickPrevByDescription: clickPrevByDescription,
+    // EventLink
+    clickNextByLink: clickNextByLink,
+    clickPrevByLink: clickPrevByLink,
+    changeLinks: changeLinks,
     // Return
     returns: returns,
     addNewRuturn: addNewRuturn,

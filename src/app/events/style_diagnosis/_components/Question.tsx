@@ -17,7 +17,7 @@ export const Question: FC<Props> = ({ title, onClickAnswer, choice1, choice2, qu
           <img className={styles.note_pin_right} src='/images/notePin.svg' alt='留め具' />
           <h2 className={styles.question_id}>Q{questionId}.</h2>
           <h1 className={styles.title}>{title}</h1>
-          <img src={`/images/styleSub${questionId}.svg`} alt='イラスト' />
+          <img width={163} height={196} src={`/images/styleSub${questionId}.png`} alt='イラスト' />
         </div>
       </div>
       <div className={styles.choices}>

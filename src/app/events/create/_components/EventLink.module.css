@@ -1,0 +1,27 @@
+.input {
+  width: 323px;
+  height: 44px;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  background-color: var(--secondary-color);
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.input_container {
+  margin-top: 57px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: start;
+  align-items: center;
+}
+
+.labels {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  justify-content: start;
+  align-items: start;
+  color: var(--primary-color);
+}

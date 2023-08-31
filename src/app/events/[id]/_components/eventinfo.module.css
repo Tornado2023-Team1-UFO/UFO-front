@@ -68,6 +68,13 @@
   border-radius: 50%;
   overflow: hidden;
 }
+
+.eventhostname {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .eventhostname p {
   text-align: center;
   padding: 0 1rem;
@@ -235,4 +242,21 @@
   gap: 6px;
   justify-content: center;
   align-items: center;
+}
+
+.link_button {
+  width: 50px;
+  height: 26px;
+  border-radius: 20px;
+  border: 1px solid var(--primary-color);
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 4px;
+}
+
+.icon_link {
+  width: 16px;
+  height: 16px;
 }
