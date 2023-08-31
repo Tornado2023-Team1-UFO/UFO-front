@@ -231,7 +231,7 @@ export const useEventCreate = () => {
     if (isLoading) return
 
     setIsLoading(true)
-    const message = `あなたは、イベントの主催者です。以下のイベントに参加したくなるような文章を300文字で書いてください。
+    const message = `あなたは、イベントの主催者です。以下のイベントに参加したくなるような文章を250文字で書いてください。
     イベントのタイトル ${event.title}
     カテゴリー ${event.category}
     一人当たりの参加費 ${event.eventFee}円
