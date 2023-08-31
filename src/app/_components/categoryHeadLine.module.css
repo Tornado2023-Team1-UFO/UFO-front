@@ -4,20 +4,20 @@
   align-items: center;
 }
 
-.categoryheadline div:first-of-type {
+/* .categoryheadline div:first-of-type {
   flex-basis: 70%;
-}
+} */
 
 .eventTag {
   margin-left: -16px !important;
 }
 .more {
-  flex-basis: 25%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 .more p {
+  padding-right: 3px;
   color: #6093ce;
   font-family: Noto Sans JP;
   font-size: 0.875rem;

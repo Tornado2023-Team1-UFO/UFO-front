@@ -141,7 +141,7 @@
   position: relative;
   align-self: center;
   width: 20.1875rem;
-  height: 24.125rem;
+  min-height: 24.125rem;
   border-radius: 1.6875rem;
   border: 1px solid var(--primary-color);
   background: #fff;
@@ -169,9 +169,9 @@
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
-  line-height: 0.9375rem;
-  /* 136.364% */
-  letter-spacing: -0.03125rem;
+  /* line-height: 0.9375rem; */
+  /* letter-spacing: -0.03125rem; */
+  padding-bottom: 1rem;
 }
 
 .note_pin_left {
@@ -237,6 +237,7 @@
 
 .categories {
   margin-top: 24px;
+  align-self: flex-start;
   display: flex;
   gap: 6px;
   justify-content: center;
