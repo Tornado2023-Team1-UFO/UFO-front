@@ -257,18 +257,24 @@ export const useEventCreate = () => {
     活動を通して、最高の成長体験をつかみましょう！`
 
     // ここでchatgptに投げ,返ってきた文章をevent.contentに入れる
-    const { data } = await nextApi.post('/chatgpts/events/descriptions', {
-      message: message,
-    })
+    try {
+      const { data } = await nextApi.post('/chatgpts/events/descriptions', {
+        message: message,
+      })
 
-    if (event.imageUrls.length === 0) {
-      setEvent({ ...event, description: data.content, imageUrls: [defaultImageUrl] })
-    } else {
-      setEvent({ ...event, description: data.content })
+      if (event.imageUrls.length === 0) {
+        setEvent({ ...event, description: data.content, imageUrls: [defaultImageUrl] })
+      } else {
+        setEvent({ ...event, description: data.content })
+      }
+      setCurrentSection(DESCRIPTION_SECTION)
+    } catch (e) {
+      console.log(e)
+      toast.error('Timeoutしました。もう一度お試しください')
+      setCurrentSection(EVENT_IMAGE_SECTION)
+    } finally {
+      setIsLoading(false)
     }
-    setCurrentSection(DESCRIPTION_SECTION)
-
-    setIsLoading(false)
   }
 
   const clickUploadImage = async (e: ChangeEvent<HTMLInputElement>) => {
