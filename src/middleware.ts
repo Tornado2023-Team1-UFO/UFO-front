@@ -18,6 +18,7 @@ export default authMiddleware({
     Path.EVENT_CREATE,
     Path.USER_FAVORITE_EVENT_LIST,
     '/api(.*)',
+    '/sso-callback(.*)',
   ],
   ignoredRoutes: ['/api/webhooks/'],
 })
