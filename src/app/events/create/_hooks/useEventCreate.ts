@@ -372,7 +372,8 @@ export const useEventCreate = () => {
       router.push(Path.EVENT_LIST)
     } catch (error) {
       console.log(error)
-      toast.error('予期しないエラーが発生しました')
+      toast.error('予期しないエラーが発生しました。もう一度お試しください')
+      return
     } finally {
       setIsLoading(false)
     }
