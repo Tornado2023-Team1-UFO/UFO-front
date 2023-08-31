@@ -20,7 +20,7 @@ export const Completed: FC<Props> = ({ onClickSubmit }) => {
           <h1>お疲れ様でした 🎉</h1>
         </div>
       </div>
-      <img src='/images/createSub3.svg' alt='event create ilast' />
+      <img width={355} height={237} src='/images/createSub3.png' alt='event create ilast' />
 
       <div className={styles.description}>
         <h3 className={styles.subtitle}>以下のボタンから公開してください</h3>

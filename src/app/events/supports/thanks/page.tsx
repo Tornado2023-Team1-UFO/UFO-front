@@ -18,7 +18,7 @@ const Page = () => {
           <h1>支援が完了しました 🎉</h1>
         </div>
       </div>
-      <img src='/images/createSub3.svg' alt='event create ilast' />
+      <img width={355} height={237} src='/images/createSub3.png' alt='event create ilast' />
       <div className={styles.description}>
         <button
           style={{
