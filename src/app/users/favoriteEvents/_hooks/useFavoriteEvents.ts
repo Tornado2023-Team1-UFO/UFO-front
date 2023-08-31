@@ -13,8 +13,12 @@ export const useFavoriteEvents = () => {
     if (!userId) {
       return
     }
-    const favoriteEvents = await UserRepository.getFavoriteEvents(userId)
-    setFavoriteEvents(favoriteEvents)
+    try {
+      const favoriteEvents = await UserRepository.getFavoriteEvents(userId)
+      setFavoriteEvents(favoriteEvents)
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   const clickFavoriteCard = (id: string) => {
