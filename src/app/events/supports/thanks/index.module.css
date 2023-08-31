@@ -22,8 +22,8 @@
   gap: 24px;
 }
 
-.title_iamge {
-  font-size: 24px;
+.title_image {
+  /* font-size: 24px;
   font-weight: 700;
   display: flex;
   justify-content: center;
@@ -32,7 +32,8 @@
   width: 300px;
   min-height: 500px;
   background-position: center;
-  background-size: auto;
+  background-size: auto; */
+  margin-left: 1.5rem;
 }
 .content {
   font-size: 10px;
@@ -42,6 +43,10 @@
   height: 120px;
   width: 300px;
   text-align: center;
+}
+
+.content h1 {
+  padding-right: 1rem;
 }
 
 .subtitle {
