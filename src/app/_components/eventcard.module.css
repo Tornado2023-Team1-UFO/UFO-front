@@ -51,7 +51,6 @@
 
 .prefecture {
   color: #4a4a4a;
-  font-family: AsagoHonmaruGothic-R;
   font-size: 0.6875rem;
   font-style: normal;
   font-weight: 400;
@@ -81,7 +80,6 @@
   display: inline-block;
   margin-top: 0;
   color: #13519a;
-  font-family: AsagoHonmaruGothic-R;
   font-size: 1rem;
   font-style: normal;
   font-weight: 400;
@@ -89,7 +87,6 @@
 }
 .cardDate {
   color: #13519a;
-  font-family: apricotJapanesefont;
   font-size: 0.625rem;
   font-style: normal;
   font-weight: 400;

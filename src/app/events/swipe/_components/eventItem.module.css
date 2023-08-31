@@ -83,14 +83,12 @@
 .title {
   font-size: 24px;
   font-weight: 400;
-  font-family: 'AsagoHonmaruGothic-R';
   color: var(--secondary-color);
 }
 
 .date {
   font-size: 14px;
   font-weight: 400;
-  font-family: 'AsagoHonmaruGothic-R';
   color: var(--secondary-color);
 }
 
