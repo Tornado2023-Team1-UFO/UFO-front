@@ -373,9 +373,9 @@ export const useEventCreate = () => {
         updatedAt: Timestamp.fromDate(new Date()),
         category: category ?? '新しい自分に出会う',
         categories: event.category,
-        twitterLink: event.twitterLink,
-        instagramLink: event.instagramLink,
-        applyLink: event.applyLink,
+        twitterLink: event.twitterLink ?? '',
+        instagramLink: event.instagramLink ?? '',
+        applyLink: event.applyLink ?? '',
       })
 
       await ReturnRepository.postReturn(eventId, returns)
