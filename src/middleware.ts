@@ -21,6 +21,7 @@ export default authMiddleware({
     '/sso-callback(.*)',
   ],
   ignoredRoutes: ['/api/webhooks/'],
+  debug: true,
 })
 
 export const config = {
