@@ -18,6 +18,9 @@ export class EventItem {
   }
   isSupported!: boolean
   isJoined!: boolean
+  twitterLink?: string
+  instagramLink?: string
+  applyLink?: string
 
   constructor(event: Partial<EventItem>) {
     Object.assign(this, event)

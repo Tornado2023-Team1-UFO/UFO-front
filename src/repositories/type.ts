@@ -16,4 +16,7 @@ export type FirebaseEventType = {
   updatedAt: Timestamp
   category: string
   categories: string[]
+  twitterLink?: string
+  instagramLink?: string
+  applyLink?: string
 }

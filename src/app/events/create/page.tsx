@@ -20,6 +20,7 @@ import {
   EVENT_IMAGE_SECTION,
   EVENT_PREFECTURE_SECTION,
   EVENT_REGION_SECTION,
+  LINK_SECTION,
   PEOPLE_COUNT_SECTION,
   PUBLISH_SECTION,
   RETURN_SECTION,
@@ -32,6 +33,7 @@ import { Return } from './_components/Return'
 import { Completed } from './_components/Completed'
 import { RedirectToSignIn, useAuth } from '@clerk/nextjs'
 import { toast } from 'react-hot-toast'
+import { EventLink } from './_components/EventLink'
 
 const Page = () => {
   const {
@@ -83,6 +85,9 @@ const Page = () => {
     publishEvent,
     clickPrevByComplete,
     loadingText,
+    clickNextByLink,
+    clickPrevByLink,
+    changeLinks,
   } = useEventCreate()
 
   const { userId } = useAuth()
@@ -209,6 +214,18 @@ const Page = () => {
             <div className={styles.navigation}>
               <PrevButton onClickButton={clickPrevByDescription} />
               <NextButton onClickButton={clickNextByDescription} />
+            </div>
+          </>
+        )
+
+      case LINK_SECTION:
+        return (
+          <>
+            <QuestionWithProgress progress={currentSection.progress} question={currentSection.value} />
+            <EventLink event={event} onChangeLinks={changeLinks} />
+            <div className={styles.navigation}>
+              <PrevButton onClickButton={clickPrevByLink} />
+              <NextButton onClickButton={clickNextByLink} />
             </div>
           </>
         )
