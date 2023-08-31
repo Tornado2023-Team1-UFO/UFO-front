@@ -90,7 +90,33 @@ export const EventInfo: FC<Props> = ({ event }) => {
               />
             </div>
             <div className={styles.eventhostname}>
-              <p>主催者名: {event.organizer.name}</p>
+              <p>{event.organizer.name}</p>
+              {event.twitterLink && (
+                <button className={styles.link_button}>
+                  <a
+                    className={styles.icon_link}
+                    href={event?.twitterLink}
+                    style={{
+                      backgroundImage: 'url(/images/x.png)',
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                    }}
+                  ></a>
+                </button>
+              )}
+              {event.instagramLink && (
+                <button className={styles.link_button}>
+                  <a
+                    className={styles.icon_link}
+                    href={event?.instagramLink}
+                    style={{
+                      backgroundImage: 'url(/images/instagrum.png)',
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                    }}
+                  ></a>
+                </button>
+              )}
             </div>
           </div>
           <div className={styles.eventDate}>
@@ -133,6 +159,7 @@ export const EventInfo: FC<Props> = ({ event }) => {
         </div>
       </div>
       <EventInfoFooter
+        applyLink={event.applyLink}
         eventId={event.id}
         isLiked={event.isLiked}
         isSupported={event.isSupported}

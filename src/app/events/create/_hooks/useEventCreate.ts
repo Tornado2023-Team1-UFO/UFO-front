@@ -60,8 +60,13 @@ export const DESCRIPTION_SECTION: Section = {
   value: 'イベントの説明を書こう！',
 }
 
-export const RETURN_SECTION: Section = {
+export const LINK_SECTION: Section = {
   progress: 90,
+  value: '外部リンクを追加しよう(任意)',
+}
+
+export const RETURN_SECTION: Section = {
+  progress: 100,
   value: 'リターンを追加しよう(任意)',
 }
 
@@ -80,6 +85,9 @@ export type Event = {
   prefecture: string
   imageUrls: string[]
   description: string
+  twitterLink?: string
+  instagramLink?: string
+  applyLink?: string
 }
 
 export type Return = {
@@ -359,6 +367,9 @@ export const useEventCreate = () => {
         updatedAt: Timestamp.fromDate(new Date()),
         category: category ?? '新しい自分に出会う',
         categories: event.category,
+        twitterLink: event.twitterLink,
+        instagramLink: event.instagramLink,
+        applyLink: event.applyLink,
       })
 
       await ReturnRepository.postReturn(eventId, returns)
@@ -599,7 +610,7 @@ export const useEventCreate = () => {
   }
 
   const clickNextByDescription = () => {
-    setCurrentSection(RETURN_SECTION)
+    setCurrentSection(LINK_SECTION)
   }
 
   const clickNextByReturn = () => {
@@ -611,11 +622,36 @@ export const useEventCreate = () => {
   }
 
   const clickPrevByReturn = () => {
-    setCurrentSection(DESCRIPTION_SECTION)
+    setCurrentSection(LINK_SECTION)
   }
 
   const clickPrevByComplete = () => {
     setCurrentSection(RETURN_SECTION)
+  }
+
+  const clickPrevByLink = () => {
+    setCurrentSection(DESCRIPTION_SECTION)
+  }
+
+  const clickNextByLink = () => {
+    setCurrentSection(RETURN_SECTION)
+  }
+
+  const changeLinks = (link: string, type: string) => {
+    console.log(link)
+    switch (type) {
+      case 'twitter':
+        setEvent({ ...event, twitterLink: link })
+        break
+      case 'instagram':
+        setEvent({ ...event, instagramLink: link })
+        break
+      case 'apply':
+        setEvent({ ...event, applyLink: link })
+        break
+      default:
+        break
+    }
   }
 
   return {
@@ -665,6 +701,10 @@ export const useEventCreate = () => {
     changeDescription: changeDescription,
     clickNextByDescription: clickNextByDescription,
     clickPrevByDescription: clickPrevByDescription,
+    // EventLink
+    clickNextByLink: clickNextByLink,
+    clickPrevByLink: clickPrevByLink,
+    changeLinks: changeLinks,
     // Return
     returns: returns,
     addNewRuturn: addNewRuturn,

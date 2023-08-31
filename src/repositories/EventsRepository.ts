@@ -109,6 +109,9 @@ export const EventsRepository = {
       },
       isSupported: (await this.getReturnsCount(eventId)) > 0,
       isJoined: isJoined,
+      twitterLink: data.twitterLink,
+      instagramLink: data.instagramLink,
+      applyLink: data.applyLink,
     })
 
     return event
