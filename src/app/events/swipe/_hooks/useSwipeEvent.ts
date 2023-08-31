@@ -123,7 +123,7 @@ export const useSwipeEvent = (): ReturnType => {
           category = '仲間とハジける'
           break
         case 'c':
-          category = 'インドアなヲタク集合!'
+          category = 'インドアなヲタク集合 !'
           break
         case 'd':
           category = '新しい自分に出会う'
