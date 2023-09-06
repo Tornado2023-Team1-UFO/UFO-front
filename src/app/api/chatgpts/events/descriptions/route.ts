@@ -15,5 +15,6 @@ export async function POST(req: Request) {
     return NextResponse.json(completion.data.choices[0].message)
   } catch (e) {
     console.log(e)
+    return NextResponse.json({ error: e })
   }
 }
